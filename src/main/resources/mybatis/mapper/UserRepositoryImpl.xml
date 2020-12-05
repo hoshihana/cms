@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.cms.repository.UserRepository">
+    <select id="getUserByAccountId" resultType="team.cms.entity.User">
+        select * from user where account_id=#{accountId}
+    </select>
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into user(account_id, name, gender, birthday, resident_id_number, email, telephone, workplace) values (#{accountId}, #{name}, #{gender}, #{birthday}, #{residentIdNumber}, #{email}, #{telephone}, #{workplace})
+    </insert>
+</mapper>
