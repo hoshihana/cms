@@ -23,9 +23,9 @@ public class VisitorInterceptor implements HandlerInterceptor {
         String jwt = request.getHeader(jwtName);
         JWTParseResult jwtParseResult = JsonWebTokenUtil.parseJWT(jwt);
         if(jwtParseResult.isSuccess()) {
-            request.setAttribute("requestAccountId", jwtParseResult.getAccountId());
-            request.setAttribute("requestUsername", jwtParseResult.getUsername());
-            request.setAttribute("requestRole", jwtParseResult.getRole());
+            request.setAttribute("accountId", jwtParseResult.getAccountId());
+            request.setAttribute("username", jwtParseResult.getUsername());
+            request.setAttribute("role", jwtParseResult.getRole());
             return true;
         } else {
             response.setContentType("text/json");
