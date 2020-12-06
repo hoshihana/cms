@@ -1,10 +1,8 @@
 package team.cms.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
-import team.cms.entity.Account;
 import team.cms.result.JWTParseResult;
 import team.cms.util.JsonWebTokenUtil;
 
