@@ -3,7 +3,6 @@ package team.cms.interceptor;
 import com.alibaba.fastjson.JSON;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
-import team.cms.entity.Account;
 import team.cms.entity.enums.Role;
 import team.cms.result.AccessResult;
 
@@ -17,13 +16,13 @@ public class DriverInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Account account = (Account)request.getAttribute("account");
-        if (account.getRole() == Role.DRIVER) {
+        Role role = (Role)request.getAttribute("role");
+        if (role == Role.DRIVER) {
             return true;
         } else {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.println(JSON.toJSONString(new AccessResult(false, Role.DRIVER, account.getRole(), "无权限访问")));
+            out.println(JSON.toJSONString(new AccessResult(false, Role.DRIVER, role, "无权限访问")));
             return false;
         }
     }

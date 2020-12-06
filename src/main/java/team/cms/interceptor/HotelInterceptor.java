@@ -17,13 +17,13 @@ public class HotelInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Account account = (Account)request.getAttribute("account");
-        if (account.getRole() == Role.HOTEL) {
+        Role role = (Role)request.getAttribute("role");
+        if (role == Role.HOTEL) {
             return true;
         } else {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.println(JSON.toJSONString(new AccessResult(false, Role.HOTEL, account.getRole(), "无权限访问")));
+            out.println(JSON.toJSONString(new AccessResult(false, Role.HOTEL, role, "无权限访问")));
             return false;
         }
     }

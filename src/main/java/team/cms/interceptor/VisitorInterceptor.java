@@ -15,18 +15,17 @@ import java.io.PrintWriter;
 @Configuration
 public class VisitorInterceptor implements HandlerInterceptor {
 
-    @Value("${jwt.name:token")
-    private String jwtName;
+    final static String jwtName = "token";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         String jwt = request.getHeader(jwtName);
-        JWTParseResult<Account> jwtParseResult = JsonWebTokenUtil.parseJWT(jwt);
-
+        JWTParseResult jwtParseResult = JsonWebTokenUtil.parseJWT(jwt);
         if(jwtParseResult.isSuccess()) {
-            Account account = jwtParseResult.getData();
-            request.setAttribute("account", account);
+            request.setAttribute("accountId", jwtParseResult.getAccountId());
+            request.setAttribute("username", jwtParseResult.getUsername());
+            request.setAttribute("role", jwtParseResult.getRole());
             return true;
         } else {
             response.setContentType("text/json");
