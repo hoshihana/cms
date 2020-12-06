@@ -1,9 +1,12 @@
 package team.cms.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import team.cms.entity.enums.Progress;
+
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
@@ -16,17 +19,23 @@ public class Conference {
 
     private Integer userId;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
     private String name;
 
     private String detail;
 
     private String address;
 
-    private String startTime;
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date startTime;
 
-    private String endTime;
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date endTime;
 
-    private String enrollTime;
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date enrollTime;
 
     private String inviteCode;
 
