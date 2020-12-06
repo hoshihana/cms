@@ -26,7 +26,7 @@ public class VisitorInterceptor implements HandlerInterceptor {
             request.setAttribute("role", jwtParseResult.getRole());
             return true;
         } else {
-            response.setContentType("text/json");
+            response.setContentType("application/json");
             PrintWriter out = response.getWriter();
             out.println(JSON.toJSONString(jwtParseResult));
             return false;
