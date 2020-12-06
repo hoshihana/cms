@@ -14,14 +14,14 @@ public class Message {
 
     private Integer id;
 
-    private Integer senderID;
+    private Integer senderId;
 
-    private Integer recipientID;
+    private Integer recipientId;
 
     private String content;
 
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date send_time;
+    private Date sendTime;
 
     private Boolean read;
 
