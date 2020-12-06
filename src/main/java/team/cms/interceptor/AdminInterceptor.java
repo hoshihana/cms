@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import team.cms.entity.Account;
 import team.cms.entity.enums.Role;
-import team.cms.result.Result;
+import team.cms.result.AccessResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         } else {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.println(JSON.toJSONString(Result.wrapErrorResult("无访问权限")));
+            out.println(JSON.toJSONString(new AccessResult(false, Role.ADMIN, account.getRole(), "无权限访问")));
             return false;
         }
     }
