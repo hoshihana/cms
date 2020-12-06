@@ -16,7 +16,7 @@ public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Role role = (Role)request.getAttribute("role");
+        Role role = (Role)request.getAttribute("requestRole");
         if (role == Role.USER) {
             return true;
         } else {

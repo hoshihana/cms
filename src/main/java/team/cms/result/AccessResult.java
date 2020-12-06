@@ -14,7 +14,7 @@ public class AccessResult {
 
     private Role requiredRole;
 
-    private Role currentRole;
+    private Role requestRole;
 
     private String message;
 
