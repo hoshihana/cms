@@ -5,8 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Account;
 import team.cms.entity.enums.Role;
-import team.cms.result.Result;
-import team.cms.result.data.LoginResultData;
+import team.cms.result.LoginResult;
 import team.cms.service.*;
 import team.cms.util.JsonWebTokenUtil;
 
@@ -20,22 +19,23 @@ public class LoginController {
     AccountService accountService;
 
     @PostMapping("/submit")
-    Result loginSubmit(Role role, String username, String password) {
+    LoginResult loginSubmit(Role role, String username, String password) {
 
         Account account = accountService.getAccountByUsername(username);
 
-        LoginResultData data = new LoginResultData();
+        LoginResult loginResult = new LoginResult();
 
         if(account == null || !account.getPassword().equals(password) || account.getRole() != role) {
-            data.setLoginSuccess(false);
+            loginResult.setSuccess(false);
         } else {
-            data.setLoginSuccess(true);
-            data.setToken(JsonWebTokenUtil.createJWT(account));
-            data.setUsername(username);
-            data.setRole(role);
+            loginResult.setSuccess(true);
+            loginResult.setToken(JsonWebTokenUtil.createJWT(account));
+            loginResult.setUsername(account.getUsername());
+            loginResult.setAccountId(account.getId());
+            loginResult.setRole(role);
         }
 
-        return Result.wrapSuccessfulResult(data);
+        return loginResult;
     }
 
 }

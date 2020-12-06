@@ -8,7 +8,6 @@ import team.cms.entity.Account;
 import team.cms.entity.User;
 import team.cms.entity.enums.Gender;
 import team.cms.entity.enums.Role;
-import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.UserService;
 
@@ -26,17 +25,16 @@ public class RegisterController {
     UserService userService;
 
     @RequestMapping("/checkUsername")
-    Result checkUsername(String username) {
-        if(accountService.usernameAvailable(username)) {
-            return Result.wrapSuccessfulResult(true);
-        } else {
-            return Result.wrapSuccessfulResult(false);
-        }
+    boolean checkUsername(String username) {
+        return accountService.usernameAvailable(username);
     }
 
     @PostMapping("/submit")
-    Result register(String username, String password, String name, Gender gender, Date birthday, String residentIdNumber, String email, String telephone, String workplace) {
+    boolean register(String username, String password, String name, Gender gender, Date birthday, String residentIdNumber, String telephone, String email, String workplace) {
 
+        if(!accountService.usernameAvailable(username)) {
+            return false;
+        }
         Account account = new Account();
         account.setUsername(username);
         account.setPassword(password);
@@ -50,12 +48,12 @@ public class RegisterController {
         user.setGender(gender);
         user.setBirthday(birthday);
         user.setResidentIdNumber(residentIdNumber);
-        user.setEmail(email);
         user.setTelephone(telephone);
+        user.setEmail(email);
         user.setWorkplace(workplace);
 
         userService.addUser(user);
 
-        return Result.wrapSuccessfulResult(true);
+        return true;
     }
 }

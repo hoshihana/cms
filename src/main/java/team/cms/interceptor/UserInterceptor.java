@@ -6,7 +6,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import team.cms.entity.Account;
 import team.cms.entity.enums.Role;
 import team.cms.result.AccessResult;
-import team.cms.result.Result;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

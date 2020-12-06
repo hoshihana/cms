@@ -1,4 +1,4 @@
-package team.cms.result.data;
+package team.cms.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,14 +8,15 @@ import team.cms.entity.enums.Role;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResultData {
+public class LoginResult {
 
-    private boolean loginSuccess;
+    private boolean success;
 
     private String token;
 
     private String username;
 
-    private Role role;
+    private Integer accountId;
 
+    private Role role;
 }
