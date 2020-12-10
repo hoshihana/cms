@@ -12,10 +12,10 @@ public class AccessResult {
 
     private boolean success;
 
+    private String message;
+
     private Role requiredRole;
 
     private Role requestRole;
-
-    private String message;
 
 }

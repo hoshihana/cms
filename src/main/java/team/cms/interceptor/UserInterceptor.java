@@ -22,7 +22,7 @@ public class UserInterceptor implements HandlerInterceptor {
         } else {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.println(JSON.toJSONString(new AccessResult(false, Role.USER, role, "无权限访问")));
+            out.println(JSON.toJSONString(new AccessResult(false, "无权限访问", Role.USER, role)));
             return false;
         }
     }

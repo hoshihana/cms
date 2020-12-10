@@ -23,7 +23,7 @@ public class HotelInterceptor implements HandlerInterceptor {
         } else {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.println(JSON.toJSONString(new AccessResult(false, Role.HOTEL, role, "无权限访问")));
+            out.println(JSON.toJSONString(new AccessResult(false, "无权限访问", Role.HOTEL, role)));
             return false;
         }
     }

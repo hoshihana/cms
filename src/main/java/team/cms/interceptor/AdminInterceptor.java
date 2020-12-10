@@ -22,7 +22,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         } else {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.println(JSON.toJSONString(new AccessResult(false, Role.ADMIN, role, "无权限访问")));
+            out.println(JSON.toJSONString(new AccessResult(false, "无权限访问", Role.ADMIN, role)));
             return false;
         }
     }
