@@ -46,4 +46,10 @@ public class MessageController {
         List<Message> messages=messageService.getUnreadMessageByAccountId(accountId);
         return messages;
     }
+
+    @PostMapping("/send")
+    void sendMessage(HttpServletRequest request,Integer recipientId,String content)
+    {
+
+    }
 }
