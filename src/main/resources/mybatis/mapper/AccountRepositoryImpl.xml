@@ -26,7 +26,7 @@
     <select id="getAccountByUserId" resultType="team.cms.entity.Account">
         select *
         from account
-        where id=(select acount_id from user where id=#{userId})
+        where id=(select account_id from user where id=#{userId})
     </select>
 
 </mapper>

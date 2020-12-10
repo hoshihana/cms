@@ -22,6 +22,7 @@ public class MessageController {
 
     @Resource
     MessageService messageService;
+    @Resource
     AccountService accountService;
 
     @PostMapping("/sent")
@@ -65,18 +66,20 @@ public class MessageController {
         messageService.sendMessage(message);
         return new Result(true, null);
     }
-  /*  @PostMapping("/sendById")
-    Result sendMessageByUserId(HttpServletRequest request, Integer UserId, String content)
+
+    @PostMapping("/sendById")
+    Result sendMessageByUserId(HttpServletRequest request, Integer userId, String content)
     {
         Date sendTime=new Date();
         Integer senderId = (Integer) request.getAttribute("accountId");
         Message message = new Message();
         message.setContent(content);
         message.setSendTime(sendTime);
-        Account account=accountService.getAccountByUserId();
-        message.setRecipientId();
+        Account account=new Account();
+        account=accountService.getAccountByUserId(userId);
+        message.setRecipientId(account.getId());
         message.setSenderId(senderId);
         messageService.sendMessage(message);
         return new Result(true, null);
-    }*/
+    }
 }
