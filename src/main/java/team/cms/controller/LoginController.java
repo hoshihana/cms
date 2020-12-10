@@ -27,6 +27,7 @@ public class LoginController {
 
         if(account == null || !account.getPassword().equals(password) || account.getRole() != role) {
             loginResult.setSuccess(false);
+            loginResult.setMessage("用户名或密码错误");
         } else {
             loginResult.setSuccess(true);
             loginResult.setToken(JsonWebTokenUtil.createJWT(account));
