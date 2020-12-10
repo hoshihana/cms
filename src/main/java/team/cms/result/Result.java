@@ -5,8 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+<<<<<<< HEAD
 @AllArgsConstructor
 @NoArgsConstructor
+=======
+@NoArgsConstructor
+@AllArgsConstructor
+>>>>>>> feature/user/message
 public class Result {
 
     private boolean success;
