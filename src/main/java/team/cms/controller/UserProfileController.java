@@ -11,7 +11,6 @@ import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/api/user/profile")

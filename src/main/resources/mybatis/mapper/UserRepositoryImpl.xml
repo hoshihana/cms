@@ -20,7 +20,7 @@
     <select id="getUserByUsername" resultType="team.cms.entity.User">
         select *
         from user
-        where account_id=(select account_id from account where username=#{username})
+        where account_id=(select id from account where username=#{username})
     </select>
     <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
         insert into user(account_id, name, gender, birthday, resident_id_number, email, telephone, workplace)
