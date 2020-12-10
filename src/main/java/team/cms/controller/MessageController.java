@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import team.cms.entity.Account;
 import team.cms.entity.Message;
 import team.cms.result.Result;
+import team.cms.service.AccountService;
 import team.cms.service.MessageService;
 
 import javax.annotation.Resource;
@@ -20,6 +22,8 @@ public class MessageController {
 
     @Resource
     MessageService messageService;
+    @Resource
+    AccountService accountService;
 
     @PostMapping("/sent")
     List<Message> getSentMessage(HttpServletRequest request)
@@ -49,8 +53,8 @@ public class MessageController {
         return messages;
     }
 
-    @PostMapping("/send")
-    Result sendMessage(HttpServletRequest request, Integer recipientId, String content)
+    @PostMapping("/sendByAccountId")
+    Result sendMessageByAccountId(HttpServletRequest request, Integer recipientId, String content)
     {
         Date sendTime=new Date();
         Integer senderId = (Integer) request.getAttribute("accountId");
@@ -58,6 +62,39 @@ public class MessageController {
         message.setContent(content);
         message.setSendTime(sendTime);
         message.setRecipientId(recipientId);
+        message.setSenderId(senderId);
+        messageService.sendMessage(message);
+        return new Result(true, null);
+    }
+
+    @PostMapping("/sendById")
+    Result sendMessageByUserId(HttpServletRequest request, Integer userId, String content)
+    {
+        Date sendTime=new Date();
+        Integer senderId = (Integer) request.getAttribute("accountId");
+        Message message = new Message();
+        message.setContent(content);
+        message.setSendTime(sendTime);
+        Account account=new Account();
+        account=accountService.getAccountByUserId(userId);
+        message.setRecipientId(account.getId());
+        message.setSenderId(senderId);
+        messageService.sendMessage(message);
+        return new Result(true, null);
+    }
+
+    @PostMapping("/sendByUsername")
+    Result sendMessageByUsername(HttpServletRequest request, String username, String content)
+    {
+        Date sendTime=new Date();
+        Integer senderId = (Integer) request.getAttribute("accountId");
+        Message message = new Message();
+        message.setContent(content);
+        message.setSendTime(sendTime);
+        Account account=new Account();
+        account=accountService.getAccountByUsername(username);
+        System.out.println(account.getId());
+        message.setRecipientId(account.getId());
         message.setSenderId(senderId);
         messageService.sendMessage(message);
         return new Result(true, null);

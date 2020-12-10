@@ -39,4 +39,9 @@ public class AccountServiceImpl implements AccountService {
     public void modifyPassword(Account account) {
         accountRepository.modifyPassword(account);
     }
+
+    @Override
+    public Account getAccountByUserId(Integer userId) {
+        return accountRepository.getAccountByUserId(userId);
+    }
 }
