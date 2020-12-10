@@ -2,10 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.cms.repository.UserRepository">
+    <update id="modifyUser">
+        update user
+        set name=#{name}, gender=#{gender}, birthday=#{birthday}, resident_id_number=#{residentIdNumber}, email=#{email}, telephone=#{telephone},workplace=#{workplace}
+        where account_id=#{accountId}
+    </update>
     <select id="getUserByAccountId" resultType="team.cms.entity.User">
-        select * from user where account_id=#{accountId}
+        select *
+        from user
+        where account_id=#{accountId}
+    </select>
+    <select id="getUserById" resultType="team.cms.entity.User">
+        select *
+        from user
+        where id=#{id}
+    </select>
+    <select id="getUserByUsername" resultType="team.cms.entity.User">
+        select *
+        from user
+        where account_id=(select id from account where username=#{username})
     </select>
     <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
-        insert into user(account_id, name, gender, birthday, resident_id_number, email, telephone, workplace) values (#{accountId}, #{name}, #{gender}, #{birthday}, #{residentIdNumber}, #{email}, #{telephone}, #{workplace})
+        insert into user(account_id, name, gender, birthday, resident_id_number, email, telephone, workplace)
+        values (#{accountId}, #{name}, #{gender}, #{birthday}, #{residentIdNumber}, #{email}, #{telephone}, #{workplace})
     </insert>
 </mapper>

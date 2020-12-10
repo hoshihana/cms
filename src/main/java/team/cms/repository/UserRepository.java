@@ -10,6 +10,11 @@ public interface UserRepository {
 
     void addUser(User user);
 
-    User getUserByAccountId(int accountId);
+    User getUserByAccountId(Integer accountId);
 
+    void modifyUser(User user);
+
+    User getUserById(Integer id);
+
+    User getUserByUsername(String username);
 }
