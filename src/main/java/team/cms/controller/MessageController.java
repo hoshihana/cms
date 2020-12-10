@@ -89,9 +89,17 @@ public class MessageController {
         message.setSendTime(sendTime);
         Account account=new Account();
         account=accountService.getAccountByUsername(username);
+        System.out.println(account.getId());
         message.setRecipientId(account.getId());
         message.setSenderId(senderId);
         messageService.sendMessage(message);
+        return new Result(true, null);
+    }
+
+    @PostMapping("/setRead")
+    Result setRead(Integer id)
+    {
+        messageService.setMessageRead(id);
         return new Result(true, null);
     }
 }

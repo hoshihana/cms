@@ -20,4 +20,5 @@ public interface MessageRepository {
 
     void addMessage(Message message);
 
+    void updateMessageReadStatus(Integer messageId);
 }
