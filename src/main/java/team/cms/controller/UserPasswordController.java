@@ -18,7 +18,7 @@ public class UserPasswordController {
     AccountService accountService;
 
     @PostMapping("/modify")
-    PasswordModifyResult updatePassword(HttpServletRequest request,String oldPassword, String newPassword)
+    PasswordModifyResult updatePassword(HttpServletRequest request, String oldPassword, String newPassword)
     {
         Integer accountId = (Integer)request.getAttribute("accountId");
         if(!accountService.checkPassword(accountId, oldPassword)) {

@@ -12,9 +12,9 @@ import team.cms.result.CheckResult;
 import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.UserService;
+import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/api/register")
@@ -32,7 +32,7 @@ public class RegisterController {
     }
 
     @PostMapping("/submit")
-    Result register(String username, String password, String name, Gender gender, Date birthday, String residentIdNumber, String telephone, String email, String workplace) {
+    Result register(String username, String password, String name, Gender gender, String birthday, String residentIdNumber, String telephone, String email, String workplace) {
 
         if(!accountService.usernameAvailable(username)) {
             return new Result(false, "用户名不可用");
@@ -48,7 +48,7 @@ public class RegisterController {
         user.setAccountId(account.getId());
         user.setName(name);
         user.setGender(gender);
-        user.setBirthday(birthday);
+        user.setBirthday(DateUtil.parseDateString(birthday));
         user.setResidentIdNumber(residentIdNumber);
         user.setTelephone(telephone);
         user.setEmail(email);
