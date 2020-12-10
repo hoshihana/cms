@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import team.cms.entity.Message;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -16,4 +17,7 @@ public interface MessageRepository {
     List<Message> getReadMessageByRecipientId(int recipientId);
 
     List<Message> getUnreadMessageByRecipientId(int recipientId);
+
+    void insertMessageByRecipientId(Integer senderId, Integer recipientId, String content, Date sendTime);
+
 }

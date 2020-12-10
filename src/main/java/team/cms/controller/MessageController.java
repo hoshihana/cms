@@ -11,6 +11,7 @@ import team.cms.service.MessageService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -52,7 +53,9 @@ public class MessageController {
     Result sendMessage(HttpServletRequest request, Integer recipientId, String content)
     {
         Result result = new Result();
-
+        SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date date=new Date();
+        String SendTime=fmt.format(date);
         return result;
     }
 }

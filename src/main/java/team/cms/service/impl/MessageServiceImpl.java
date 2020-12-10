@@ -6,6 +6,7 @@ import team.cms.repository.MessageRepository;
 import team.cms.service.MessageService;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,7 +31,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void sendMessage(Integer senderId, Integer recipientId, String content) {
-
+    public void sendMessage(Integer senderId, Integer recipientId, String content,Date sendTime) {
+        messageRepository.insertMessageByRecipientId(senderId,recipientId,content,sendTime);
     }
 }

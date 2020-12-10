@@ -12,4 +12,8 @@
     <select id="getUnreadMessageByRecipientId" resultType="team.cms.entity.Message">
         select * from message where recipient_id=#{recipientId} and 'read'=false
     </select>
+    <insert id="insertMessageByRecipientId" useGeneratedKeys="true" keyProperty="id">
+        insert into message(sender_id, recipient_id, content, send_time, 'read') values (#{sendId},#{recipientId},
+        #{content},#{sendTime},false)
+    </insert>
 </mapper>
