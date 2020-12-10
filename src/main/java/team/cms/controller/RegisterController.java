@@ -8,11 +8,13 @@ import team.cms.entity.Account;
 import team.cms.entity.User;
 import team.cms.entity.enums.Gender;
 import team.cms.entity.enums.Role;
+import team.cms.result.CheckResult;
+import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.UserService;
 
 import javax.annotation.Resource;
-import java.sql.Date;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/register")
@@ -25,15 +27,15 @@ public class RegisterController {
     UserService userService;
 
     @RequestMapping("/checkUsername")
-    boolean checkUsername(String username) {
-        return accountService.usernameAvailable(username);
+    CheckResult checkUsername(String username) {
+        return new CheckResult(accountService.usernameAvailable(username));
     }
 
     @PostMapping("/submit")
-    boolean register(String username, String password, String name, Gender gender, Date birthday, String residentIdNumber, String telephone, String email, String workplace) {
+    Result register(String username, String password, String name, Gender gender, Date birthday, String residentIdNumber, String telephone, String email, String workplace) {
 
         if(!accountService.usernameAvailable(username)) {
-            return false;
+            return new Result(false, "用户名不可用");
         }
         Account account = new Account();
         account.setUsername(username);
@@ -54,6 +56,6 @@ public class RegisterController {
 
         userService.addUser(user);
 
-        return true;
+        return new Result(true, null);
     }
 }
