@@ -34,4 +34,9 @@ public class MessageServiceImpl implements MessageService {
     public void sendMessage(Message message) {
         messageRepository.addMessage(message);
     }
+
+    @Override
+    public void setMessageRead(Integer messageId) {
+        messageRepository.updateMessageReadStatus(messageId);
+    }
 }

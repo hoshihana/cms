@@ -31,9 +31,6 @@ public class MessageController {
         Integer accountId=(Integer)request.getAttribute("accountId");
         List<Message> messages=messageService.getSentMessageByAccountId(accountId);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for (Message message: messages) {
-            System.out.println(df.format(message.getSendTime()));
-        }
         return messages;
     }
 
@@ -93,10 +90,16 @@ public class MessageController {
         message.setSendTime(sendTime);
         Account account=new Account();
         account=accountService.getAccountByUsername(username);
-        System.out.println(account.getId());
         message.setRecipientId(account.getId());
         message.setSenderId(senderId);
         messageService.sendMessage(message);
+        return new Result(true, null);
+    }
+
+    @PostMapping("/setRead")
+    Result setRead(Integer id)
+    {
+        messageService.setMessageRead(id);
         return new Result(true, null);
     }
 }

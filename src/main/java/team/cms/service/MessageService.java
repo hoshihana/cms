@@ -15,4 +15,6 @@ public interface MessageService {
     List<Message> getReadMessageByAccountId(int recipientId);
 
     void sendMessage(Message message);
+
+    void setMessageRead(Integer messageId);
 }
