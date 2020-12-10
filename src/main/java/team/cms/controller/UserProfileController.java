@@ -7,6 +7,7 @@ import team.cms.entity.User;
 import team.cms.entity.enums.Gender;
 import team.cms.result.Result;
 import team.cms.service.UserService;
+import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,19 +20,19 @@ public class UserProfileController {
     @Resource
     private UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping("")
     User getProfile(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return userService.getUserByAccountId(accountId);
     }
 
     @PostMapping("/modify")
-    Result modifyProfile(HttpServletRequest request, String name, Gender gender, Date birthday, String residentIdNumber, String email, String telephone, String workplace) {
+    Result modifyProfile(HttpServletRequest request, String name, Gender gender, String birthday, String residentIdNumber, String email, String telephone, String workplace) {
         User user = new User();
         user.setAccountId((Integer)request.getAttribute("accountId"));
         user.setName(name);
         user.setGender(gender);
-        user.setBirthday(birthday);
+        user.setBirthday(DateUtil.parseDateString(birthday));
         user.setResidentIdNumber(residentIdNumber);
         user.setEmail(email);
         user.setTelephone(telephone);
