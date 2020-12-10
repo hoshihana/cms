@@ -14,4 +14,6 @@ public interface AccountService {
     boolean checkPassword(Integer id, String password);
 
     void modifyPassword(Account account);
+
+    Account getAccountByUserId(Integer userId);
 }

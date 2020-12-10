@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import team.cms.entity.Account;
 import team.cms.entity.Message;
 import team.cms.result.Result;
+import team.cms.service.AccountService;
 import team.cms.service.MessageService;
 
 import javax.annotation.Resource;
@@ -20,6 +22,7 @@ public class MessageController {
 
     @Resource
     MessageService messageService;
+    AccountService accountService;
 
     @PostMapping("/sent")
     List<Message> getSentMessage(HttpServletRequest request)
@@ -50,7 +53,7 @@ public class MessageController {
     }
 
     @PostMapping("/sendByAccountId")
-    Result sendMessage(HttpServletRequest request, Integer recipientId, String content)
+    Result sendMessageByAccountId(HttpServletRequest request, Integer recipientId, String content)
     {
         Date sendTime=new Date();
         Integer senderId = (Integer) request.getAttribute("accountId");
@@ -62,4 +65,18 @@ public class MessageController {
         messageService.sendMessage(message);
         return new Result(true, null);
     }
+  /*  @PostMapping("/sendById")
+    Result sendMessageByUserId(HttpServletRequest request, Integer UserId, String content)
+    {
+        Date sendTime=new Date();
+        Integer senderId = (Integer) request.getAttribute("accountId");
+        Message message = new Message();
+        message.setContent(content);
+        message.setSendTime(sendTime);
+        Account account=accountService.getAccountByUserId();
+        message.setRecipientId();
+        message.setSenderId(senderId);
+        messageService.sendMessage(message);
+        return new Result(true, null);
+    }*/
 }
