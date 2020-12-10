@@ -49,7 +49,7 @@ public class MessageController {
         return messages;
     }
 
-    @PostMapping("/send")
+    @PostMapping("/sendByAccountId")
     Result sendMessage(HttpServletRequest request, Integer recipientId, String content)
     {
         Date sendTime=new Date();
