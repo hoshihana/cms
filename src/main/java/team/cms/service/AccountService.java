@@ -11,4 +11,7 @@ public interface AccountService {
 
     void addAccount(Account account);
 
+    boolean checkPassword(Integer id, String password);
+
+    void modifyPassword(Account account);
 }

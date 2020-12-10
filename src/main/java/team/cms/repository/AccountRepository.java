@@ -10,6 +10,11 @@ public interface AccountRepository {
 
     Account getAccountByUsername(String name);
 
+    Account getAccountById(Integer id);
+
+    Account getAccountByUserId(Integer userId);
+
     void addAccount(Account account);
 
+    void modifyPassword(Account account);
 }
