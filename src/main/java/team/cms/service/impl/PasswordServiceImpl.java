@@ -1,8 +1,6 @@
 package team.cms.service.impl;
 
 import org.springframework.stereotype.Service;
-import team.cms.repository.PasswordRepository;
-import team.cms.service.PasswordService;
 
 import javax.annotation.Resource;
 

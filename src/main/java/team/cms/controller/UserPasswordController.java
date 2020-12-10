@@ -3,7 +3,9 @@ package team.cms.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.cms.service.PasswordService;
+import team.cms.entity.Account;
+import team.cms.result.PasswordModifyResult;
+import team.cms.service.AccountService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,22 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 public class UserPasswordController {
 
     @Resource
-    PasswordService passwordService;
-
-    @PostMapping("/check")
-    Boolean passwordCheck(HttpServletRequest request,String inputPassword)
-    {
-        Integer accountId=(Integer)request.getAttribute("accountId");
-        String password=passwordService.getPasswordByAccountId(accountId);
-        if(!inputPassword.equals(password))return false;
-        return true;
-    }
+    AccountService accountService;
 
     @PostMapping("/modify")
-    Boolean updatePassword(HttpServletRequest request,String newPassword)
+    PasswordModifyResult updatePassword(HttpServletRequest request,String oldPassword, String newPassword)
     {
-        Integer accountId=(Integer)request.getAttribute("accountId");
-        passwordService.PasswordModify(newPassword,accountId);
-        return true;
+        Integer accountId = (Integer)request.getAttribute("accountId");
+        if(!accountService.checkPassword(accountId, oldPassword)) {
+            return new PasswordModifyResult(false, false, "旧密码错误");
+        } else {
+            Account account = new Account();
+            account.setId(accountId);
+            account.setPassword(newPassword);
+            accountService.modifyPassword(account);
+            return new PasswordModifyResult(true, true, null);
+        }
     }
 }

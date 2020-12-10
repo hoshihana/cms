@@ -20,16 +20,23 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public boolean usernameAvailable(String username) {
-        Account account = getAccountByUsername(username);
-        if(account == null) {
-            return true;
-        } else {
-            return false;
-        }
+        Account account = accountRepository.getAccountByUsername(username);
+        return account == null;
     }
 
     @Override
     public void addAccount(Account account) {
         accountRepository.addAccount(account);
+    }
+
+    @Override
+    public boolean checkPassword(Integer id, String password) {
+        Account account = accountRepository.getAccountById(id);
+        return password.equals(account.getPassword());
+    }
+
+    @Override
+    public void modifyPassword(Account account) {
+        accountRepository.modifyPassword(account);
     }
 }
