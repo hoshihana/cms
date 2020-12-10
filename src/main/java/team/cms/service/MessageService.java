@@ -14,5 +14,5 @@ public interface MessageService {
 
     List<Message> getReadMessageByAccountId(int recipientId);
 
-    void sendMessage(Integer senderId, Integer recipientId, String content, Date sendTime);
+    void sendMessage(Message message);
 }

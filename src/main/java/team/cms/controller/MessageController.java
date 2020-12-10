@@ -52,10 +52,14 @@ public class MessageController {
     @PostMapping("/send")
     Result sendMessage(HttpServletRequest request, Integer recipientId, String content)
     {
-        Result result = new Result();
-        SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date date=new Date();
-        String SendTime=fmt.format(date);
-        return result;
+        Date sendTime=new Date();
+        Integer senderId = (Integer) request.getAttribute("accountId");
+        Message message = new Message();
+        message.setContent(content);
+        message.setSendTime(sendTime);
+        message.setRecipientId(recipientId);
+        message.setSenderId(senderId);
+        messageService.sendMessage(message);
+        return new Result(true, null);
     }
 }

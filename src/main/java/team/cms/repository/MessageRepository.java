@@ -18,6 +18,6 @@ public interface MessageRepository {
 
     List<Message> getUnreadMessageByRecipientId(int recipientId);
 
-    void insertMessageByRecipientId(Integer senderId, Integer recipientId, String content, Date sendTime);
+    void addMessage(Message message);
 
 }

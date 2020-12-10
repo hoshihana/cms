@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Result {
 
-    boolean success;
+    private boolean success;
 
-    String message;
-
+    private String message;
 }

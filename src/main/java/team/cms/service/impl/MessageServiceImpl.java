@@ -31,7 +31,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void sendMessage(Integer senderId, Integer recipientId, String content,Date sendTime) {
-        messageRepository.insertMessageByRecipientId(senderId,recipientId,content,sendTime);
+    public void sendMessage(Message message) {
+        messageRepository.addMessage(message);
     }
 }
