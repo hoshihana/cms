@@ -12,4 +12,6 @@ public interface MessageService {
     List<Message> getUnreadMessageByAccountId(int recipientId);
 
     List<Message> getReadMessageByAccountId(int recipientId);
+
+    void sendMessage(Integer senderId,Integer recipientId,String content);
 }

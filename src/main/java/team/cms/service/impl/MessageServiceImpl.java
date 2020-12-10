@@ -29,4 +29,8 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.getReadMessageByRecipientId(recipientId);
     }
 
+    @Override
+    public void sendMessage(Integer senderId, Integer recipientId, String content) {
+
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Message;
+import team.cms.result.Result;
 import team.cms.service.MessageService;
 
 import javax.annotation.Resource;
@@ -48,8 +49,10 @@ public class MessageController {
     }
 
     @PostMapping("/send")
-    void sendMessage(HttpServletRequest request,Integer recipientId,String content)
+    Result sendMessage(HttpServletRequest request, Integer recipientId, String content)
     {
+        Result result = new Result();
 
+        return result;
     }
 }
