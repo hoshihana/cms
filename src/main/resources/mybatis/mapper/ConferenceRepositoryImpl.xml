@@ -10,10 +10,10 @@
     <update id="updateProgress">
         update conference
         set progress='ENDED'
-        where ent_time &lt;= #{currentTime};
+        where end_time&lt;=#{currentTime};
         update conference
         set progress='OWNER_CONFIRM'
-        where progress='ENROLLMENT' and enroll_time &lt;= #{currentTime};
+        where progress='ENROLLMENT' and enroll_time&lt;=#{currentTime};
     </update>
     <update id="updateNumber">
         update conference
@@ -23,12 +23,12 @@
     <select id="getOngoingAndCreatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference
-        where progress &lt;&gt; 'ENDED' and user_id=#{userId}
+        where progress&lt;&gt;'ENDED' and user_id=#{userId}
     </select>
     <select id="getOngoingAndParticipatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference
-        where progress &lt;&gt; 'ENDED' and id in(select conference_id from enrollment where user_id=#{userId})
+        where progress&lt;&gt;'ENDED' and id in(select conference_id from enrollment where user_id=#{userId})
     </select>
     <select id="getEndedAndCreatedConferenceByAccountUserId" resultType="team.cms.entity.Conference">
         select *
@@ -38,7 +38,7 @@
     <select id="getEndedAndParticipatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference
-        where progress='ENDED' and id in(select conference_id from enrollment where user_id=#{userId})
+        where progress='ENDED' and id in (select conference_id from enrollment where user_id=#{userId})
     </select>
     <select id="getCreatedConferenceByUserIdAndId" resultType="team.cms.entity.Conference">
         select *
@@ -55,10 +55,10 @@
         from conference
         where id=#{id} and exists (select * from enrollment where conference_id=conference.id and user_id=#{userId})
     </select>
-    <select id="getParticipatedCreateConferenceByUserIdAndNumber" resultType="team.cms.entity.Conference">
+    <select id="getParticipatedConferenceByUserIdAndNumber" resultType="team.cms.entity.Conference">
         select *
         from conference
-        where `number`=#{number} and (select * from enrollment where conference_id=conference.id and user_id=#{userId})
+        where `number`=#{number} and exists (select * from enrollment where conference_id=conference.id and user_id=#{userId})
     </select>
     <select id="getConferenceById" resultType="team.cms.entity.Conference">
         select *

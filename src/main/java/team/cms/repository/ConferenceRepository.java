@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import team.cms.entity.Conference;
 
 import java.util.Date;
+import java.util.List;
 
 @Mapper
 @Repository
@@ -13,13 +14,13 @@ public interface ConferenceRepository {
 
     void updateProgress(Date currentTime);
 
-    Conference getOngoingAndCreatedConferenceByUserId(Integer userId);
+    List<Conference> getOngoingAndCreatedConferenceByUserId(Integer userId);
 
-    Conference getOngoingAndParticipatedConferenceByUserId(Integer userId);
+    List<Conference> getOngoingAndParticipatedConferenceByUserId(Integer userId);
 
-    Conference getEndedAndCreatedConferenceByAccountUserId(Integer userId);
+    List<Conference> getEndedAndCreatedConferenceByAccountUserId(Integer userId);
 
-    Conference getEndedAndParticipatedConferenceByUserId(Integer userId);
+    List<Conference> getEndedAndParticipatedConferenceByUserId(Integer userId);
 
     Conference getCreatedConferenceByUserIdAndId(@Param("userId") Integer userId, @Param("id")Integer id);
 
@@ -27,13 +28,13 @@ public interface ConferenceRepository {
 
     Conference getParticipatedConferenceByUserIdAndId(@Param("userId") Integer userId, @Param("id")Integer id);
 
-    Conference getParticipatedCreateConferenceByUserIdAndNumber(@Param("userId") Integer userId, @Param("number")String number);
+    Conference getParticipatedConferenceByUserIdAndNumber(@Param("userId") Integer userId, @Param("number")String number);
 
     Conference getConferenceById(Integer id);
 
     Conference getConferenceByNumber(String number);
 
-    Conference addConference(Conference conference);
+    void addConference(Conference conference);
 
-    Conference updateNumber(Integer id);
+    void updateNumber(Integer id);
 }
