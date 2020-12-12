@@ -3,7 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.DriverRepository">
-    <select id="getDriverByAccountId" resultType="team.cms.entity.Driver">
 
+    <update id="modifyDrivers">
+        update driver
+        set name=#{name},gender=#{gender},resident_id_number=#{residentIdNumber},telephone=#{telephone}
+        where account_id=#{accountId}
+    </update>
+
+    <select id="getDriverByAccountId" resultType="team.cms.entity.Driver">
+        select *
+        from driver
+        where account_id=#{accountId}
+    </select>
+
+    <select id="getFleetDrivers" resultType="team.cms.entity.Driver">
+        select *
+        from driver
+        where fleet_id=#{fleetId}
+    </select>
+
+    <select id="getDriverById" resultType="team.cms.entity.Driver">
+        select *
+        from driver
+        where id=#{id}
     </select>
 </mapper>
