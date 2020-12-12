@@ -3,5 +3,73 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.ConferenceRepository">
+    <insert id="addConference" keyProperty="id">
+        insert into conference(user_id, create_time, name, detail, address, start_time, end_time, enroll_time, invite_code, hotel_id, fleet_id, progress)
+        values(#{userId}, #{createTime}, #{name}, #{detail}, #{address}, #{startTime}, #{endTime}, #{enrollTime}, #{inviteCode}, #{hotelId}, #{fleetId}, #{progress})
+    </insert>
+    <update id="updateProgress">
+        update conference
+        set progress='ENDED'
+        where ent_time &lt;= #{currentTime};
+        update conference
+        set progress='OWNER_CONFIRM'
+        where progress='ENROLLMENT' and enroll_time &lt;= #{currentTime};
+    </update>
+    <update id="updateNumber">
+        update conference
+        set number=(select number from conference_number where id=#{id})
+        where id=#{id}
+    </update>
+    <select id="getOngoingAndCreatedConferenceByUserId" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where progress &lt;&gt; 'ENDED' and user_id=#{userId}
+    </select>
+    <select id="getOngoingAndParticipatedConferenceByUserId" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where progress &lt;&gt; 'ENDED' and id in(select conference_id from enrollment where user_id=#{userId})
+    </select>
+    <select id="getEndedAndCreatedConferenceByAccountUserId" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where progress='ENDED' and user_id=#{userId}
+    </select>
+    <select id="getEndedAndParticipatedConferenceByUserId" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where progress='ENDED' and id in(select conference_id from enrollment where user_id=#{userId})
+    </select>
+    <select id="getCreatedConferenceByUserIdAndId" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where user_id=#{userId} and id=#{id}
+    </select>
+    <select id="getCreatedConferenceByUserIdAndNumber" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where user_id=#{userId} and number=#{number}
+    </select>
+    <select id="getParticipatedConferenceByUserIdAndId" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where id=#{id} and exists (select * from enrollment where conference_id=conference.id and user_id=#{userId})
+    </select>
+    <select id="getParticipatedCreateConferenceByUserIdAndNumber" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where `number`=#{number} and (select * from enrollment where conference_id=conference.id and user_id=#{userId})
+    </select>
+    <select id="getConferenceById" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where id=#{id}
+    </select>
+    <select id="getConferenceByNumber" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where `number`=#{number}
+    </select>
+
 
 </mapper>
