@@ -10,9 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class DriverReservation {
+public class HotelReservation {
 
-    private Integer fleetId;
+    private Integer hotelId;
 
     private Integer conferenceId;
 
@@ -20,16 +20,11 @@ public class DriverReservation {
 
     private Date reserveTime;
 
-    private boolean driverCheck;
+    private boolean hotelCheck;
 
-    private Integer driverId;
+    private Date checkinTime;
 
-    private Date pickupTime;
-
-    private String pickupSite;
-
-    private String carNumber;
+    private String roomNumber;
 
     private boolean userCheck;
-
 }
