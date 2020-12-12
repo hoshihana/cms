@@ -3,9 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.HotelRepository">
+    <update id="modifyHotel">
+        update hotel
+        set name=#{name},adress=#{adress},detail=#{detail},telephone=#{telephone}
+        where account_id=#{accountId}
+    </update>
+
     <select id="getHotelByAccountId" resultType="team.cms.entity.Hotel">
         select *
         from hotel
         where accountId=#{accountId}
     </select>
+
+    <select id="getAll" resultType="team.cms.entity.Hotel">
+        select *
+        from hotel
+    </select>
+
+    <select id="getHotelById" resultType="team.cms.entity.Hotel">
+        select *
+        from hotel
+        where id=#{id}
+    </select>
+
 </mapper>
