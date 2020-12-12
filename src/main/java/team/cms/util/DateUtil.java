@@ -22,7 +22,7 @@ public class DateUtil {
         }
     }
 
-    public static Date parseDatetimeString(String datetime) throws ParseException {
+    public static Date parseDatetimeString(String datetime) {
         SimpleDateFormat sdf = new SimpleDateFormat(DATETIME_FORMAT);
         sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         try {

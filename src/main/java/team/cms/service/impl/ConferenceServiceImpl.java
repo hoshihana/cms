@@ -1,5 +1,6 @@
 package team.cms.service.impl;
 
+import org.springframework.stereotype.Service;
 import team.cms.entity.Conference;
 import team.cms.entity.enums.Progress;
 import team.cms.repository.ConferenceRepository;
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class ConferenceServiceImpl implements ConferenceService {
 
     @Resource

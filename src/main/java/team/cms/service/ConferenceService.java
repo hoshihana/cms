@@ -1,11 +1,9 @@
 package team.cms.service;
 
-import org.springframework.stereotype.Service;
 import team.cms.entity.Conference;
 
 import java.util.List;
 
-@Service
 public interface ConferenceService {
 
     List<Conference> getOngoingAndCreatedConference(Integer accountId);
