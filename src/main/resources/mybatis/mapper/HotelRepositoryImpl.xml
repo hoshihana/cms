@@ -5,14 +5,14 @@
 <mapper namespace="team.cms.repository.HotelRepository">
     <update id="modifyHotel">
         update hotel
-        set name=#{name},adress=#{adress},detail=#{detail},telephone=#{telephone}
+        set name=#{name},address=#{address},detail=#{detail},telephone=#{telephone}
         where account_id=#{accountId}
     </update>
 
     <select id="getHotelByAccountId" resultType="team.cms.entity.Hotel">
         select *
         from hotel
-        where accountId=#{accountId}
+        where account_id=#{accountId}
     </select>
 
     <select id="getAll" resultType="team.cms.entity.Hotel">
