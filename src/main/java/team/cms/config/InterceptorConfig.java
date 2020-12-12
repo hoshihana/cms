@@ -14,20 +14,30 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/user/**")
                 .addPathPatterns("/api/conference/**")
                 .addPathPatterns("/api/admin/**")
+                .addPathPatterns("/api/fleet/**")
                 .addPathPatterns("/api/hotel/**")
                 .addPathPatterns("/api/driver/**");
 
         registry.addInterceptor(new UserInterceptor())
                 .addPathPatterns("/api/user/**")
-                .addPathPatterns("/api/conference/**");
+                .addPathPatterns("/api/conference/**")
+                .addPathPatterns("/api/hotel/getAll")
+                .addPathPatterns("/api/hotel/get")
+                .addPathPatterns("/api/fleet/**")
+                .addPathPatterns("/api/driver/getByFleetId")
+                .addPathPatterns("/api/driver/getById");
 
         registry.addInterceptor(new AdminInterceptor())
                 .addPathPatterns("/api/admin/**");
 
         registry.addInterceptor(new HotelInterceptor())
-                .addPathPatterns("/api/hotel/**");
+                .addPathPatterns("/api/hotel/profile/**")
+                .addPathPatterns("/api/hotel/password/**")
+                .addPathPatterns("/api/hotel/reservation/**");
 
         registry.addInterceptor(new DriverInterceptor())
-                .addPathPatterns("/api/driver/**");
+                .addPathPatterns("/api/driver/profile/**")
+                .addPathPatterns("/api/driver/password/**")
+                .addPathPatterns("/api/driver/reservation/**");
     }
 }
