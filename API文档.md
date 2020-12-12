@@ -1020,7 +1020,7 @@
 
 #### 获取所有酒店信息
 
-- URI: POST api/hotel/profile/getAll
+- URI: POST api/hotel/getAll
 
 - Path参数：无
 
@@ -1039,7 +1039,7 @@
 
 #### 酒店编号获取酒店信息
 
-- URI: POST api/hotel/profile/get
+- URI: POST api/hotel/get
 
 - Path参数：
 
