@@ -13,6 +13,6 @@ public interface EnrollmentService {
 
     Enrollment getEnrollmentInfo(Integer id, Integer userId);
 
-    void deleteEnrollment(Integer id, Integer userId);
+    boolean deleteEnrollment(Integer id, Integer userId);
 
 }
