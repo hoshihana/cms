@@ -1142,7 +1142,6 @@
   |    hotelCheck    |         boolean          | 酒店是否已确认 |
   |   checkinTime    |         Datetime         |    入住时间    |
   |    roomNumber    |          String          |     房间号     |
-  |      reply       |          String          |      回复      |
   |    userCheck     |         Integer          | 用户是否已确认 |
 
 
@@ -1170,7 +1169,6 @@
   |    hotelCheck    |         boolean          | 酒店是否已确认 |
   |   checkinTime    |         Datetime         |    入住时间    |
   |    roomNumber    |          String          |     房间号     |
-  |      reply       |          String          |      回复      |
   |    userCheck     |         Integer          | 用户是否已确认 |
 
 
@@ -1199,7 +1197,6 @@
   |    hotelCheck    |         boolean          | 酒店是否已确认 |
   |   checkinTime    |         Datetime         |    入住时间    |
   |    roomNumber    |          String          |     房间号     |
-  |      reply       |          String          |      回复      |
   |    userCheck     |         Integer          | 用户是否已确认 |
 
 
@@ -1216,8 +1213,7 @@
   |    userId    | Integer  | 用户编号 |
   | checkinTime  | Datetime | 入住时间 |
   |  roomNumber  |  String  |  房间号  |
-  |    reply     |  String  |   回复   |
-
+  
 - Result参数：
 
   | 参数名  |  类型   |     说明     |
@@ -1299,7 +1295,7 @@
 
 #### 司机编号获取司机信息
 
-- URI：POST api/driver/getByDriverId
+- URI：POST api/driver/getById
 
 - Path参数：
 
@@ -1405,7 +1401,6 @@
   |  pickupTime  |         Datetime         |    接车时间    |
   |  pickupSite  |          String          |    接车地点    |
   |  carNumber   |          String          |     车牌号     |
-  |    reply     |          String          |      回复      |
   |  userCheck   |         boolean          | 用户是否已确认 |
 
 
@@ -1432,7 +1427,6 @@
   |  pickupTime  |         Datetime         |    接车时间    |
   |  pickupSite  |          String          |    接车地点    |
   |  carNumber   |          String          |     车牌号     |
-  |    reply     |          String          |      回复      |
   |  userCheck   |         boolean          | 用户是否已确认 |
 
 
@@ -1459,7 +1453,6 @@
   |  pickupTime  |         Datetime         |    接车时间    |
   |  pickupSite  |          String          |    接车地点    |
   |  carNumber   |          String          |     车牌号     |
-  |    reply     |          String          |      回复      |
   |  userCheck   |         boolean          | 用户是否已确认 |
 
 
@@ -1477,8 +1470,7 @@
   |  pickupTime  | Datetime | 接车时间 |
   |  pickupSite  |  String  | 接车地点 |
   |  carNumber   |  String  |  车牌号  |
-  |    reply     |  String  |   回复   |
-
+  
 - Result参数：
 
   | 参数名  |  类型   |     说明     |
