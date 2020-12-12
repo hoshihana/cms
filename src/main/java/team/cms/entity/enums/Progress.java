@@ -4,5 +4,6 @@ public enum Progress {
     ENROLLMENT,
     OWNER_CONFIRM,
     RESERVATION_CONFIRM,
-    PARTICIPANT_CONFIRM,
+    READY,
+    ENDED,
 }
