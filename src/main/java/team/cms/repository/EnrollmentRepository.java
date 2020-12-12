@@ -1,12 +1,15 @@
-package team.cms.service;
+package team.cms.repository;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 import team.cms.entity.Enrollment;
 import team.cms.entity.User;
 
 import java.util.List;
 
-public interface EnrollmentService {
-
+@Mapper
+@Repository
+public interface EnrollmentRepository {
     Integer getNumberOfEnrollment(Integer id);
 
     List<User> getEnrollmentUserInfo(Integer id);
@@ -14,5 +17,4 @@ public interface EnrollmentService {
     Enrollment getEnrollmentInfo(Integer id, Integer userId);
 
     void deleteEnrollment(Integer id, Integer userId);
-
 }
