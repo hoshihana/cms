@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.ConferenceRepository">
     <insert id="addConference" keyProperty="id">
-        insert into conference(user_id, create_time, name, detail, address, start_time, end_time, enroll_time, invite_code, hotel_id, fleet_id, progress)
+        insert into conference(user_id, create_time, `name`, detail, address, start_time, end_time, enroll_time, invite_code, hotel_id, fleet_id, progress)
         values(#{userId}, #{createTime}, #{name}, #{detail}, #{address}, #{startTime}, #{endTime}, #{enrollTime}, #{inviteCode}, #{hotelId}, #{fleetId}, #{progress})
     </insert>
     <update id="updateProgress">
         update conference
         set progress='ENDED'
-        where end_time&lt;=#{currentTime};
+        where progress&lt;&gt;'ENDED' and end_time&lt;=#{currentTime};
         update conference
         set progress='OWNER_CONFIRM'
         where progress='ENROLLMENT' and enroll_time&lt;=#{currentTime};
