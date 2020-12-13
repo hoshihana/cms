@@ -3,11 +3,17 @@ package team.cms.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-<<<<<<< HEAD
+
 import team.cms.entity.Conference;
 import team.cms.service.ConferenceService;
+import team.cms.entity.Enrollment;
+import team.cms.entity.User;
+import team.cms.result.CountResult;
+import team.cms.result.Result;
+import team.cms.service.EnrollmentService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/conference")
@@ -15,6 +21,9 @@ public class ConferenceController {
 
     @Resource
     ConferenceService conferenceService;
+
+    @Resource
+    EnrollmentService enrollmentService;
 
     @PostMapping("/getById")
     Conference getConferenceById(Integer id) {
@@ -24,26 +33,8 @@ public class ConferenceController {
     @PostMapping("/getByNumber")
     Conference getConferenceByNumber(String number) {
         return conferenceService.getConferenceByNumber(number);
-=======
-import team.cms.entity.Driver;
-import team.cms.entity.Enrollment;
-import team.cms.entity.User;
-import team.cms.repository.EnrollmentRepository;
-import team.cms.result.CountResult;
-import team.cms.result.Result;
-import team.cms.service.DriverService;
-import team.cms.service.EnrollmentService;
 
-import javax.annotation.Resource;
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/conference")
-
-public class ConferenceController {
-    @Resource
-    EnrollmentService enrollmentService;
-
+    }
     @PostMapping("/participant/count")
     public CountResult getNumberOfEnrollment(Integer id) {
         Integer amount=enrollmentService.getNumberOfEnrollment(id);
@@ -65,11 +56,11 @@ public class ConferenceController {
     @PostMapping("/enrollment/remove")
     public Result deleteEnrollment(Integer id, Integer userId) {
 
-        boolean flag=enrollmentService.deleteEnrollment(id, userId);
-        if(flag)
+        boolean flag = enrollmentService.deleteEnrollment(id, userId);
+        if (flag)
             return new Result(true, null);
         else
             return new Result(false, "删除失败！");
->>>>>>> feature/enrollment
     }
 }
+
