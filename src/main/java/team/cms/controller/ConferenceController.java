@@ -7,6 +7,7 @@ import team.cms.entity.Driver;
 import team.cms.entity.Enrollment;
 import team.cms.entity.User;
 import team.cms.repository.EnrollmentRepository;
+import team.cms.result.CountResult;
 import team.cms.result.Result;
 import team.cms.service.DriverService;
 import team.cms.service.EnrollmentService;
@@ -22,9 +23,9 @@ public class ConferenceController {
     EnrollmentService enrollmentService;
 
     @PostMapping("/participant/count")
-    public Integer getNumberOfEnrollment(Integer id) {
+    public CountResult getNumberOfEnrollment(Integer id) {
         Integer amount=enrollmentService.getNumberOfEnrollment(id);
-        return amount;
+        return new CountResult(amount);
     }
 
     @PostMapping("/participant/get")

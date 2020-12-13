@@ -12,7 +12,7 @@
     <select id="getEnrollmentUserInfo" resultType="team.cms.entity.User">
         select *
         from user
-        where conference_id = #{id}
+        where id in (select user_id from enrollment where conference_id=#{id})
     </select>
 
     <select id="getEnrollmentInfo" resultType="team.cms.entity.Enrollment">
