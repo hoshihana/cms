@@ -72,5 +72,10 @@ public class ConferenceController {
         return hotelReservationService.getAllHotelReservationsByConferenceId(id);
     }
 
+    @PostMapping("/hotelReservation/get")
+    public HotelReservation getParticipantHotelReservation(Integer id, Integer userId){
+        return hotelReservationService.getParticipantHotelReservation(id, userId);
+    }
+
 
 }

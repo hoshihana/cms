@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface HotelReservationService {
     List<HotelReservation> getAllHotelReservationsByConferenceId(Integer id);
+
+    HotelReservation getParticipantHotelReservation(Integer id, Integer userId);
 }

@@ -18,4 +18,9 @@ public class HotelReservationServiceImpl implements HotelReservationService {
         return hotelReservationRepository.getAllHotelReservationsByConferenceId(id);
     }
 
+    @Override
+    public HotelReservation getParticipantHotelReservation(Integer id, Integer userId) {
+        return hotelReservationRepository.getParticipantHotelReservation(id, userId);
+    }
+
 }

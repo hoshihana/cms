@@ -9,4 +9,9 @@
         from hotel_reservation
         where conference_id=#{id}
     </select>
+    <select id="getParticipantHotelReservation" resultType="team.cms.entity.HotelReservation">
+        select *
+        from hotel_reservation
+        where conference_id=#{id} and user_id=#{userId}
+    </select>
 </mapper>
