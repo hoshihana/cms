@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.cms.repository.DriverReservationRepository">
+    <insert id="addDriverReservation">
+        insert into driver_reservation(fleet_id, conference_id, user_id, reserve_time)
+        values (#{fleetId}, #{conferenceId}, #{userId}, #{reserveTime})
+    </insert>
+
+    <select id="getDriverReservation" resultType="team.cms.entity.DriverReservation">
+        select *
+        from driver_reservation
+        where conference_id=#{id} and userId=#{userId}
+    </select>
+    <select id="getUncheckedDriverReservationByFleetId" resultType="team.cms.entity.DriverReservation">
+        select *
+        from driver_reservation
+        where fleet_id=#{fleetId} and driver_check=false
+    </select>
+    <select id="getCheckDriverReservationByDriverId" resultType="team.cms.entity.DriverReservation">
+        select *
+        from driver_reservation
+        where driver_id=#{driverId} and driver_check=true and user_check=false;
+    </select>
+    <select id="getEndedDriverReservationByDriverId" resultType="team.cms.entity.DriverReservation">
+        select *
+        from driver_reservation
+        where driver_id=#{driverId} and driver_check=true and user_check=true;
+    </select>
+</mapper>
