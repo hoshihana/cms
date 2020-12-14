@@ -86,6 +86,11 @@ public class ConferenceController {
         return driverReservationService.getDirverReservationByConferenceId(id,accountId);
     }
 
-
+    @PostMapping("/check")
+    Result checkDriverReservation(HttpServletRequest request,Integer id){
+        Integer accountId = (Integer)request.getAttribute("accountId");
+        driverReservationService.setDriverReservationUserCheck(id,accountId);
+        return new Result(true,null);
+    }
 }
 
