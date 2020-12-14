@@ -3,13 +3,11 @@ package team.cms.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import team.cms.entity.Conference;
-import team.cms.service.ConferenceService;
 import team.cms.entity.Enrollment;
 import team.cms.entity.User;
-import team.cms.result.CountResult;
 import team.cms.result.Result;
+import team.cms.service.ConferenceService;
 import team.cms.service.EnrollmentService;
 
 import javax.annotation.Resource;
@@ -33,12 +31,13 @@ public class ConferenceController {
     @PostMapping("/getByNumber")
     Conference getConferenceByNumber(String number) {
         return conferenceService.getConferenceByNumber(number);
-
     }
+
+
     @PostMapping("/participant/count")
-    public CountResult getNumberOfEnrollment(Integer id) {
+    public Integer getNumberOfEnrollment(Integer id) {
         Integer amount=enrollmentService.getNumberOfEnrollment(id);
-        return new CountResult(amount);
+        return amount;
     }
 
     @PostMapping("/participant/get")
@@ -54,22 +53,12 @@ public class ConferenceController {
     }
 
     @PostMapping("/enrollment/remove")
-    public Result removeEnrollment(Integer id, Integer userId) {
+    public Result deleteEnrollment(Integer id, Integer userId) {
 
-        boolean flag = enrollmentService.removeEnrollment(id, userId);
-        if (flag)
+        boolean flag=enrollmentService.deleteEnrollment(id, userId);
+        if(flag)
             return new Result(true, null);
         else
             return new Result(false, "删除失败！");
     }
-
-    @PostMapping("/chooseHotel")
-    public Result chooseHotel(Integer id, Integer hotelId){
-        if(conferenceService.setConferenceHotel(id, hotelId))
-            return new Result(true,null);
-        else
-            return new Result(false,"选择酒店失败");
-    }
-
 }
-

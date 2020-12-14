@@ -3,12 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.EnrollmentRepository">
-    <insert id="addEnrollment">
-        insert into
-        enrollment
-        values (#{userId}, #{conferenceId}, #{tripNumber}, #{arriveTime}, #{enrollTime}, #{stayStart}, #{stayEnd}, #{stayNeeds}, #{remark})
-    </insert>
-
     <select id="getNumberOfEnrollment" resultType="java.lang.Integer">
         select count(*)
         from enrollment
@@ -18,7 +12,7 @@
     <select id="getEnrollmentUserInfo" resultType="team.cms.entity.User">
         select *
         from user
-        where id in (select user_id from enrollment where conference_id=#{id})
+        where conference_id = #{id}
     </select>
 
     <select id="getEnrollmentInfo" resultType="team.cms.entity.Enrollment">
@@ -27,12 +21,10 @@
         where conference_id = #{id} and user_id=#{userId}
     </select>
 
-    <delete id="removeEnrollment">
+    <delete id="deleteEnrollment">
         delete
         from enrollment
         where conference_id = #{id} and user_id=#{userId}
     </delete>
-
-
 
 </mapper>

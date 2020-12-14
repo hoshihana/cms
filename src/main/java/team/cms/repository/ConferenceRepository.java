@@ -37,6 +37,4 @@ public interface ConferenceRepository {
     void addConference(Conference conference);
 
     void updateNumber(Integer id);
-
-    boolean updateConferenceHotel(@Param("id")Integer id, @Param("hotelId")Integer hotelId);
 }

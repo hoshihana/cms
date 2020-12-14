@@ -4,12 +4,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Conference;
-import team.cms.entity.Enrollment;
 import team.cms.result.CheckResult;
-import team.cms.result.ParticipateConferenceResult;
 import team.cms.result.Result;
 import team.cms.service.ConferenceService;
-import team.cms.service.EnrollmentService;
 import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
@@ -22,7 +19,6 @@ public class UserConferenceController {
 
     @Resource
     ConferenceService conferenceService;
-    EnrollmentService enrollmentService;
 
     @PostMapping("/created/ongoing")
     List<Conference> getOngoingAndCreatedConference(HttpServletRequest request) {
@@ -85,33 +81,6 @@ public class UserConferenceController {
         conference.setInviteCode(inviteCode);
         conferenceService.addConference(accountId, conference);
         return new Result(true, null);
-    }
-
-    @PostMapping("/participate")
-    ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, Integer conferenceId,
-                                                      String tripNumber, String arriveTime, String enrollTime,
-                                                      String stayStart, String stayEnd, String stayNeeds, String remark) {
-
-        Integer accountId = (Integer)request.getAttribute("accountId");
-
-        if(conferenceService.checkInviteCode(conferenceId, inviteCode)){
-            Enrollment enrollment=new Enrollment();
-            enrollment.setConferenceId(conferenceId);
-            enrollment.setTripNumber(tripNumber);
-            enrollment.setArriveTime(DateUtil.parseDatetimeString(arriveTime));
-            enrollment.setEnrollTime(DateUtil.parseDatetimeString(enrollTime));
-            enrollment.setStayStart(DateUtil.parseDateString(stayStart));
-            enrollment.setStayEnd(DateUtil.parseDateString(stayEnd));
-            enrollment.setStayNeeds(stayNeeds);
-            enrollment.setRemark(remark);
-
-            if(enrollmentService.participateConference(accountId, enrollment))
-                return new ParticipateConferenceResult(true, true, null);
-            else
-                return new ParticipateConferenceResult(false, true, "创建参加信息失败！");
-
-        }
-        else return new ParticipateConferenceResult(true, false, "邀请码错误！");
     }
 
 
