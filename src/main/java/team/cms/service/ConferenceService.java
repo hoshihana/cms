@@ -28,5 +28,5 @@ public interface ConferenceService {
 
     Conference getConferenceByNumber(String number);
 
-    boolean checkInviteCode(Integer id, String inviteCode);
+    void modifyFleetId(Integer id, Integer fleetId);
 }

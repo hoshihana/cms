@@ -54,14 +54,19 @@ public class ConferenceController {
     }
 
     @PostMapping("/enrollment/remove")
-    public Result removeEnrollment(Integer id, Integer userId) {
+    public Result deleteEnrollment(Integer id, Integer userId) {
 
-        boolean flag = enrollmentService.removeEnrollment(id, userId);
+        boolean flag = enrollmentService.deleteEnrollment(id, userId);
         if (flag)
             return new Result(true, null);
         else
             return new Result(false, "删除失败！");
     }
 
+    @PostMapping("/chooseFleet")
+    Result chooseFleet(Integer id, Integer fleetId) {
+        conferenceService.modifyFleetId(id, fleetId);
+        return new Result(true, null);
+    }
 }
 

@@ -99,11 +99,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
-    public boolean checkInviteCode(Integer id, String inviteCode) {
-        String s=conferenceRepository.getConferenceById(id).getInviteCode();
-        if(s==null)
-            return true;
-        else
-            return s.equals(inviteCode);
+    public void modifyFleetId(Integer id, Integer fleetId) {
+        conferenceRepository.modifyFleetId(id, fleetId);
     }
 }
