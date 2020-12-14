@@ -33,7 +33,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public boolean deleteEnrollment(Integer id, Integer userId) {
-        return enrollmentRepository.deleteEnrollment(id, userId);
+    public boolean removeEnrollment(Integer id, Integer userId) {
+        return enrollmentRepository.removeEnrollment(id, userId);
     }
 }

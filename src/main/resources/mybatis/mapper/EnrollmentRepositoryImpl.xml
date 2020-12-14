@@ -21,7 +21,7 @@
         where conference_id = #{id} and user_id=#{userId}
     </select>
 
-    <delete id="deleteEnrollment">
+    <delete id="removeEnrollment">
         delete
         from enrollment
         where conference_id = #{id} and user_id=#{userId}
