@@ -1,5 +1,6 @@
 package team.cms.service;
 
+import org.apache.ibatis.annotations.Param;
 import team.cms.entity.Conference;
 
 import java.util.List;
@@ -29,4 +30,7 @@ public interface ConferenceService {
     Conference getConferenceByNumber(String number);
 
     boolean checkInviteCode(Integer id, String inviteCode);
+
+    boolean setConferenceHotel(Integer id, Integer hotelId);
+
 }

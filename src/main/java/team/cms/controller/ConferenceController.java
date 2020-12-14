@@ -63,5 +63,13 @@ public class ConferenceController {
             return new Result(false, "删除失败！");
     }
 
+    @PostMapping("/chooseHotel")
+    public Result chooseHotel(Integer id, Integer hotelId){
+        if(conferenceService.setConferenceHotel(id, hotelId))
+            return new Result(true,null);
+        else
+            return new Result(false,"选择酒店失败");
+    }
+
 }
 

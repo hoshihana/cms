@@ -106,4 +106,9 @@ public class ConferenceServiceImpl implements ConferenceService {
         else
             return s.equals(inviteCode);
     }
+
+    @Override
+    public boolean setConferenceHotel(Integer id, Integer hotelId) {
+        return conferenceRepository.updateConferenceHotel(id, hotelId);
+    }
 }
