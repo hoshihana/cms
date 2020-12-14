@@ -3,6 +3,7 @@ package team.cms.repository;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import team.cms.entity.Hotel;
+import team.cms.result.UserHotelReservation;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ public interface HotelRepository {
     Hotel getHotelById(Integer id);
 
     void modifyHotel(Hotel hotel);
+
+    List<UserHotelReservation> getAllReservationsByAccountId(Integer accountId);
+
 }
