@@ -54,9 +54,9 @@ public class ConferenceController {
     }
 
     @PostMapping("/enrollment/remove")
-    public Result deleteEnrollment(Integer id, Integer userId) {
+    public Result removeEnrollment(Integer id, Integer userId) {
 
-        boolean flag = enrollmentService.deleteEnrollment(id, userId);
+        boolean flag = enrollmentService.removeEnrollment(id, userId);
         if (flag)
             return new Result(true, null);
         else

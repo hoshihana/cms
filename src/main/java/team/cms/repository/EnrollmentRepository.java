@@ -16,5 +16,5 @@ public interface EnrollmentRepository {
 
     Enrollment getEnrollmentInfo(Integer id, Integer userId);
 
-    boolean deleteEnrollment(Integer id, Integer userId);
+    boolean removeEnrollment(Integer id, Integer userId);
 }
