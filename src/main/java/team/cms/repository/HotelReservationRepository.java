@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 @Repository
 public interface HotelReservationRepository {
-    List<HotelReservation> getAllReservationsByConferenceId(Integer id);
+    List<HotelReservation> getAllHotelReservationsByConferenceId(Integer id);
 }

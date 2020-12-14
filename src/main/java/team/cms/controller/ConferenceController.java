@@ -68,8 +68,8 @@ public class ConferenceController {
     }
 
     @PostMapping("/hotelReservation")
-    public List<HotelReservation> getAllReservations(Integer id){
-        return hotelReservationService.getAllReservationsByConferenceId(id);
+    public List<HotelReservation> getAllHotelReservations(Integer id){
+        return hotelReservationService.getAllHotelReservationsByConferenceId(id);
     }
 
 

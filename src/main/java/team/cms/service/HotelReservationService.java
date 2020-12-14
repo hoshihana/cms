@@ -5,5 +5,5 @@ import team.cms.entity.HotelReservation;
 import java.util.List;
 
 public interface HotelReservationService {
-    List<HotelReservation> getAllReservationsByConferenceId(Integer id);
+    List<HotelReservation> getAllHotelReservationsByConferenceId(Integer id);
 }

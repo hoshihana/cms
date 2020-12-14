@@ -14,8 +14,8 @@ public class HotelReservationServiceImpl implements HotelReservationService {
     HotelReservationRepository hotelReservationRepository;
 
     @Override
-    public List<HotelReservation> getAllReservationsByConferenceId(Integer id){
-        return hotelReservationRepository.getAllReservationsByConferenceId(id);
+    public List<HotelReservation> getAllHotelReservationsByConferenceId(Integer id){
+        return hotelReservationRepository.getAllHotelReservationsByConferenceId(id);
     }
 
 }
