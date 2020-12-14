@@ -37,4 +37,6 @@ public interface ConferenceRepository {
     void addConference(Conference conference);
 
     void updateNumber(Integer id);
+
+    void modifyFleetId(@Param("id") Integer id, @Param("fleetId") Integer fleetId);
 }

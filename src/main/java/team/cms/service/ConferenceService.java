@@ -27,4 +27,6 @@ public interface ConferenceService {
     Conference getConferenceById(Integer id);
 
     Conference getConferenceByNumber(String number);
+
+    void modifyFleetId(Integer id, Integer fleetId);
 }
