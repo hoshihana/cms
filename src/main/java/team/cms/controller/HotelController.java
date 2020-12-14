@@ -53,4 +53,16 @@ public class HotelController {
         return results;
     }
 
+    @PostMapping("/reservation/ended")
+    List<UserHotelReservation> getAllEndedReservations(HttpServletRequest request){
+        Integer accountId= (Integer) request.getAttribute("accountId");
+        List<UserHotelReservation> list=hotelService.getAllReservationsByAccountId(accountId);
+        List<UserHotelReservation> results=new LinkedList<>();
+
+        for(UserHotelReservation reservation:list){
+            if(reservation.isHotelCheck()&&reservation.isUserCheck()) results.add(reservation);
+        }
+        return results;
+    }
+
 }
