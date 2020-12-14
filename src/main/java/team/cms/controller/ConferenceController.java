@@ -5,14 +5,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.cms.entity.Conference;
+import team.cms.entity.DriverReservation;
 import team.cms.service.ConferenceService;
 import team.cms.entity.Enrollment;
 import team.cms.entity.User;
 import team.cms.result.CountResult;
 import team.cms.result.Result;
+import team.cms.service.DriverReservationService;
 import team.cms.service.EnrollmentService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -24,6 +27,9 @@ public class ConferenceController {
 
     @Resource
     EnrollmentService enrollmentService;
+
+    @Resource
+    DriverReservationService driverReservationService;
 
     @PostMapping("/getById")
     Conference getConferenceById(Integer id) {
@@ -68,5 +74,18 @@ public class ConferenceController {
         conferenceService.modifyFleetId(id, fleetId);
         return new Result(true, null);
     }
+
+    @PostMapping("/driverReservation/get")
+    DriverReservation getDriverReservationByConferenceIdAndUserId(Integer id, Integer userId) {
+        return driverReservationService.getDirverReservationByConferenceIdAndUserId(id, userId);
+    }
+
+    @PostMapping("/driverReservation")
+    DriverReservation getDriverReservationByConferenceId(HttpServletRequest request,Integer id){
+        Integer accountId=(Integer)request.getAttribute("account_Id");
+        return driverReservationService.getDirverReservationByConferenceId(id,accountId);
+    }
+
+
 }
 
