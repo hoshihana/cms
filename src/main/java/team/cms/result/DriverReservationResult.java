@@ -22,7 +22,7 @@ public class DriverReservationResult {
 
     private String telephone;
 
-    private Integer arriveTime;
+    private Date arriveTime;
 
     private Date reserveTime;
 
