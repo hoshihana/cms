@@ -1,6 +1,7 @@
 package team.cms.service.impl;
 
 import org.springframework.stereotype.Service;
+import team.cms.entity.Driver;
 import team.cms.entity.DriverReservation;
 import team.cms.repository.DriverRepository;
 import team.cms.repository.DriverReservationRepository;
@@ -14,9 +15,12 @@ public class DriverReservationServiceImpl implements DriverReservationService {
 
     @Resource
     DriverReservationRepository driverReservationRepository;
-    @Resource
 
+    @Resource
     UserRepository userRepository;
+
+    @Resource
+    DriverRepository driverRepository;
 
 
     @Override
@@ -28,5 +32,29 @@ public class DriverReservationServiceImpl implements DriverReservationService {
     public DriverReservation getDirverReservationByConferenceId(Integer id, Integer accountId) {
         Integer userId=userRepository.getUserByAccountId(accountId).getId();
         return driverReservationRepository.getDriverReservation(id,userId);
+    }
+
+    @Override
+    public DriverReservation getUncheckedDriverReservationByFleetId(Integer accountId) {
+        Driver driver=new Driver();
+        driver=driverRepository.getDriverByAccountId(accountId);
+        Integer fleetId = driver.getFleetId();
+        return driverReservationRepository.getUncheckedDriverReservationByFleetId(fleetId);
+    }
+
+    @Override
+    public DriverReservation getCheckDriverReservationByDriverId(Integer driverId) {
+        return driverReservationRepository.getCheckDriverReservationByDriverId(driverId);
+    }
+
+    @Override
+    public DriverReservation getEndedDriverReservationByDriverId(Integer driverId) {
+        return driverReservationRepository.getEndedDriverReservationByDriverId(driverId);
+    }
+
+    @Override
+    public void setDriverReservationUserCheck(Integer id, Integer accountId) {
+        Integer userId=userRepository.getUserByAccountId(accountId).getId();
+        driverReservationRepository.setDriverReservationUserCheck(id,userId);
     }
 }
