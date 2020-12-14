@@ -62,5 +62,6 @@ public class ConferenceController {
         else
             return new Result(false, "删除失败！");
     }
+
 }
 
