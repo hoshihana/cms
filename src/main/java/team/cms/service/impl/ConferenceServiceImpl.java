@@ -97,4 +97,18 @@ public class ConferenceServiceImpl implements ConferenceService {
         conferenceRepository.updateProgress(new Date());
         return conferenceRepository.getConferenceByNumber(number);
     }
+
+    @Override
+    public boolean checkInviteCode(Integer id, String inviteCode) {
+        String s=conferenceRepository.getConferenceById(id).getInviteCode();
+        if(s==null)
+            return true;
+        else
+            return s.equals(inviteCode);
+    }
+
+    @Override
+    public boolean setConferenceHotel(Integer id, Integer hotelId) {
+        return conferenceRepository.updateConferenceHotel(id, hotelId);
+    }
 }

@@ -54,13 +54,22 @@ public class ConferenceController {
     }
 
     @PostMapping("/enrollment/remove")
-    public Result deleteEnrollment(Integer id, Integer userId) {
+    public Result removeEnrollment(Integer id, Integer userId) {
 
-        boolean flag = enrollmentService.deleteEnrollment(id, userId);
+        boolean flag = enrollmentService.removeEnrollment(id, userId);
         if (flag)
             return new Result(true, null);
         else
             return new Result(false, "删除失败！");
     }
+
+    @PostMapping("/chooseHotel")
+    public Result chooseHotel(Integer id, Integer hotelId){
+        if(conferenceService.setConferenceHotel(id, hotelId))
+            return new Result(true,null);
+        else
+            return new Result(false,"选择酒店失败");
+    }
+
 }
 
