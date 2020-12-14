@@ -19,4 +19,7 @@ public interface DriverReservationRepository {
 
     DriverReservation getEndedDriverReservationByDriverId(Integer driverId);
 
+    boolean allReservationChecked(Integer conferenceId);
+
+    void setDriverReservationUserCheck(@Param("id") Integer id, @Param("userId") Integer userId);
 }
