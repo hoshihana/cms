@@ -20,11 +20,6 @@
         set number=(select number from conference_number where id=#{id})
         where id=#{id}
     </update>
-    <update id="modifyFleetId">
-        update conference
-        set fleet_id=#{fleetId}
-        where id=#{id}
-    </update>
     <select id="getOngoingAndCreatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference

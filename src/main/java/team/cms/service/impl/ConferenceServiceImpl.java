@@ -97,9 +97,4 @@ public class ConferenceServiceImpl implements ConferenceService {
         conferenceRepository.updateProgress(new Date());
         return conferenceRepository.getConferenceByNumber(number);
     }
-
-    @Override
-    public void modifyFleetId(Integer id, Integer fleetId) {
-        conferenceRepository.modifyFleetId(id, fleetId);
-    }
 }

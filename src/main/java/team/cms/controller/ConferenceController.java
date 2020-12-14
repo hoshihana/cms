@@ -62,11 +62,5 @@ public class ConferenceController {
         else
             return new Result(false, "删除失败！");
     }
-
-    @PostMapping("/chooseFleet")
-    Result chooseFleet(Integer id, Integer fleetId) {
-        conferenceService.modifyFleetId(id, fleetId);
-        return new Result(true, null);
-    }
 }
 
