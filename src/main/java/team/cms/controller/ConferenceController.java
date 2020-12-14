@@ -77,5 +77,15 @@ public class ConferenceController {
         return hotelReservationService.getParticipantHotelReservation(id, userId);
     }
 
+    @PostMapping("/hotelReservation/checkAll")
+    public boolean ifAllHotelReservationChecked(Integer id){
+        List<HotelReservation> hotelReservations=hotelReservationService.getAllHotelReservationsByConferenceId(id);
+        for(HotelReservation h:hotelReservations){
+            if(!h.isHotelCheck()) return false;
+        }
+        return true;
+    }
+
+
 
 }
