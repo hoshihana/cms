@@ -82,7 +82,7 @@ public class ConferenceController {
 
     @PostMapping("/driverReservation")
     DriverReservation getDriverReservationByConferenceId(HttpServletRequest request,Integer id){
-        Integer accountId=(Integer)request.getAttribute("account_Id");
+        Integer accountId=(Integer)request.getAttribute("accountId");
         return driverReservationService.getDirverReservationByConferenceId(id,accountId);
     }
 

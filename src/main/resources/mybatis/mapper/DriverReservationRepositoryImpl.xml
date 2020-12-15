@@ -9,7 +9,7 @@
     </insert>
     <update id="setDriverReservationUserCheck">
         update driver_reservation
-        set user_check=true;
+        set user_check=true
         where user_id=#{userId} and conference_id=#{id}
     </update>
     <update id="setDriverReservationDriverCheck">
@@ -20,7 +20,7 @@
     <select id="getDriverReservation" resultType="team.cms.entity.DriverReservation">
         select *
         from driver_reservation
-        where conference_id=#{id} and userId=#{userId}
+        where conference_id=#{id} and user_id=#{userId}
     </select>
     <select id="getUncheckedDriverReservationByFleetId" resultType="team.cms.entity.DriverReservation">
         select *

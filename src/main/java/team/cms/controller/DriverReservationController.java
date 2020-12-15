@@ -11,6 +11,9 @@ import team.cms.repository.UserRepository;
 import team.cms.result.DriverReservationResult;
 import team.cms.result.Result;
 import team.cms.service.DriverReservationService;
+import team.cms.service.DriverService;
+import team.cms.service.EnrollmentService;
+import team.cms.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +25,11 @@ public class DriverReservationController {
     @Resource
     DriverReservationService driverReservationService;
     @Resource
-    DriverRepository driverRepository;
+    DriverService driverService;
     @Resource
-    UserRepository userRepository;
+    UserService userService;
     @Resource
-    EnrollmentRepository enrollmentRepository;
+    EnrollmentService enrollmentService;
 
     @PostMapping("/unchecked")
     DriverReservationResult getUncheckedReservation(HttpServletRequest request) {
@@ -35,11 +38,12 @@ public class DriverReservationController {
 
         driverReservation = driverReservationService.getUncheckedDriverReservationByFleetId(accountId);
 
+        Integer userId=driverReservation.getUserId();
         User user = new User();
-        user = userRepository.getUserByAccountId(accountId);
+        user = userService.getUserById(userId);
 
         Enrollment enrollment = new Enrollment();
-        enrollment = enrollmentRepository.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
+        enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
 
         DriverReservationResult driverReservationResult = new DriverReservationResult();
         driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -64,16 +68,20 @@ public class DriverReservationController {
         DriverReservation driverReservation = new DriverReservation();
         Integer accountId = (Integer)request.getAttribute("accountId");
 
+
         Driver driver = new Driver();
-        driver = driverRepository.getDriverByAccountId(accountId);
+        driver = driverService.getDriverByAccountId(accountId);
 
         driverReservation = driverReservationService.getCheckDriverReservationByDriverId(driver.getId());
 
+
+        Integer userId=driverReservation.getUserId();
         User user = new User();
-        user = userRepository.getUserByAccountId(accountId);
+        user = userService.getUserById(userId);
+
 
         Enrollment enrollment = new Enrollment();
-        enrollment = enrollmentRepository.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
+        enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
 
         DriverReservationResult driverReservationResult = new DriverReservationResult();
         driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -100,17 +108,18 @@ public class DriverReservationController {
         Integer accountId = (Integer)request.getAttribute("accountId");
 
         Driver driver = new Driver();
-        driver = driverRepository.getDriverByAccountId(accountId);
+        driver = driverService.getDriverByAccountId(accountId);
 
 
         driverReservation = driverReservationService.getEndedDriverReservationByDriverId(driver.getId());
 
+        Integer userId=driverReservation.getUserId();
         User user = new User();
-        user = userRepository.getUserByAccountId(accountId);
+        user = userService.getUserById(userId);
 
         Enrollment enrollment = new Enrollment();
-        enrollment = enrollmentRepository.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
 
+        enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
         DriverReservationResult driverReservationResult = new DriverReservationResult();
         driverReservationResult.setConferenceId(driverReservation.getConferenceId());
         driverReservationResult.setUserId(user.getId());
