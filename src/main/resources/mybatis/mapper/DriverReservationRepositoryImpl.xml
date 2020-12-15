@@ -37,7 +37,7 @@
         from driver_reservation
         where driver_id=#{driverId} and driver_check=true and user_check=true;
     </select>
-    <select id="allReservationChecked" resultType="java.lang.Boolean">
+    <select id="allDriverReservationChecked" resultType="java.lang.Boolean">
         select case when sum(user_check) == count(*) then 1 else 0
         from driver_reservation
         where conference_id=#{conferenceId}

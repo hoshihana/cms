@@ -17,6 +17,8 @@ import team.cms.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/driver/reservation")
@@ -32,110 +34,120 @@ public class DriverReservationController {
     EnrollmentService enrollmentService;
 
     @PostMapping("/unchecked")
-    DriverReservationResult getUncheckedReservation(HttpServletRequest request) {
-        DriverReservation driverReservation = new DriverReservation();
+    List<DriverReservationResult> getUncheckedReservation(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
+        List<DriverReservation> driverReservationList = driverReservationService.getUncheckedDriverReservationByFleetId(accountId);
+        List<DriverReservationResult> driverReservationResultList= new ArrayList<>();
 
-        driverReservation = driverReservationService.getUncheckedDriverReservationByFleetId(accountId);
+        for (DriverReservation driverReservation:driverReservationList)
+        {
+            Integer userId=driverReservation.getUserId();
+            User user = new User();
+            user = userService.getUserById(userId);
 
-        Integer userId=driverReservation.getUserId();
-        User user = new User();
-        user = userService.getUserById(userId);
+            Enrollment enrollment = new Enrollment();
+            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
 
-        Enrollment enrollment = new Enrollment();
-        enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
+            DriverReservationResult driverReservationResult = new DriverReservationResult();
+            driverReservationResult.setConferenceId(driverReservation.getConferenceId());
+            driverReservationResult.setUserId(user.getId());
+            driverReservationResult.setName(user.getName());
+            driverReservationResult.setGender(user.getGender());
+            driverReservationResult.setTelephone(user.getTelephone());
+            driverReservationResult.setArriveTime(enrollment.getArriveTime());
+            driverReservationResult.setReserveTime(driverReservation.getReserveTime());
+            driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
+            driverReservationResult.setDriverId(driverReservation.getDriverId());
+            driverReservationResult.setPickupTime(driverReservation.getPickupTime());
+            driverReservationResult.setPickupSite(driverReservation.getPickupSite());
+            driverReservationResult.setCarNumber(driverReservation.getCarNumber());
+            driverReservationResult.setUserCheck(driverReservation.isUserCheck());
+            driverReservationResultList.add(driverReservationResult);
+        }
 
-        DriverReservationResult driverReservationResult = new DriverReservationResult();
-        driverReservationResult.setConferenceId(driverReservation.getConferenceId());
-        driverReservationResult.setUserId(user.getId());
-        driverReservationResult.setName(user.getName());
-        driverReservationResult.setGender(user.getGender());
-        driverReservationResult.setTelephone(user.getTelephone());
-        driverReservationResult.setArriveTime(enrollment.getArriveTime());
-        driverReservationResult.setReserveTime(driverReservation.getReserveTime());
-        driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
-        driverReservationResult.setDriverId(driverReservation.getDriverId());
-        driverReservationResult.setPickupTime(driverReservation.getPickupTime());
-        driverReservationResult.setPickupSite(driverReservation.getPickupSite());
-        driverReservationResult.setCarNumber(driverReservation.getCarNumber());
-        driverReservationResult.setUserCheck(driverReservation.isUserCheck());
-
-        return driverReservationResult;
+        return driverReservationResultList;
     }
 
     @PostMapping("/checked")
-    DriverReservationResult getCheckedReservation(HttpServletRequest request){
-        DriverReservation driverReservation = new DriverReservation();
+    List<DriverReservationResult> getCheckedReservation(HttpServletRequest request){
         Integer accountId = (Integer)request.getAttribute("accountId");
 
 
         Driver driver = new Driver();
         driver = driverService.getDriverByAccountId(accountId);
 
-        driverReservation = driverReservationService.getCheckDriverReservationByDriverId(driver.getId());
+        List<DriverReservation> driverReservationList = driverReservationService.getCheckDriverReservationByDriverId(driver.getId());
+        List<DriverReservationResult> driverReservationResultList= new ArrayList<>();
 
 
-        Integer userId=driverReservation.getUserId();
-        User user = new User();
-        user = userService.getUserById(userId);
+        for (DriverReservation driverReservation:driverReservationList)
+        {
+            Integer userId=driverReservation.getUserId();
+            User user = new User();
+            user = userService.getUserById(userId);
 
+            Enrollment enrollment = new Enrollment();
+            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
 
-        Enrollment enrollment = new Enrollment();
-        enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
+            DriverReservationResult driverReservationResult = new DriverReservationResult();
+            driverReservationResult.setConferenceId(driverReservation.getConferenceId());
+            driverReservationResult.setUserId(user.getId());
+            driverReservationResult.setName(user.getName());
+            driverReservationResult.setGender(user.getGender());
+            driverReservationResult.setTelephone(user.getTelephone());
+            driverReservationResult.setArriveTime(enrollment.getArriveTime());
+            driverReservationResult.setReserveTime(driverReservation.getReserveTime());
+            driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
+            driverReservationResult.setDriverId(driverReservation.getDriverId());
+            driverReservationResult.setPickupTime(driverReservation.getPickupTime());
+            driverReservationResult.setPickupSite(driverReservation.getPickupSite());
+            driverReservationResult.setCarNumber(driverReservation.getCarNumber());
+            driverReservationResult.setUserCheck(driverReservation.isUserCheck());
+            driverReservationResultList.add(driverReservationResult);
+        }
 
-        DriverReservationResult driverReservationResult = new DriverReservationResult();
-        driverReservationResult.setConferenceId(driverReservation.getConferenceId());
-        driverReservationResult.setUserId(user.getId());
-        driverReservationResult.setName(user.getName());
-        driverReservationResult.setGender(user.getGender());
-        driverReservationResult.setTelephone(user.getTelephone());
-        driverReservationResult.setArriveTime(enrollment.getArriveTime());
-        driverReservationResult.setReserveTime(driverReservation.getReserveTime());
-        driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
-        driverReservationResult.setDriverId(driverReservation.getDriverId());
-        driverReservationResult.setPickupTime(driverReservation.getPickupTime());
-        driverReservationResult.setPickupSite(driverReservation.getPickupSite());
-        driverReservationResult.setCarNumber(driverReservation.getCarNumber());
-        driverReservationResult.setUserCheck(driverReservation.isUserCheck());
-
-        return driverReservationResult;
+        return driverReservationResultList;
     }
 
     @PostMapping("/ended")
-    DriverReservationResult getEndedReservation(HttpServletRequest request){
+    List<DriverReservationResult> getEndedReservation(HttpServletRequest request){
 
-        DriverReservation driverReservation = new DriverReservation();
         Integer accountId = (Integer)request.getAttribute("accountId");
 
         Driver driver = new Driver();
         driver = driverService.getDriverByAccountId(accountId);
 
 
-        driverReservation = driverReservationService.getEndedDriverReservationByDriverId(driver.getId());
+        List<DriverReservation> driverReservationList = driverReservationService.getEndedDriverReservationByDriverId(driver.getId());
+        List<DriverReservationResult> driverReservationResultList= new ArrayList<>();
 
-        Integer userId=driverReservation.getUserId();
-        User user = new User();
-        user = userService.getUserById(userId);
+        for (DriverReservation driverReservation:driverReservationList)
+        {
+            Integer userId=driverReservation.getUserId();
+            User user = new User();
+            user = userService.getUserById(userId);
 
-        Enrollment enrollment = new Enrollment();
+            Enrollment enrollment = new Enrollment();
+            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
 
-        enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
-        DriverReservationResult driverReservationResult = new DriverReservationResult();
-        driverReservationResult.setConferenceId(driverReservation.getConferenceId());
-        driverReservationResult.setUserId(user.getId());
-        driverReservationResult.setName(user.getName());
-        driverReservationResult.setGender(user.getGender());
-        driverReservationResult.setTelephone(user.getTelephone());
-        driverReservationResult.setArriveTime(enrollment.getArriveTime());
-        driverReservationResult.setReserveTime(driverReservation.getReserveTime());
-        driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
-        driverReservationResult.setDriverId(driverReservation.getDriverId());
-        driverReservationResult.setPickupTime(driverReservation.getPickupTime());
-        driverReservationResult.setPickupSite(driverReservation.getPickupSite());
-        driverReservationResult.setCarNumber(driverReservation.getCarNumber());
-        driverReservationResult.setUserCheck(driverReservation.isUserCheck());
+            DriverReservationResult driverReservationResult = new DriverReservationResult();
+            driverReservationResult.setConferenceId(driverReservation.getConferenceId());
+            driverReservationResult.setUserId(user.getId());
+            driverReservationResult.setName(user.getName());
+            driverReservationResult.setGender(user.getGender());
+            driverReservationResult.setTelephone(user.getTelephone());
+            driverReservationResult.setArriveTime(enrollment.getArriveTime());
+            driverReservationResult.setReserveTime(driverReservation.getReserveTime());
+            driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
+            driverReservationResult.setDriverId(driverReservation.getDriverId());
+            driverReservationResult.setPickupTime(driverReservation.getPickupTime());
+            driverReservationResult.setPickupSite(driverReservation.getPickupSite());
+            driverReservationResult.setCarNumber(driverReservation.getCarNumber());
+            driverReservationResult.setUserCheck(driverReservation.isUserCheck());
+            driverReservationResultList.add(driverReservationResult);
+        }
 
-        return driverReservationResult;
+        return driverReservationResultList;
     }
 
 }

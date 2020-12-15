@@ -9,6 +9,7 @@ import team.cms.repository.UserRepository;
 import team.cms.service.DriverReservationService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class DriverReservationServiceImpl implements DriverReservationService {
@@ -35,7 +36,7 @@ public class DriverReservationServiceImpl implements DriverReservationService {
     }
 
     @Override
-    public DriverReservation getUncheckedDriverReservationByFleetId(Integer accountId) {
+    public List<DriverReservation> getUncheckedDriverReservationByFleetId(Integer accountId) {
         Driver driver=new Driver();
         driver=driverRepository.getDriverByAccountId(accountId);
         Integer fleetId = driver.getFleetId();
@@ -43,12 +44,12 @@ public class DriverReservationServiceImpl implements DriverReservationService {
     }
 
     @Override
-    public DriverReservation getCheckDriverReservationByDriverId(Integer driverId) {
+    public List<DriverReservation> getCheckDriverReservationByDriverId(Integer driverId) {
         return driverReservationRepository.getCheckDriverReservationByDriverId(driverId);
     }
 
     @Override
-    public DriverReservation getEndedDriverReservationByDriverId(Integer driverId) {
+    public List<DriverReservation> getEndedDriverReservationByDriverId(Integer driverId) {
         return driverReservationRepository.getEndedDriverReservationByDriverId(driverId);
     }
 

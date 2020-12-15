@@ -7,6 +7,8 @@ import team.cms.entity.DriverReservation;
 
 import java.util.Date;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface DriverReservationRepository {
@@ -15,13 +17,13 @@ public interface DriverReservationRepository {
 
     void addDriverReservation(DriverReservation driverReservation);
 
-    DriverReservation getUncheckedDriverReservationByFleetId(Integer fleetId);
+    List<DriverReservation> getUncheckedDriverReservationByFleetId(Integer fleetId);
 
-    DriverReservation getCheckDriverReservationByDriverId(Integer driverId);
+    List<DriverReservation> getCheckDriverReservationByDriverId(Integer driverId);
 
-    DriverReservation getEndedDriverReservationByDriverId(Integer driverId);
+    List<DriverReservation> getEndedDriverReservationByDriverId(Integer driverId);
 
-    boolean allReservationChecked(Integer conferenceId);
+    boolean allDriverReservationChecked(Integer conferenceId);
 
     void setDriverReservationUserCheck(@Param("id") Integer id, @Param("userId") Integer userId);
 
