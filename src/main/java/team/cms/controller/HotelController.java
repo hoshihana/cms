@@ -25,4 +25,5 @@ public class HotelController {
     Hotel getHotelById(Integer id) {
         return hotelService.getHotelById(id);
     }
+
 }

@@ -17,4 +17,5 @@ public interface HotelRepository {
     Hotel getHotelById(Integer id);
 
     void modifyHotel(Hotel hotel);
+
 }

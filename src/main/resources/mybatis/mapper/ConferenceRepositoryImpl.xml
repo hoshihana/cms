@@ -20,6 +20,11 @@
         set number=(select number from conference_number where id=#{id})
         where id=#{id}
     </update>
+    <update id="modifyHotelId">
+        update conference
+        set hotel_id=#{hotelId}
+        where id=#{id}
+    </update>
     <update id="modifyFleetId">
         update conference
         set fleet_id=#{fleetId}

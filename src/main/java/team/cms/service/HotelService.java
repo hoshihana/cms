@@ -13,4 +13,5 @@ public interface HotelService {
     Hotel getHotelById(Integer id);
 
     void modifyHotel(Hotel hotel);
+
 }
