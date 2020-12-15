@@ -4,15 +4,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import team.cms.entity.Conference;
+import team.cms.entity.*;
 import team.cms.service.ConferenceService;
-import team.cms.entity.Enrollment;
-import team.cms.entity.HotelReservation;
-import team.cms.entity.User;
 import team.cms.result.CheckResult;
 import team.cms.result.CountResult;
 import team.cms.result.Result;
-import team.cms.service.ConferenceService;
+import team.cms.service.DriverReservationService;
 import team.cms.service.EnrollmentService;
 import team.cms.service.HotelReservationService;
 
@@ -91,18 +88,18 @@ public class ConferenceController {
         return driverReservationService.getDirverReservationByConferenceId(id,accountId);
     }
 
-    @PostMapping("/check")
+    @PostMapping("/driverReservation/check")
     Result checkDriverReservation(HttpServletRequest request,Integer id){
         Integer accountId = (Integer)request.getAttribute("accountId");
         driverReservationService.setDriverReservationUserCheck(id,accountId);
         return new Result(true,null);
     }
 
-    @PostMapping("/checkAll")
+    @PostMapping("/driverReservation/checkAll")
     Boolean checkAllReservationIsChecked(Integer id) {
         return driverReservationService.allDriverReservationChecked(id);
     }
-}
+
 
     @PostMapping("/chooseHotel")
     public Result chooseHotel(Integer id, Integer hotelId) {

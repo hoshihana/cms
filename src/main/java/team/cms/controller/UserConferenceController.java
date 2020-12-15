@@ -14,6 +14,7 @@ import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,6 +23,8 @@ public class UserConferenceController {
 
     @Resource
     ConferenceService conferenceService;
+
+    @Resource
     EnrollmentService enrollmentService;
 
     @PostMapping("/created/ongoing")
@@ -88,23 +91,21 @@ public class UserConferenceController {
     }
 
     @PostMapping("/participate")
-    ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, Integer conferenceId,
-                                                      String tripNumber, String arriveTime, String enrollTime,
-                                                      String stayStart, String stayEnd, String stayNeeds, String remark) {
+    ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, Integer id,
+                                                      String tripNumber, String arriveTime, String stayStart, String stayEnd, String stayNeeds, String remark) {
 
         Integer accountId = (Integer)request.getAttribute("accountId");
 
-        if(conferenceService.checkInviteCode(conferenceId, inviteCode)){
+        if(conferenceService.checkInviteCode(id, inviteCode)){
             Enrollment enrollment=new Enrollment();
-            enrollment.setConferenceId(conferenceId);
+            enrollment.setConferenceId(id);
             enrollment.setTripNumber(tripNumber);
             enrollment.setArriveTime(DateUtil.parseDatetimeString(arriveTime));
-            enrollment.setEnrollTime(DateUtil.parseDatetimeString(enrollTime));
+            enrollment.setEnrollTime(new Date());
             enrollment.setStayStart(DateUtil.parseDateString(stayStart));
             enrollment.setStayEnd(DateUtil.parseDateString(stayEnd));
             enrollment.setStayNeeds(stayNeeds);
             enrollment.setRemark(remark);
-
             if(enrollmentService.participateConference(accountId, enrollment))
                 return new ParticipateConferenceResult(true, true, null);
             else
