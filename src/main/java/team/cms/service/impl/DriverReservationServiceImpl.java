@@ -9,6 +9,7 @@ import team.cms.repository.UserRepository;
 import team.cms.service.DriverReservationService;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -57,5 +58,17 @@ public class DriverReservationServiceImpl implements DriverReservationService {
     public void setDriverReservationUserCheck(Integer id, Integer accountId) {
         Integer userId=userRepository.getUserByAccountId(accountId).getId();
         driverReservationRepository.setDriverReservationUserCheck(id,userId);
+    }
+
+    @Override
+    public void setDriverReservationDriverCheck(Integer conferenceId, Integer userId, Date pickupTime, String pickupSite, String carNumber,Integer accountId) {
+        Driver driver=new Driver();
+        driver=driverRepository.getDriverByAccountId(accountId);
+        driverReservationRepository.setDriverReservationDriverCheck(conferenceId,userId,pickupTime,pickupSite,carNumber,driver.getId());
+    }
+
+    @Override
+    public boolean allDriverReservationChecked(Integer conferenceId) {
+        return driverReservationRepository.countUncheckedDriverReservation(conferenceId) == 0;
     }
 }

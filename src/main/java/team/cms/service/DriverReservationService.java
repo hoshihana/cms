@@ -3,6 +3,7 @@ package team.cms.service;
 import org.apache.ibatis.annotations.Param;
 import team.cms.entity.DriverReservation;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DriverReservationService {
@@ -19,4 +20,7 @@ public interface DriverReservationService {
 
     void setDriverReservationUserCheck( Integer id, Integer accountId);
 
+    void setDriverReservationDriverCheck(Integer conferenceId, Integer userId,Date pickupTime,String pickupSite, String carNumber,Integer driverId);
+
+    boolean allDriverReservationChecked(Integer conferenceId);
 }

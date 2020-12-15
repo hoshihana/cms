@@ -92,5 +92,10 @@ public class ConferenceController {
         driverReservationService.setDriverReservationUserCheck(id,accountId);
         return new Result(true,null);
     }
+
+    @PostMapping("/checkAll")
+    Boolean checkAllReservationIsChecked(Integer id) {
+        return driverReservationService.allDriverReservationChecked(id);
+    }
 }
 

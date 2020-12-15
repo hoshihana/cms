@@ -14,7 +14,7 @@
     </update>
     <update id="setDriverReservationDriverCheck">
         update driver_reservation
-        set driver_check=true, pickup_time=#{pickupTime}, pickup_site=#{pickupSite}, car_number=#{carNumber}
+        set driver_check=true, pickup_time=#{pickupTime}, pickup_site=#{pickupSite}, car_number=#{carNumber},driver_id=#{dirverId}
         where conference_id=#{conferenceId} and user_id=#{userId}
     </update>
     <select id="getDriverReservation" resultType="team.cms.entity.DriverReservation">
@@ -30,15 +30,15 @@
     <select id="getCheckDriverReservationByDriverId" resultType="team.cms.entity.DriverReservation">
         select *
         from driver_reservation
-        where driver_id=#{driverId} and driver_check=true and user_check=false;
+        where driver_id=#{driverId} and driver_check=true and user_check=false
     </select>
     <select id="getEndedDriverReservationByDriverId" resultType="team.cms.entity.DriverReservation">
         select *
         from driver_reservation
-        where driver_id=#{driverId} and driver_check=true and user_check=true;
+        where driver_id=#{driverId} and driver_check=true and user_check=true
     </select>
-    <select id="allDriverReservationChecked" resultType="java.lang.Boolean">
-        select case when sum(user_check) == count(*) then 1 else 0
+    <select id="countUncheckedDriverReservation" resultType="java.lang.Integer">
+        select count(*) - sum(driver_check)
         from driver_reservation
         where conference_id=#{conferenceId}
     </select>

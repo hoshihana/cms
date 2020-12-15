@@ -14,10 +14,12 @@ import team.cms.service.DriverReservationService;
 import team.cms.service.DriverService;
 import team.cms.service.EnrollmentService;
 import team.cms.service.UserService;
+import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,19 +36,18 @@ public class DriverReservationController {
     EnrollmentService enrollmentService;
 
     @PostMapping("/unchecked")
-    List<DriverReservationResult> getUncheckedReservation(HttpServletRequest request) {
-        Integer accountId = (Integer)request.getAttribute("accountId");
+    public List<DriverReservationResult> getUncheckedReservation(HttpServletRequest request) {
+        Integer accountId = (Integer) request.getAttribute("accountId");
         List<DriverReservation> driverReservationList = driverReservationService.getUncheckedDriverReservationByFleetId(accountId);
-        List<DriverReservationResult> driverReservationResultList= new ArrayList<>();
+        List<DriverReservationResult> driverReservationResultList = new ArrayList<>();
 
-        for (DriverReservation driverReservation:driverReservationList)
-        {
-            Integer userId=driverReservation.getUserId();
+        for (DriverReservation driverReservation : driverReservationList) {
+            Integer userId = driverReservation.getUserId();
             User user = new User();
             user = userService.getUserById(userId);
 
             Enrollment enrollment = new Enrollment();
-            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
+            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(), user.getId());
 
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -69,25 +70,24 @@ public class DriverReservationController {
     }
 
     @PostMapping("/checked")
-    List<DriverReservationResult> getCheckedReservation(HttpServletRequest request){
-        Integer accountId = (Integer)request.getAttribute("accountId");
+    public List<DriverReservationResult> getCheckedReservation(HttpServletRequest request) {
+        Integer accountId = (Integer) request.getAttribute("accountId");
 
 
         Driver driver = new Driver();
         driver = driverService.getDriverByAccountId(accountId);
 
         List<DriverReservation> driverReservationList = driverReservationService.getCheckDriverReservationByDriverId(driver.getId());
-        List<DriverReservationResult> driverReservationResultList= new ArrayList<>();
+        List<DriverReservationResult> driverReservationResultList = new ArrayList<>();
 
 
-        for (DriverReservation driverReservation:driverReservationList)
-        {
-            Integer userId=driverReservation.getUserId();
+        for (DriverReservation driverReservation : driverReservationList) {
+            Integer userId = driverReservation.getUserId();
             User user = new User();
             user = userService.getUserById(userId);
 
             Enrollment enrollment = new Enrollment();
-            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
+            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(), user.getId());
 
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -110,25 +110,24 @@ public class DriverReservationController {
     }
 
     @PostMapping("/ended")
-    List<DriverReservationResult> getEndedReservation(HttpServletRequest request){
+    public List<DriverReservationResult> getEndedReservation(HttpServletRequest request) {
 
-        Integer accountId = (Integer)request.getAttribute("accountId");
+        Integer accountId = (Integer) request.getAttribute("accountId");
 
         Driver driver = new Driver();
         driver = driverService.getDriverByAccountId(accountId);
 
 
         List<DriverReservation> driverReservationList = driverReservationService.getEndedDriverReservationByDriverId(driver.getId());
-        List<DriverReservationResult> driverReservationResultList= new ArrayList<>();
+        List<DriverReservationResult> driverReservationResultList = new ArrayList<>();
 
-        for (DriverReservation driverReservation:driverReservationList)
-        {
-            Integer userId=driverReservation.getUserId();
+        for (DriverReservation driverReservation : driverReservationList) {
+            Integer userId = driverReservation.getUserId();
             User user = new User();
             user = userService.getUserById(userId);
 
             Enrollment enrollment = new Enrollment();
-            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
+            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(), user.getId());
 
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -150,4 +149,22 @@ public class DriverReservationController {
         return driverReservationResultList;
     }
 
+    @PostMapping("/check")
+    public Result checkReservation(HttpServletRequest request, Integer conferenceId, Integer userId, String pickupTime, String pickupSite, String carNumber) {
+        Integer accountId = (Integer) request.getAttribute("accountId");
+        Date datetime = DateUtil.parseDatetimeString(pickupTime);
+        System.out.println(datetime);
+        Result result = new Result();
+        DriverReservation driverReservation = driverReservationService.getDirverReservationByConferenceIdAndUserId(conferenceId, userId);
+        if (driverReservation.isDriverCheck() == false) {
+            driverReservationService.setDriverReservationDriverCheck(conferenceId, userId, datetime, pickupSite, carNumber, accountId);
+            result.setSuccess(true);
+            result.setMessage(null);
+        } else {
+            result.setSuccess(false);
+            result.setMessage("此预约已被其他司机抢先确定！");
+        }
+
+        return result;
+    }
 }
