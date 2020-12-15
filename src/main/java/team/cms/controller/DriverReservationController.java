@@ -11,6 +11,7 @@ import team.cms.repository.UserRepository;
 import team.cms.result.DriverReservationResult;
 import team.cms.result.Result;
 import team.cms.service.DriverReservationService;
+import team.cms.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class DriverReservationController {
     @Resource
     DriverRepository driverRepository;
     @Resource
-    UserRepository userRepository;
+    UserService userService;
     @Resource
     EnrollmentRepository enrollmentRepository;
 
@@ -35,8 +36,9 @@ public class DriverReservationController {
 
         driverReservation = driverReservationService.getUncheckedDriverReservationByFleetId(accountId);
 
+        Integer userId=driverReservation.getUserId();
         User user = new User();
-        user = userRepository.getUserByAccountId(accountId);
+        user = userService.getUserById(userId);
 
         Enrollment enrollment = new Enrollment();
         enrollment = enrollmentRepository.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
@@ -64,13 +66,17 @@ public class DriverReservationController {
         DriverReservation driverReservation = new DriverReservation();
         Integer accountId = (Integer)request.getAttribute("accountId");
 
+
         Driver driver = new Driver();
         driver = driverRepository.getDriverByAccountId(accountId);
 
         driverReservation = driverReservationService.getCheckDriverReservationByDriverId(driver.getId());
 
+
+        Integer userId=driverReservation.getUserId();
         User user = new User();
-        user = userRepository.getUserByAccountId(accountId);
+        user = userService.getUserById(userId);
+
 
         Enrollment enrollment = new Enrollment();
         enrollment = enrollmentRepository.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
@@ -105,12 +111,13 @@ public class DriverReservationController {
 
         driverReservation = driverReservationService.getEndedDriverReservationByDriverId(driver.getId());
 
+        Integer userId=driverReservation.getUserId();
         User user = new User();
-        user = userRepository.getUserByAccountId(accountId);
+        user = userService.getUserById(userId);
 
         Enrollment enrollment = new Enrollment();
-        enrollment = enrollmentRepository.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
 
+        enrollment = enrollmentRepository.getEnrollmentInfo(driverReservation.getConferenceId(),user.getId());
         DriverReservationResult driverReservationResult = new DriverReservationResult();
         driverReservationResult.setConferenceId(driverReservation.getConferenceId());
         driverReservationResult.setUserId(user.getId());
