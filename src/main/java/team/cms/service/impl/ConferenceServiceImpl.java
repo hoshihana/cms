@@ -109,6 +109,6 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Override
     public boolean setConferenceHotel(Integer id, Integer hotelId) {
-        return conferenceRepository.updateConferenceHotel(id, hotelId);
+        return conferenceRepository.modifyHotelId(id, hotelId);
     }
 }

@@ -1,8 +1,6 @@
 package team.cms.service;
 
 import team.cms.entity.Hotel;
-import team.cms.entity.User;
-import team.cms.result.UserHotelReservation;
 
 import java.util.List;
 
@@ -16,5 +14,4 @@ public interface HotelService {
 
     void modifyHotel(Hotel hotel);
 
-    List<UserHotelReservation> getAllReservationsByAccountId(Integer accountId);
 }

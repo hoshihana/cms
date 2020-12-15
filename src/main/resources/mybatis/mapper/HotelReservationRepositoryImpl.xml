@@ -3,15 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.HotelReservationRepository" >
+    <update id="setHotelReservationUserCheck">
+        update hotel_reservation
+        set user_check=true
+        where conference_id=#{conferenceId} and user_id=#{userId}
+    </update>
+    <update id="setHotelReservationHotelCheck">
+        update hotel_reservation
+        set hotel_check=true, checkin_time=#{checkinTime}, room_number=#{roomNumber}
+        where conference_id=#{conferenceId} and user_id=#{userId}
+    </update>
 
-    <select id="getAllHotelReservationsByConferenceId" resultType="team.cms.entity.HotelReservation">
+    <select id="getHotelReservationsByConferenceId" resultType="team.cms.entity.HotelReservation">
         select *
         from hotel_reservation
         where conference_id=#{id}
     </select>
-    <select id="getParticipantHotelReservation" resultType="team.cms.entity.HotelReservation">
+    <select id="getHotelReservation" resultType="team.cms.entity.HotelReservation">
         select *
         from hotel_reservation
         where conference_id=#{id} and user_id=#{userId}
+    </select>
+    <select id="getHotelReservationsByHotelId" resultType="team.cms.entity.HotelReservation">
+        select *
+        from hotel_reservation
+        where hotel_id=#{hotelId}
     </select>
 </mapper>

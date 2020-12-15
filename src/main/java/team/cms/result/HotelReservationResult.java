@@ -11,7 +11,10 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserHotelReservation {
+public class HotelReservationResult {
+
+    private Integer hotelId;
+
     private Integer conferenceId;
 
     private Integer userId;

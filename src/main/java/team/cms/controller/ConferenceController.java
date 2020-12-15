@@ -7,6 +7,7 @@ import team.cms.entity.Conference;
 import team.cms.entity.Enrollment;
 import team.cms.entity.HotelReservation;
 import team.cms.entity.User;
+import team.cms.result.CheckResult;
 import team.cms.result.CountResult;
 import team.cms.result.Result;
 import team.cms.service.ConferenceService;
@@ -14,6 +15,7 @@ import team.cms.service.EnrollmentService;
 import team.cms.service.HotelReservationService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -60,7 +62,6 @@ public class ConferenceController {
 
     @PostMapping("/enrollment/remove")
     public Result removeEnrollment(Integer id, Integer userId) {
-
         boolean flag = enrollmentService.removeEnrollment(id, userId);
         if (flag)
             return new Result(true, null);
@@ -68,31 +69,32 @@ public class ConferenceController {
             return new Result(false, "删除失败！");
     }
 
+    @PostMapping("/chooseHotel")
+    public Result chooseHotel(Integer id, Integer hotelId) {
+        conferenceService.setConferenceHotel(id, hotelId);
+        return new Result(true, null);
+    }
+
     @PostMapping("/hotelReservation")
-    public List<HotelReservation> getAllHotelReservations(Integer id){
-        return hotelReservationService.getAllHotelReservationsByConferenceId(id);
+    public HotelReservation getAllHotelReservations(HttpServletRequest request, Integer id){
+        Integer accountId = (Integer) request.getAttribute("accountId");
+        return hotelReservationService.getHotelReservationByAccountId(id, accountId);
     }
 
     @PostMapping("/hotelReservation/get")
-    public HotelReservation getParticipantHotelReservation(Integer id, Integer userId){
-        return hotelReservationService.getParticipantHotelReservation(id, userId);
+    public HotelReservation getHotelReservation(Integer id, Integer userId){
+        return hotelReservationService.getHotelReservationByUserId(id, userId);
     }
 
     @PostMapping("/hotelReservation/checkAll")
-    public boolean isAllHotelReservationChecked(Integer id){
-        List<HotelReservation> hotelReservations=hotelReservationService.getAllHotelReservationsByConferenceId(id);
-        for(HotelReservation h:hotelReservations){
-            if(!h.isHotelCheck()) return false;
-        }
-        return true;
+    public CheckResult allHotelReservationChecked(Integer id){
+        return new CheckResult(hotelReservationService.allHotelReservationChecked(id));
     }
 
     @PostMapping("/hotelReservation/check")
-    public boolean checkHotelReservation(Integer id){
-        List<HotelReservation> hotelReservations=hotelReservationService.getAllHotelReservationsByConferenceId(id);
-        for(HotelReservation h:hotelReservations){
-            if(!h.isHotelCheck()) return false;
-        }
-        return true;
+    public Result checkHotelReservation(HttpServletRequest request, Integer id){
+        Integer accountId = (Integer)request.getAttribute("accountId");
+        hotelReservationService.setHotelReservationUserCheck(id, accountId);
+        return new Result(true, null);
     }
 }

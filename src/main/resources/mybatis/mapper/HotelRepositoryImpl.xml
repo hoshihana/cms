@@ -25,29 +25,5 @@
         from hotel
         where id=#{id}
     </select>
-    <select id="getAllReservationsByAccountId" resultType="team.cms.result.UserHotelReservation">
-        select
-        hotel_reservation.conference_id,
-        hotel_reservation.user_id,
-        user.name,
-        user.gender,
-        user.resident_id_number,
-        user.telephone,
-        enrollment.stay_start,
-        enrollment.stay_end,
-        enrollment.stay_needs,
-        hotel_reservation.reserve_time,
-        hotel_reservation.hotel_check,
-        hotel_reservation.checkin_time,
-        hotel_reservation.room_number,
-        hotel_reservation.user_check
-        from
-        hotel_reservation, user, hotel_reservation
-        where
-        hotel_reservation.hotel_id=#{accountId} and
-        user.accountId=hotel_reservation.user_id and
-        enrollment.user_id=hotel_reservation.user_id and
-        enrollment.conference_id=hotel_reservation.conference_id
-    </select>
 
 </mapper>
