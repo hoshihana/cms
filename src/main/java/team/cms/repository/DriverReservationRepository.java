@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import team.cms.entity.DriverReservation;
 
+import java.util.Date;
+
 @Mapper
 @Repository
 public interface DriverReservationRepository {
@@ -22,4 +24,6 @@ public interface DriverReservationRepository {
     boolean allReservationChecked(Integer conferenceId);
 
     void setDriverReservationUserCheck(@Param("id") Integer id, @Param("userId") Integer userId);
+
+    void setDriverReservationDriverCheck(@Param("conferenceId") Integer conferenceId, @Param("userId") Integer userId, @Param("pickupTime") Date pickupTime, @Param("pickupSite") String pickupSite, @Param("carNumber") String carNumber);
 }

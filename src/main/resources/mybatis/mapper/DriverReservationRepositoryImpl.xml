@@ -12,6 +12,11 @@
         set user_check=true;
         where user_id=#{userId} and conference_id=#{id}
     </update>
+    <update id="setDriverReservationDriverCheck">
+        update driver_reservation
+        set driver_check=true, pickup_time=#{pickupTime}, pickup_site=#{pickupSite}, car_number=#{carNumber}
+        where conference_id=#{conferenceId} and user_id=#{userId}
+    </update>
     <select id="getDriverReservation" resultType="team.cms.entity.DriverReservation">
         select *
         from driver_reservation
