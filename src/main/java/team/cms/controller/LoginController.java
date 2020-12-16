@@ -16,10 +16,10 @@ import javax.annotation.Resource;
 public class LoginController {
 
     @Resource
-    AccountService accountService;
+    private AccountService accountService;
 
     @PostMapping("/submit")
-    LoginResult loginSubmit(Role role, String username, String password) {
+    public LoginResult loginSubmit(Role role, String username, String password) {
 
         Account account = accountService.getAccountByUsername(username);
 

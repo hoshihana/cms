@@ -4,10 +4,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.*;
-import team.cms.repository.AccountRepository;
-import team.cms.repository.DriverRepository;
-import team.cms.repository.EnrollmentRepository;
-import team.cms.repository.UserRepository;
 import team.cms.result.DriverReservationResult;
 import team.cms.result.Result;
 import team.cms.service.DriverReservationService;
@@ -27,13 +23,13 @@ import java.util.List;
 public class DriverReservationController {
 
     @Resource
-    DriverReservationService driverReservationService;
+    private DriverReservationService driverReservationService;
     @Resource
-    DriverService driverService;
+    private DriverService driverService;
     @Resource
-    UserService userService;
+    private UserService userService;
     @Resource
-    EnrollmentService enrollmentService;
+    private EnrollmentService enrollmentService;
 
     @PostMapping("/unchecked")
     public List<DriverReservationResult> getUncheckedReservation(HttpServletRequest request) {
@@ -153,7 +149,6 @@ public class DriverReservationController {
     public Result checkReservation(HttpServletRequest request, Integer conferenceId, Integer userId, String pickupTime, String pickupSite, String carNumber) {
         Integer accountId = (Integer) request.getAttribute("accountId");
         Date datetime = DateUtil.parseDatetimeString(pickupTime);
-        System.out.println(datetime);
         Result result = new Result();
         DriverReservation driverReservation = driverReservationService.getDirverReservationByConferenceIdAndUserId(conferenceId, userId);
         if (driverReservation.isDriverCheck() == false) {
@@ -164,7 +159,6 @@ public class DriverReservationController {
             result.setSuccess(false);
             result.setMessage("此预约已被其他司机抢先确定！");
         }
-
         return result;
     }
 }

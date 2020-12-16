@@ -16,6 +16,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/admin/**")
                 .addPathPatterns("/api/fleet/**")
                 .addPathPatterns("/api/hotel/**")
+                .addPathPatterns("/api/message/**")
                 .addPathPatterns("/api/driver/**");
 
         registry.addInterceptor(new UserInterceptor())
@@ -23,7 +24,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/conference/**")
                 .addPathPatterns("/api/hotel/getAll")
                 .addPathPatterns("/api/hotel/get")
-                .addPathPatterns("/api/fleet/**")
+                .addPathPatterns("/api/fleet/getAll")
+                .addPathPatterns("/api/fleet/get")
                 .addPathPatterns("/api/driver/getByFleetId")
                 .addPathPatterns("/api/driver/getById");
 

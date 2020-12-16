@@ -21,18 +21,18 @@ import javax.annotation.Resource;
 public class RegisterController {
 
     @Resource
-    AccountService accountService;
+    private AccountService accountService;
 
     @Resource
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping("/checkUsername")
-    CheckResult checkUsername(String username) {
+    public CheckResult checkUsername(String username) {
         return new CheckResult(accountService.usernameAvailable(username));
     }
 
     @PostMapping("/submit")
-    Result register(String username, String password, String name, Gender gender, String birthday, String residentIdNumber, String telephone, String email, String workplace) {
+    public Result register(String username, String password, String name, Gender gender, String birthday, String residentIdNumber, String telephone, String email, String workplace) {
 
         if(!accountService.usernameAvailable(username)) {
             return new Result(false, "用户名不可用");

@@ -2,9 +2,12 @@ package team.cms.service.impl;
 
 import org.springframework.stereotype.Service;
 import team.cms.entity.HotelReservation;
+import team.cms.repository.ConferenceRepository;
 import team.cms.repository.HotelRepository;
 import team.cms.repository.HotelReservationRepository;
 import team.cms.repository.UserRepository;
+import team.cms.service.DriverReservationService;
+import team.cms.service.DriverService;
 import team.cms.service.HotelReservationService;
 
 import javax.annotation.Resource;
@@ -19,6 +22,12 @@ public class HotelReservationServiceImpl implements HotelReservationService {
 
     @Resource
     HotelRepository hotelRepository;
+
+    @Resource
+    ConferenceRepository conferenceRepository;
+
+    @Resource
+    DriverReservationService driverReservationService;
 
     @Resource
     HotelReservationRepository hotelReservationRepository;
@@ -60,5 +69,8 @@ public class HotelReservationServiceImpl implements HotelReservationService {
     @Override
     public void setHotelReservationHotelCheck(Integer conferenceId, Integer userId, Date checkinTime, String roomNumber) {
         hotelReservationRepository.setHotelReservationHotelCheck(conferenceId, userId, checkinTime, roomNumber);
+        if(allHotelReservationChecked(conferenceId) && driverReservationService.allDriverReservationChecked(conferenceId)) {
+            conferenceRepository.setConferenceReady(conferenceId);
+        }
     }
 }

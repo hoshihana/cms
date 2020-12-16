@@ -14,16 +14,16 @@ import java.util.List;
 public class FleetController {
 
     @Resource
-    FleetService fleetService;
+    private FleetService fleetService;
 
     @PostMapping("/getAll")
-    List<Fleet> getAll()
+    public List<Fleet> getAll()
     {
         return fleetService.getAll();
     }
 
     @PostMapping("/get")
-    Fleet getFleetById(Integer id)
+    public Fleet getFleetById(Integer id)
     {
         return fleetService.getFleetById(id);
     }

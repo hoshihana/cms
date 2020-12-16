@@ -14,17 +14,17 @@ import java.util.List;
 public class DriverController {
 
     @Resource
-    DriverService driverService;
+    private DriverService driverService;
 
     @PostMapping("/getByFleetId")
-    List<Driver> getFleetDrivers(Integer fleetId)
+    public List<Driver> getFleetDrivers(Integer fleetId)
     {
         List<Driver> drivers= driverService.getFleetDrivers(fleetId);
         return drivers;
     }
 
     @PostMapping("/getById")
-    Driver getDriverById(Integer id)
+    public Driver getDriverById(Integer id)
     {
         return driverService.getDriverById(id);
     }

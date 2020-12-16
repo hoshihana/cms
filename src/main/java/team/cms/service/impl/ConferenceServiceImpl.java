@@ -116,4 +116,9 @@ public class ConferenceServiceImpl implements ConferenceService {
     public boolean setConferenceHotel(Integer id, Integer hotelId) {
         return conferenceRepository.modifyHotelId(id, hotelId);
     }
+
+    @Override
+    public void confirmConference(Integer id) {
+        conferenceRepository.setConferenceReservationConfirm(id);
+    }
 }

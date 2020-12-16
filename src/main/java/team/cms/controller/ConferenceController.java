@@ -22,24 +22,24 @@ import java.util.List;
 public class ConferenceController {
 
     @Resource
-    ConferenceService conferenceService;
+    private ConferenceService conferenceService;
 
     @Resource
-    EnrollmentService enrollmentService;
+    private EnrollmentService enrollmentService;
 
     @Resource
-    HotelReservationService hotelReservationService;
+    private HotelReservationService hotelReservationService;
 
     @Resource
-    DriverReservationService driverReservationService;
+    private DriverReservationService driverReservationService;
 
     @PostMapping("/getById")
-    Conference getConferenceById(Integer id) {
+    public Conference getConferenceById(Integer id) {
         return conferenceService.getConferenceById(id);
     }
 
     @PostMapping("/getByNumber")
-    Conference getConferenceByNumber(String number) {
+    public Conference getConferenceByNumber(String number) {
         return conferenceService.getConferenceByNumber(number);
     }
 
@@ -72,31 +72,31 @@ public class ConferenceController {
     }
 
     @PostMapping("/chooseFleet")
-    Result chooseFleet(Integer id, Integer fleetId) {
+    public Result chooseFleet(Integer id, Integer fleetId) {
         conferenceService.modifyFleetId(id, fleetId);
         return new Result(true, null);
     }
 
     @PostMapping("/driverReservation/get")
-    DriverReservation getDriverReservationByConferenceIdAndUserId(Integer id, Integer userId) {
+    public DriverReservation getDriverReservationByConferenceIdAndUserId(Integer id, Integer userId) {
         return driverReservationService.getDirverReservationByConferenceIdAndUserId(id, userId);
     }
 
     @PostMapping("/driverReservation")
-    DriverReservation getDriverReservationByConferenceId(HttpServletRequest request,Integer id){
+    public DriverReservation getDriverReservationByConferenceId(HttpServletRequest request,Integer id){
         Integer accountId=(Integer)request.getAttribute("accountId");
         return driverReservationService.getDirverReservationByConferenceId(id,accountId);
     }
 
     @PostMapping("/driverReservation/check")
-    Result checkDriverReservation(HttpServletRequest request,Integer id){
+    public Result checkDriverReservation(HttpServletRequest request,Integer id){
         Integer accountId = (Integer)request.getAttribute("accountId");
         driverReservationService.setDriverReservationUserCheck(id,accountId);
         return new Result(true,null);
     }
 
     @PostMapping("/driverReservation/checkAll")
-    Boolean checkAllReservationIsChecked(Integer id) {
+    public Boolean checkAllReservationIsChecked(Integer id) {
         return driverReservationService.allDriverReservationChecked(id);
     }
 
@@ -128,5 +128,20 @@ public class ConferenceController {
         Integer accountId = (Integer)request.getAttribute("accountId");
         hotelReservationService.setHotelReservationUserCheck(id, accountId);
         return new Result(true, null);
+    }
+
+    @PostMapping("/confirm")
+    public Result confirmConference(Integer id) {
+        Conference conference = conferenceService.getConferenceById(id);
+        if(conference.getFleetId() == null && conference.getHotelId() == null) {
+            return new Result(false, "未选择预约车队和酒店");
+        } else if(conference.getFleetId() == null) {
+            return new Result(false, "未选择预约车队");
+        } else if(conference.getHotelId() == null) {
+            return new Result(false, "未选择预约酒店");
+        } else {
+            conferenceService.confirmConference(id);
+            return new Result(true, null);
+        }
     }
 }

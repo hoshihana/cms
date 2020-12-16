@@ -3,10 +3,13 @@ package team.cms.service.impl;
 import org.springframework.stereotype.Service;
 import team.cms.entity.Driver;
 import team.cms.entity.DriverReservation;
+import team.cms.repository.ConferenceRepository;
 import team.cms.repository.DriverRepository;
 import team.cms.repository.DriverReservationRepository;
 import team.cms.repository.UserRepository;
+import team.cms.service.ConferenceService;
 import team.cms.service.DriverReservationService;
+import team.cms.service.HotelReservationService;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,11 +22,16 @@ public class DriverReservationServiceImpl implements DriverReservationService {
     DriverReservationRepository driverReservationRepository;
 
     @Resource
+    HotelReservationService hotelReservationService;
+
+    @Resource
     UserRepository userRepository;
 
     @Resource
     DriverRepository driverRepository;
 
+    @Resource
+    ConferenceRepository conferenceRepository;
 
     @Override
     public DriverReservation getDirverReservationByConferenceIdAndUserId(Integer id, Integer userId) {
@@ -65,6 +73,9 @@ public class DriverReservationServiceImpl implements DriverReservationService {
         Driver driver=new Driver();
         driver=driverRepository.getDriverByAccountId(accountId);
         driverReservationRepository.setDriverReservationDriverCheck(conferenceId,userId,pickupTime,pickupSite,carNumber,driver.getId());
+        if(allDriverReservationChecked(conferenceId) && hotelReservationService.allHotelReservationChecked(conferenceId)) {
+            conferenceRepository.setConferenceReady(conferenceId);
+        }
     }
 
     @Override
