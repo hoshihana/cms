@@ -13,7 +13,7 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService {
 
     @Resource
-    MessageRepository messageRepository;
+    private MessageRepository messageRepository;
 
     @Override
     public List<Message> getSentMessageByAccountId(int senderId) {

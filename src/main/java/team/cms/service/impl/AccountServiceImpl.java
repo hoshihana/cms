@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 public class AccountServiceImpl implements AccountService {
 
     @Resource
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
 
     @Override
     public Account getAccountByUsername(String username) {

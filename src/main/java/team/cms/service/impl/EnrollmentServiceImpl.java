@@ -16,10 +16,10 @@ import java.util.List;
 public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Resource
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Resource
-    EnrollmentRepository enrollmentRepository;
+    private EnrollmentRepository enrollmentRepository;
 
     @Override
     public Integer getNumberOfEnrollment(Integer id) {

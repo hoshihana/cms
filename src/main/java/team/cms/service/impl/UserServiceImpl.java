@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public User getUserByAccountId(Integer accountId) {

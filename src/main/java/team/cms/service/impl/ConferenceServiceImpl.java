@@ -15,10 +15,10 @@ import java.util.List;
 public class ConferenceServiceImpl implements ConferenceService {
 
     @Resource
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Resource
-    ConferenceRepository conferenceRepository;
+    private ConferenceRepository conferenceRepository;
 
     @Override
     public List<Conference> getOngoingAndCreatedConference(Integer accountId) {

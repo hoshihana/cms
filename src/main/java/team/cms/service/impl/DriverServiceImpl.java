@@ -12,7 +12,7 @@ import java.util.List;
 public class DriverServiceImpl implements DriverService {
 
     @Resource
-    DriverRepository driverRepository;
+    private DriverRepository driverRepository;
 
 
     @Override

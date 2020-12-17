@@ -12,7 +12,7 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService {
 
     @Resource
-    HotelRepository hotelRepository;
+    private HotelRepository hotelRepository;
 
     @Override
     public Hotel getHotelByAccountId(Integer accountId) {

@@ -12,7 +12,7 @@ import java.util.List;
 public class FleetServiceImpl implements FleetService {
 
     @Resource
-    FleetRepository fleetRepository;
+    private FleetRepository fleetRepository;
 
     @Override
     public List<Fleet> getAll() {

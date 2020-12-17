@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 public class AdminServiceImpl implements AdminService {
 
     @Resource
-    AdminRepository adminRepository;
+    private AdminRepository adminRepository;
 
     @Override
     public Admin getAdminByAccountId(int accountId) {
