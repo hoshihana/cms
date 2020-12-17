@@ -34,12 +34,12 @@ public class DriverReservationServiceImpl implements DriverReservationService {
     ConferenceRepository conferenceRepository;
 
     @Override
-    public DriverReservation getDirverReservationByConferenceIdAndUserId(Integer id, Integer userId) {
+    public DriverReservation getDriverReservationByConferenceIdAndUserId(Integer id, Integer userId) {
         return driverReservationRepository.getDriverReservation(id, userId);
     }
 
     @Override
-    public DriverReservation getDirverReservationByConferenceId(Integer id, Integer accountId) {
+    public DriverReservation getDriverReservationByConferenceId(Integer id, Integer accountId) {
         Integer userId=userRepository.getUserByAccountId(accountId).getId();
         return driverReservationRepository.getDriverReservation(id,userId);
     }

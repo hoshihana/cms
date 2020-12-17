@@ -43,7 +43,7 @@ public class DriverReservationController {
             user = userService.getUserById(userId);
 
             Enrollment enrollment = new Enrollment();
-            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(), user.getId());
+            enrollment = enrollmentService.getEnrollmentByUserId(driverReservation.getConferenceId(), user.getId());
 
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -52,6 +52,7 @@ public class DriverReservationController {
             driverReservationResult.setGender(user.getGender());
             driverReservationResult.setTelephone(user.getTelephone());
             driverReservationResult.setArriveTime(enrollment.getArriveTime());
+            driverReservationResult.setArriveSite(enrollment.getArriveSite());
             driverReservationResult.setReserveTime(driverReservation.getReserveTime());
             driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
             driverReservationResult.setDriverId(driverReservation.getDriverId());
@@ -83,7 +84,7 @@ public class DriverReservationController {
             user = userService.getUserById(userId);
 
             Enrollment enrollment = new Enrollment();
-            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(), user.getId());
+            enrollment = enrollmentService.getEnrollmentByUserId(driverReservation.getConferenceId(), user.getId());
 
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -92,6 +93,7 @@ public class DriverReservationController {
             driverReservationResult.setGender(user.getGender());
             driverReservationResult.setTelephone(user.getTelephone());
             driverReservationResult.setArriveTime(enrollment.getArriveTime());
+            driverReservationResult.setArriveSite(enrollment.getArriveSite());
             driverReservationResult.setReserveTime(driverReservation.getReserveTime());
             driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
             driverReservationResult.setDriverId(driverReservation.getDriverId());
@@ -123,7 +125,7 @@ public class DriverReservationController {
             user = userService.getUserById(userId);
 
             Enrollment enrollment = new Enrollment();
-            enrollment = enrollmentService.getEnrollmentInfo(driverReservation.getConferenceId(), user.getId());
+            enrollment = enrollmentService.getEnrollmentByUserId(driverReservation.getConferenceId(), user.getId());
 
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
@@ -132,6 +134,7 @@ public class DriverReservationController {
             driverReservationResult.setGender(user.getGender());
             driverReservationResult.setTelephone(user.getTelephone());
             driverReservationResult.setArriveTime(enrollment.getArriveTime());
+            driverReservationResult.setArriveSite(enrollment.getArriveSite());
             driverReservationResult.setReserveTime(driverReservation.getReserveTime());
             driverReservationResult.setDriverCheck(driverReservation.isDriverCheck());
             driverReservationResult.setDriverId(driverReservation.getDriverId());
@@ -150,7 +153,7 @@ public class DriverReservationController {
         Integer accountId = (Integer) request.getAttribute("accountId");
         Date datetime = DateUtil.parseDatetimeString(pickupTime);
         Result result = new Result();
-        DriverReservation driverReservation = driverReservationService.getDirverReservationByConferenceIdAndUserId(conferenceId, userId);
+        DriverReservation driverReservation = driverReservationService.getDriverReservationByConferenceIdAndUserId(conferenceId, userId);
         if (driverReservation.isDriverCheck() == false) {
             driverReservationService.setDriverReservationDriverCheck(conferenceId, userId, datetime, pickupSite, carNumber, accountId);
             result.setSuccess(true);

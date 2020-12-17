@@ -40,7 +40,7 @@ public class HotelReservationController {
             if (!hotelReservation.isHotelCheck() && !hotelReservation.isUserCheck()) {
                 HotelReservationResult hotelReservationResult = new HotelReservationResult();
                 User user = userService.getUserById(hotelReservation.getUserId());
-                Enrollment enrollment = enrollmentService.getEnrollmentInfo(hotelReservation.getConferenceId(), hotelReservation.getUserId());
+                Enrollment enrollment = enrollmentService.getEnrollmentByUserId(hotelReservation.getConferenceId(), hotelReservation.getUserId());
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
@@ -71,7 +71,7 @@ public class HotelReservationController {
             if (hotelReservation.isHotelCheck() && !hotelReservation.isUserCheck()) {
                 HotelReservationResult hotelReservationResult = new HotelReservationResult();
                 User user = userService.getUserById(hotelReservation.getUserId());
-                Enrollment enrollment = enrollmentService.getEnrollmentInfo(hotelReservation.getConferenceId(), hotelReservation.getUserId());
+                Enrollment enrollment = enrollmentService.getEnrollmentByUserId(hotelReservation.getConferenceId(), hotelReservation.getUserId());
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
@@ -102,7 +102,7 @@ public class HotelReservationController {
             if (hotelReservation.isHotelCheck() && hotelReservation.isUserCheck()) {
                 HotelReservationResult hotelReservationResult = new HotelReservationResult();
                 User user = userService.getUserById(hotelReservation.getUserId());
-                Enrollment enrollment = enrollmentService.getEnrollmentInfo(hotelReservation.getConferenceId(), hotelReservation.getUserId());
+                Enrollment enrollment = enrollmentService.getEnrollmentByUserId(hotelReservation.getConferenceId(), hotelReservation.getUserId());
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());

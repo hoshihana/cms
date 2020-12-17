@@ -92,7 +92,7 @@ public class UserConferenceController {
 
     @PostMapping("/participate")
     public ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, Integer id,
-                                                      String tripNumber, String arriveTime, String stayStart, String stayEnd, String stayNeeds, String remark) {
+                                                      String tripNumber, String arriveTime, String arriveSite, String stayStart, String stayEnd, String stayNeeds, String remark) {
 
         Integer accountId = (Integer)request.getAttribute("accountId");
 
@@ -101,6 +101,7 @@ public class UserConferenceController {
             enrollment.setConferenceId(id);
             enrollment.setTripNumber(tripNumber);
             enrollment.setArriveTime(DateUtil.parseDatetimeString(arriveTime));
+            enrollment.setArriveSite(arriveSite);
             enrollment.setEnrollTime(new Date());
             enrollment.setStayStart(DateUtil.parseDateString(stayStart));
             enrollment.setStayEnd(DateUtil.parseDateString(stayEnd));
