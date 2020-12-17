@@ -13,6 +13,7 @@ import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.UserService;
 import team.cms.util.DateUtil;
+import team.cms.util.EncodeUtil;
 
 import javax.annotation.Resource;
 
@@ -39,7 +40,7 @@ public class RegisterController {
         }
         Account account = new Account();
         account.setUsername(username);
-        account.setPassword(password);
+        account.setPassword(EncodeUtil.encodeByMd5(password));
         account.setRole(Role.USER);
 
         accountService.addAccount(account);
