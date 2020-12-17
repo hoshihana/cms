@@ -10,9 +10,11 @@ public interface EnrollmentService {
 
     Integer getNumberOfEnrollment(Integer id);
 
-    List<User> getEnrollmentUserInfo(Integer id);
+    List<User> getAllParticipant(Integer id);
 
-    Enrollment getEnrollmentInfo(Integer id, Integer userId);
+    Enrollment getEnrollmentByUserId(Integer id, Integer userId);
+
+    Enrollment getEnrollmentByAccountId(Integer id, Integer accountId);
 
     boolean removeEnrollment(Integer id, Integer userId);
 

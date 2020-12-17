@@ -2,7 +2,6 @@ package team.cms.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Account;
 import team.cms.entity.Message;
@@ -12,21 +11,20 @@ import team.cms.service.MessageService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user/message")
+@RequestMapping("/api/message")
 public class MessageController {
 
     @Resource
-    MessageService messageService;
+    private MessageService messageService;
     @Resource
-    AccountService accountService;
+    private AccountService accountService;
 
     @PostMapping("/sent")
-    List<Message> getSentMessage(HttpServletRequest request)
+    public List<Message> getSentMessage(HttpServletRequest request)
     {
         Integer accountId=(Integer)request.getAttribute("accountId");
         List<Message> messages=messageService.getSentMessageByAccountId(accountId);
@@ -34,7 +32,7 @@ public class MessageController {
     }
 
     @PostMapping("/read")
-    List<Message> getReadMessage(HttpServletRequest request)
+    public List<Message> getReadMessage(HttpServletRequest request)
     {
         Integer accountId=(Integer)request.getAttribute("accountId");
         List<Message> messages=messageService.getReadMessageByAccountId(accountId);
@@ -42,7 +40,7 @@ public class MessageController {
     }
 
     @PostMapping("/unread")
-    List<Message> getUnreadMessage(HttpServletRequest request)
+    public List<Message> getUnreadMessage(HttpServletRequest request)
     {
         Integer accountId=(Integer)request.getAttribute("accountId");
         List<Message> messages=messageService.getUnreadMessageByAccountId(accountId);
@@ -50,8 +48,12 @@ public class MessageController {
     }
 
     @PostMapping("/sendByAccountId")
-    Result sendMessageByAccountId(HttpServletRequest request, Integer recipientId, String content)
+    public Result sendMessageByAccountId(HttpServletRequest request, Integer recipientId, String content)
     {
+        Account recipientAccount = accountService.getAccountById(recipientId);
+        if(recipientAccount == null) {
+            return new Result(false, "收信人不存在！");
+        }
         Date sendTime=new Date();
         Integer senderId = (Integer) request.getAttribute("accountId");
         Message message = new Message();
@@ -63,25 +65,13 @@ public class MessageController {
         return new Result(true, null);
     }
 
-    @PostMapping("/sendById")
-    Result sendMessageByUserId(HttpServletRequest request, Integer userId, String content)
-    {
-        Date sendTime=new Date();
-        Integer senderId = (Integer) request.getAttribute("accountId");
-        Message message = new Message();
-        message.setContent(content);
-        message.setSendTime(sendTime);
-        Account account=new Account();
-        account=accountService.getAccountByUserId(userId);
-        message.setRecipientId(account.getId());
-        message.setSenderId(senderId);
-        messageService.sendMessage(message);
-        return new Result(true, null);
-    }
-
     @PostMapping("/sendByUsername")
-    Result sendMessageByUsername(HttpServletRequest request, String username, String content)
+    public Result sendMessageByUsername(HttpServletRequest request, String username, String content)
     {
+        Account recipientAccount = accountService.getAccountByUsername(username);
+        if(recipientAccount == null) {
+            return new Result(false, "收信人不存在！");
+        }
         Date sendTime=new Date();
         Integer senderId = (Integer) request.getAttribute("accountId");
         Message message = new Message();
@@ -97,7 +87,7 @@ public class MessageController {
     }
 
     @PostMapping("/setRead")
-    Result setRead(Integer id)
+    public Result setRead(Integer id)
     {
         messageService.setMessageRead(id);
         return new Result(true, null);

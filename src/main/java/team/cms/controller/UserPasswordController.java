@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 public class UserPasswordController {
 
     @Resource
-    AccountService accountService;
+    private AccountService accountService;
 
     @PostMapping("/modify")
-    PasswordModifyResult updatePassword(HttpServletRequest request, String oldPassword, String newPassword)
+    public PasswordModifyResult updatePassword(HttpServletRequest request, String oldPassword, String newPassword)
     {
         Integer accountId = (Integer)request.getAttribute("accountId");
         if(!accountService.checkPassword(accountId, oldPassword)) {

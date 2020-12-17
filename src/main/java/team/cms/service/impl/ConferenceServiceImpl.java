@@ -2,9 +2,9 @@ package team.cms.service.impl;
 
 import org.springframework.stereotype.Service;
 import team.cms.entity.Conference;
+import team.cms.entity.User;
 import team.cms.entity.enums.Progress;
-import team.cms.repository.ConferenceRepository;
-import team.cms.repository.UserRepository;
+import team.cms.repository.*;
 import team.cms.service.ConferenceService;
 
 import javax.annotation.Resource;
@@ -19,6 +19,15 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Resource
     ConferenceRepository conferenceRepository;
+
+    @Resource
+    EnrollmentRepository enrollmentRepository;
+
+    @Resource
+    DriverReservationRepository driverReservationRepository;
+
+    @Resource
+    HotelReservationRepository hotelReservationRepository;
 
     @Override
     public List<Conference> getOngoingAndCreatedConference(Integer accountId) {
@@ -115,5 +124,16 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Override
     public boolean setConferenceHotel(Integer id, Integer hotelId) {
         return conferenceRepository.modifyHotelId(id, hotelId);
+    }
+
+    @Override
+    public void confirmConference(Integer id) {
+        Conference conference = conferenceRepository.getConferenceById(id);
+        List<User> participants = enrollmentRepository.getAllParticipant(id);
+        for(User user : participants) {
+            driverReservationRepository.addDriverReservation(conference.getFleetId(), conference.getId(), user.getId(), new Date());
+            hotelReservationRepository.addHotelReservation(conference.getHotelId(), conference.getId(), user.getId(), new Date());
+        }
+        conferenceRepository.setConferenceReservationConfirm(id);
     }
 }

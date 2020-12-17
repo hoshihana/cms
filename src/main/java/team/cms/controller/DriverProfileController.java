@@ -18,16 +18,16 @@ import java.util.List;
 public class DriverProfileController {
 
     @Resource
-    DriverService driverService;
+    private DriverService driverService;
 
     @PostMapping("")
-    Driver getDriverProfile(HttpServletRequest request) {
+    public Driver getDriverProfile(HttpServletRequest request) {
         Integer accountId = (Integer) request.getAttribute("accountId");
         return driverService.getDriverByAccountId(accountId);
     }
 
     @PostMapping("/modify")
-    Result modifyDriverMessage(HttpServletRequest request, String name, Gender gender, String residentIdNumber, String telephone) {
+    public Result modifyDriverMessage(HttpServletRequest request, String name, Gender gender, String residentIdNumber, String telephone) {
         Integer accountId = (Integer) request.getAttribute("accountId");
         Driver driver = new Driver();
         driver.setAccountId(accountId);

@@ -15,7 +15,7 @@ public interface DriverReservationRepository {
 
     DriverReservation getDriverReservation(@Param("id") Integer id, @Param("userId") Integer userId);
 
-    void addDriverReservation(DriverReservation driverReservation);
+    void addDriverReservation(@Param("fleetId") Integer fleetId, @Param("conferenceId") Integer conferenceId, @Param("userId") Integer userId, @Param("reserveTime") Date reserveTime);
 
     List<DriverReservation> getUncheckedDriverReservationByFleetId(Integer fleetId);
 
@@ -28,5 +28,4 @@ public interface DriverReservationRepository {
     void setDriverReservationUserCheck(@Param("id") Integer id, @Param("userId") Integer userId);
 
     void setDriverReservationDriverCheck(@Param("conferenceId") Integer conferenceId, @Param("userId") Integer userId, @Param("pickupTime") Date pickupTime, @Param("pickupSite") String pickupSite, @Param("carNumber") String carNumber,@Param("dirverId")Integer driverId);
-
 }

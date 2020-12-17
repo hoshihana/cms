@@ -14,15 +14,15 @@ import java.util.List;
 public class HotelController {
 
     @Resource
-    HotelService hotelService;
+    private HotelService hotelService;
 
     @PostMapping("/getAll")
-    List<Hotel> getAll(){
+    public List<Hotel> getAll(){
         return hotelService.getAll();
     }
 
     @PostMapping("/get")
-    Hotel getHotelById(Integer id) {
+    public Hotel getHotelById(Integer id) {
         return hotelService.getHotelById(id);
     }
 

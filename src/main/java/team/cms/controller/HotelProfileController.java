@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 public class HotelProfileController {
 
     @Resource
-    HotelService hotelService;
+    private HotelService hotelService;
 
     @PostMapping("")
-    Hotel getHotelProfile(HttpServletRequest request) {
+    public Hotel getHotelProfile(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return hotelService.getHotelByAccountId(accountId);
     }
 
     @PostMapping("/modify")
-    Result modifyHotel(HttpServletRequest request,String name,String address,String detail,String telephone) {
+    public Result modifyHotel(HttpServletRequest request,String name,String address,String detail,String telephone) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         Hotel hotel=new Hotel();
         hotel.setAccountId(accountId);

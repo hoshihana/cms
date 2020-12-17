@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface HotelReservationRepository {
 
+    void addHotelReservation(@Param("hotelId") Integer hotelId, @Param("conferenceId") Integer conferenceId, @Param("userId") Integer userId, @Param("reserveTime") Date reserveTime);
 
     List<HotelReservation> getHotelReservationsByHotelId(Integer hotelId);
 

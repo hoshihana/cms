@@ -30,6 +30,16 @@
         set fleet_id=#{fleetId}
         where id=#{id}
     </update>
+    <update id="setConferenceReservationConfirm">
+        update conference
+        set progress='RESERVATION_CONFIRM'
+        where id=#{id}
+    </update>
+    <update id="setConferenceReady">
+        update conference
+        set progress='READY'
+        where id=#{id}
+    </update>
     <select id="getOngoingAndCreatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference

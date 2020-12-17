@@ -15,7 +15,6 @@ import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,16 +23,16 @@ import java.util.List;
 public class HotelReservationController {
 
     @Resource
-    HotelReservationService hotelReservationService;
+    private HotelReservationService hotelReservationService;
 
     @Resource
-    UserService userService;
+    private UserService userService;
 
     @Resource
-    EnrollmentService enrollmentService;
+    private EnrollmentService enrollmentService;
 
     @PostMapping("/unchecked")
-    List<HotelReservationResult> getAllUncheckedReservations(HttpServletRequest request) {
+    public List<HotelReservationResult> getAllUncheckedReservations(HttpServletRequest request) {
         Integer accountId = (Integer) request.getAttribute("accountId");
         List<HotelReservation> list = hotelReservationService.getHotelReservationByHotelAccountId(accountId);
         List<HotelReservationResult> results = new LinkedList<>();
@@ -41,7 +40,7 @@ public class HotelReservationController {
             if (!hotelReservation.isHotelCheck() && !hotelReservation.isUserCheck()) {
                 HotelReservationResult hotelReservationResult = new HotelReservationResult();
                 User user = userService.getUserById(hotelReservation.getUserId());
-                Enrollment enrollment = enrollmentService.getEnrollmentInfo(hotelReservation.getConferenceId(), hotelReservation.getUserId());
+                Enrollment enrollment = enrollmentService.getEnrollmentByUserId(hotelReservation.getConferenceId(), hotelReservation.getUserId());
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
@@ -64,7 +63,7 @@ public class HotelReservationController {
     }
 
     @PostMapping("/checked")
-    List<HotelReservationResult> getAllCheckedReservations(HttpServletRequest request) {
+    public List<HotelReservationResult> getAllCheckedReservations(HttpServletRequest request) {
         Integer accountId = (Integer) request.getAttribute("accountId");
         List<HotelReservation> list = hotelReservationService.getHotelReservationByHotelAccountId(accountId);
         List<HotelReservationResult> results = new LinkedList<>();
@@ -72,7 +71,7 @@ public class HotelReservationController {
             if (hotelReservation.isHotelCheck() && !hotelReservation.isUserCheck()) {
                 HotelReservationResult hotelReservationResult = new HotelReservationResult();
                 User user = userService.getUserById(hotelReservation.getUserId());
-                Enrollment enrollment = enrollmentService.getEnrollmentInfo(hotelReservation.getConferenceId(), hotelReservation.getUserId());
+                Enrollment enrollment = enrollmentService.getEnrollmentByUserId(hotelReservation.getConferenceId(), hotelReservation.getUserId());
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
@@ -95,7 +94,7 @@ public class HotelReservationController {
     }
 
     @PostMapping("/ended")
-    List<HotelReservationResult> getAllEndedReservations(HttpServletRequest request) {
+    public List<HotelReservationResult> getAllEndedReservations(HttpServletRequest request) {
         Integer accountId = (Integer) request.getAttribute("accountId");
         List<HotelReservation> list = hotelReservationService.getHotelReservationByHotelAccountId(accountId);
         List<HotelReservationResult> results = new LinkedList<>();
@@ -103,7 +102,7 @@ public class HotelReservationController {
             if (hotelReservation.isHotelCheck() && hotelReservation.isUserCheck()) {
                 HotelReservationResult hotelReservationResult = new HotelReservationResult();
                 User user = userService.getUserById(hotelReservation.getUserId());
-                Enrollment enrollment = enrollmentService.getEnrollmentInfo(hotelReservation.getConferenceId(), hotelReservation.getUserId());
+                Enrollment enrollment = enrollmentService.getEnrollmentByUserId(hotelReservation.getConferenceId(), hotelReservation.getUserId());
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
