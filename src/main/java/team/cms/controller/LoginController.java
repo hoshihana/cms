@@ -7,6 +7,7 @@ import team.cms.entity.Account;
 import team.cms.entity.enums.Role;
 import team.cms.result.LoginResult;
 import team.cms.service.*;
+import team.cms.util.EncodeUtil;
 import team.cms.util.JsonWebTokenUtil;
 
 import javax.annotation.Resource;
@@ -16,16 +17,16 @@ import javax.annotation.Resource;
 public class LoginController {
 
     @Resource
-    AccountService accountService;
+    private AccountService accountService;
 
     @PostMapping("/submit")
-    LoginResult loginSubmit(Role role, String username, String password) {
+    public LoginResult loginSubmit(Role role, String username, String password) {
 
         Account account = accountService.getAccountByUsername(username);
 
         LoginResult loginResult = new LoginResult();
 
-        if(account == null || !account.getPassword().equals(password) || account.getRole() != role) {
+        if(account == null || !account.getPassword().equals(EncodeUtil.encodeByMd5(password)) || account.getRole() != role) {
             loginResult.setSuccess(false);
             loginResult.setMessage("用户名或密码错误");
         } else {

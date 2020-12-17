@@ -20,13 +20,13 @@ public class UserProfileController {
     private UserService userService;
 
     @RequestMapping("")
-    User getProfile(HttpServletRequest request) {
+    public User getProfile(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return userService.getUserByAccountId(accountId);
     }
 
     @PostMapping("/modify")
-    Result modifyProfile(HttpServletRequest request, String name, Gender gender, String birthday, String residentIdNumber, String email, String telephone, String workplace) {
+    public Result modifyProfile(HttpServletRequest request, String name, Gender gender, String birthday, String residentIdNumber, String email, String telephone, String workplace) {
         User user = new User();
         user.setAccountId((Integer)request.getAttribute("accountId"));
         user.setName(name);
@@ -41,17 +41,17 @@ public class UserProfileController {
     }
 
     @PostMapping("/getById")
-    User getProfileById(Integer id) {
+    public User getProfileById(Integer id) {
         return userService.getUserById(id);
     }
 
     @PostMapping("/getByUsername")
-    User getProfileByUsername(String username) {
+    public User getProfileByUsername(String username) {
         return userService.getUserByUsername(username);
     }
 
     @PostMapping("/getByAccountId")
-    User getProfileByAccountId(Integer accountId) {
+    public User getProfileByAccountId(Integer accountId) {
         return userService.getUserByAccountId(accountId);
     }
 }

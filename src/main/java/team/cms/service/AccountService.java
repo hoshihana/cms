@@ -7,6 +7,8 @@ public interface AccountService {
 
     Account getAccountByUsername(String username);
 
+    Account getAccountById(Integer id);
+
     boolean usernameAvailable(String username);
 
     void addAccount(Account account);

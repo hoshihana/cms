@@ -19,6 +19,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account getAccountById(Integer id) {
+        return accountRepository.getAccountById(id);
+    }
+
+    @Override
     public boolean usernameAvailable(String username) {
         Account account = accountRepository.getAccountByUsername(username);
         return account == null;

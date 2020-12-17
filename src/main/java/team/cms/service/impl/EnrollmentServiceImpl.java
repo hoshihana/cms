@@ -5,7 +5,6 @@ import team.cms.entity.Enrollment;
 import team.cms.entity.User;
 import team.cms.repository.EnrollmentRepository;
 import team.cms.repository.UserRepository;
-import team.cms.result.ParticipateConferenceResult;
 import team.cms.service.EnrollmentService;
 
 import javax.annotation.Resource;
@@ -28,13 +27,19 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public List<User> getEnrollmentUserInfo(Integer id) {
-        return enrollmentRepository.getEnrollmentUserInfo(id);
+    public List<User> getAllParticipant(Integer id) {
+        return enrollmentRepository.getAllParticipant(id);
     }
 
     @Override
-    public Enrollment getEnrollmentInfo(Integer id, Integer userId) {
-        return enrollmentRepository.getEnrollmentInfo(id, userId);
+    public Enrollment getEnrollmentByUserId(Integer id, Integer userId) {
+        return enrollmentRepository.getEnrollment(id, userId);
+    }
+
+    @Override
+    public Enrollment getEnrollmentByAccountId(Integer id, Integer accountId) {
+        Integer userId = userRepository.getUserByAccountId(accountId).getId();
+        return enrollmentRepository.getEnrollment(id, userId);
     }
 
     @Override

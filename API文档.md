@@ -125,6 +125,127 @@
 
 
 
+### 消息接口
+
+
+#### 获取发送的消息
+
+- URI: POST api/message/sent
+
+- Path参数：无
+
+- Result参数：
+
+  |   参数名    |   类型   |      说明      |
+  | :---------: | :------: | :------------: |
+  |     id      | Integer  |    消息编号    |
+  |  senderId   | Integer  | 发送者账号编号 |
+  | recipientId | Integer  | 接收者账号编号 |
+  |   content   |  String  |      内容      |
+  |  sendTime   | Datetime |    发送时间    |
+  |    read     | boolean  |    是否已读    |
+
+
+
+#### 获取接收的未读消息
+
+- URI: POST api/message/unread
+
+- Path参数：无
+
+- Result参数：
+
+  |   参数名    |   类型   |       说明       |
+  | :---------: | :------: | :--------------: |
+  |     id      | Integer  |     消息编号     |
+  |  senderId   | Integer  |  发送者账号编号  |
+  | recipientId | Integer  |  接收者账号编号  |
+  |   content   |  String  |       内容       |
+  |  sendTime   | Datetime |     发送时间     |
+  |    read     | boolean  | 是否已读（false) |
+
+  
+
+#### 获取接收的已读消息
+
+- URI: POST api/message/read
+
+- Path参数：无
+
+- Result参数：
+
+  |   参数名    |   类型   |      说明       |
+  | :---------: | :------: | :-------------: |
+  |     id      | Integer  |    消息编号     |
+  |  senderId   | Integer  | 发送者账号编号  |
+  | recipientId | Integer  | 接收者账号编号  |
+  |   content   |  String  |      内容       |
+  |  sendTime   | Datetime |    发送时间     |
+  |    read     | boolean  | 是否已读（true) |
+
+
+
+#### 通过账号编号发送消息
+
+- URI: POST api/message/sendByAccountId
+
+- Path参数：
+
+  |  参数名   |  类型   |      说明      |
+  | :-------: | :-----: | :------------: |
+  | accountId | Integer | 接收者账号编号 |
+  |  content  | String  |      内容      |
+
+- Result参数：
+
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 操作是否成功 |
+  | message | String  |   错误信息   |
+
+
+
+#### 通过用户名发送消息
+
+- URI: POST api/message/sendByUsername
+
+- Path参数：
+
+  |  参数名  |  类型  |     说明     |
+  | :------: | :----: | :----------: |
+  | username | String | 接收者用户名 |
+  | content  | String |     内容     |
+
+- Result参数：
+
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 操作是否成功 |
+  | message | String  |   错误信息   |
+
+
+
+#### 将消息置为已读
+
+- URI: POST api/message/setRead
+
+- Path参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  |   id   | Integer | 消息编号 |
+  
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+
+
 ### 用户接口
 
 #### 获取用户个人信息
@@ -167,10 +288,10 @@
   
 - Result参数：
 
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 操作是否成功 |
-  | message | String  |   错误信息   |
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -271,142 +392,6 @@
   |      success       | boolean |  更改是否成功  |
   | oldPasswordCorrect | boolean | 旧密码是否正确 |
   |      message       | String  |      信息      |
-
-
-
-#### 获取用户发送的消息
-
-- URI: POST api/user/message/sent
-
-- Path参数：无
-
-- Result参数：
-
-  |   参数名    |   类型   |      说明      |
-  | :---------: | :------: | :------------: |
-  |     id      | Integer  |    消息编号    |
-  |  senderId   | Integer  | 发送者用户编号 |
-  | recipientId | Integer  | 接收者用户编号 |
-  |   content   |  String  |      内容      |
-  |  sendTime   | Datetime |    发送时间    |
-  |    read     | boolean  |    是否已读    |
-
-
-
-#### 获取用户接收的未读消息
-
-- URI: POST api/user/message/unread
-
-- Path参数：无
-
-- Result参数：
-
-  |   参数名    |   类型   |       说明       |
-  | :---------: | :------: | :--------------: |
-  |     id      | Integer  |     消息编号     |
-  |  senderId   | Integer  |  发送者用户编号  |
-  | recipientId | Integer  |  接收者用户编号  |
-  |   content   |  String  |       内容       |
-  |  sendTime   | Datetime |     发送时间     |
-  |    read     | boolean  | 是否已读（false) |
-
-  
-
-#### 获取用户接收的已读消息
-
-- URI: POST api/user/message/read
-
-- Path参数：无
-
-- Result参数：
-
-  |   参数名    |   类型   |      说明       |
-  | :---------: | :------: | :-------------: |
-  |     id      | Integer  |    消息编号     |
-  |  senderId   | Integer  | 发送者用户编号  |
-  | recipientId | Integer  | 接收者用户编号  |
-  |   content   |  String  |      内容       |
-  |  sendTime   | Datetime |    发送时间     |
-  |    read     | boolean  | 是否已读（true) |
-
-
-
-#### 通过用户编号发送消息
-
-- URI: POST api/user/message/sendById
-
-- Path参数：
-
-  | 参数名  |  类型   |      说明      |
-  | :-----: | :-----: | :------------: |
-  |   id    | Integer | 接收者用户编号 |
-  | content | String  |      内容      |
-  
-- Result参数：
-
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 操作是否成功 |
-  | message | String  |   错误信息   |
-
-
-
-#### 通过账号编号发送消息
-
-- URI: POST api/user/message/sendByAccountId
-
-- Path参数：
-
-  |  参数名   |  类型   |      说明      |
-  | :-------: | :-----: | :------------: |
-  | accountId | Integer | 接收者账号编号 |
-  |  content  | String  |      内容      |
-
-- Result参数：
-
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 操作是否成功 |
-  | message | String  |   错误信息   |
-
-
-
-#### 通过用户名发送消息
-
-- URI: POST api/user/message/sendByUsername
-
-- Path参数：
-
-  |  参数名  |  类型  |     说明     |
-  | :------: | :----: | :----------: |
-  | username | String | 接收者用户名 |
-  | content  | String |     内容     |
-
-- Result参数：
-
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 操作是否成功 |
-  | message | String  |   错误信息   |
-
-
-
-#### 将消息置为已读
-
-- URI: POST api/user/message/setRead
-
-- Path参数：
-
-  | 参数名 |  类型   |   说明   |
-  | :----: | :-----: | :------: |
-  |   id   | Integer | 消息编号 |
-  
-- Result参数：
-
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 操作是否成功 |
-  | message | String  |   错误信息   |
 
 
 
@@ -612,10 +597,10 @@
 
 - Result参数：
 
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 创建是否成功 |
-  | message | String  |   错误信息   |
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -630,6 +615,7 @@
   |     id     |   Integer   |   会议编号   |
   | tripNumber |   String    | 航班号/车次  |
   | arriveTime |  Datetime   |   到达时间   |
+  | arriveSite |   String    |   到站地点   |
   | stayStart  |    Date     | 住宿开始日期 |
   |  stayEnd   |    Date     | 住宿结束日期 |
   | stayNeeds  | String/null |   住宿需求   |
@@ -775,6 +761,7 @@
   | conferenceId | Integer  |   会议编号   |
   |  tripNumber  |  String  | 车次/航班号  |
   |  arriveTime  | Datetime |   到达时间   |
+  |  arriveSite  |  String  |   到站地点   |
   |  enrollTime  | Datetime |   报名时间   |
   |  stayStart   |   Date   | 住宿开始日期 |
   |   stayEnd    |   Date   | 住宿结束日期 |
@@ -817,10 +804,10 @@
 
 - Result参数：
 
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 选择是否成功 |
-  | message | String  |   错误信息   |
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -837,10 +824,10 @@
 
 - Result参数：
 
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 选择是否成功 |
-  | message | String  |   错误信息   |
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -865,7 +852,7 @@
 
 #### 检查酒店预约是否均确认
 
-- URI: POST api/conferfence/hotelReservation/checkAll
+- URI: POST api/conferfence/hotelReservation/allChecked
 
 - Path参数：
 
@@ -883,7 +870,7 @@
 
 #### 检查司机预约是否均确认
 
-- URI: POST api/conference/driverReservation/checkAll
+- URI: POST api/conference/driverReservation/allChecked
 
 - Path参数：
 
@@ -917,10 +904,7 @@
   |   hotelId    | Integer  |    酒店编号    |
   | conferenceId | Integer  |    会议编号    |
   |    userId    | Integer  |    用户编号    |
-  |  startStart  |   Date   |  住宿开始时间  |
-  |   startEnd   |   Date   |  住宿结束时间  |
-  |  stayNeeds   |  String  |    住宿需求    |
-  | reserveTime  | Integer  |  发送预约时间  |
+  | reserveTime  | Datetime |  发送预约时间  |
   |  hotelCheck  | boolean  | 酒店是否已确认 |
   | checkinTime  | Datetime |    入住时间    |
   |  roomNumber  |  String  |     房间号     |
@@ -946,7 +930,6 @@
   |   fleetId    | Integer  |    车队编号    |
   | conferenceId | Integer  |    会议编号    |
   |    userId    | Integer  |    用户编号    |
-  |  arriveTime  | Integer  |    到站时间    |
   | reserveTime  | Datetime |  发送预约时间  |
   | driverCheck  | boolean  | 司机是否已确认 |
   |   driverId   | Integer  |    司机编号    |
@@ -958,6 +941,33 @@
 
 
 ### 参加者会议接口
+
+#### 获取个人报名信息
+
+- POST api/conference/enrollment
+
+- Path参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  |   id   | Integer | 会议编号 |
+
+- Result参数：
+
+  |    参数名    |   类型   |     说明     |
+  | :----------: | :------: | :----------: |
+  |    userId    | Integer  |   用户编号   |
+  | conferenceId | Integer  |   会议编号   |
+  |  tripNumber  |  String  | 车次/航班号  |
+  |  arriveTime  | Datetime |   到达时间   |
+  |  arriveSite  |  String  |   到站地点   |
+  |  enrollTime  | Datetime |   报名时间   |
+  |  stayStart   |   Date   | 住宿开始日期 |
+  |   stayEnd    |   Date   | 住宿结束日期 |
+  |  stayNeeds   |  String  |   住宿需求   |
+  |    remark    |  String  |     备注     |
+
+
 
 #### 获取个人酒店预约信息
 
@@ -976,14 +986,30 @@
   |   hotelId    | Integer  |    酒店编号    |
   | conferenceId | Integer  |    会议编号    |
   |    userId    | Integer  |    用户编号    |
-  |  startStart  |   Date   |  住宿开始时间  |
-  |   startEnd   |   Date   |  住宿结束时间  |
-  |  stayNeeds   |  String  |    住宿需求    |
-  | reserveTime  | Integer  |  发送预约时间  |
+  | reserveTime  | Datetime |  发送预约时间  |
   |  hotelCheck  | boolean  | 酒店是否已确认 |
   | checkinTime  | Datetime |    入住时间    |
   |  roomNumber  |  String  |     房间号     |
   |  userCheck   | Integer  | 用户是否已确认 |
+
+
+
+#### 确认个人酒店预约信息
+
+- URI: POST api/conference/hotelReservation/check
+
+- Path参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  |   id   | Integer | 会议编号 |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -1004,7 +1030,6 @@
   |   fleetId    | Integer  |    车队编号    |
   | conferenceId | Integer  |    会议编号    |
   |    userId    | Integer  |    用户编号    |
-  |  arriveTime  | Integer  |    到站时间    |
   | reserveTime  | Datetime |  发送预约时间  |
   | driverCheck  | boolean  | 司机是否已确认 |
   |   driverId   | Integer  |    司机编号    |
@@ -1012,6 +1037,25 @@
   |  pickupSite  |  String  |    接车地点    |
   |  carNumber   |  String  |     车牌号     |
   |  userCheck   | boolean  | 用户是否已确认 |
+
+
+
+#### 确认个人司机预约信息
+
+- URI: POST api/conference/driverReservation/check
+
+- Path参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  |   id   | Integer | 会议编号 |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -1060,6 +1104,8 @@
 
 
 
+
+
 #### 更改酒店密码
 
 - URI: POST api/hotel/password/modify
@@ -1077,6 +1123,7 @@
   | :----------------: | :-----: | :------------: |
   |      success       | boolean |  更改是否成功  |
   | oldPasswordCorrect | boolean | 旧密码是否正确 |
+  |      message       | String  |    错误信息    |
 
 
 
@@ -1112,10 +1159,10 @@
 
 - Result参数：
 
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 修改是否成功 |
-  | message | String  |   错误信息   |
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -1334,6 +1381,7 @@
   | :----------------: | :-----: | :------------: |
   |      success       | boolean |  更改是否成功  |
   | oldPasswordCorrect | boolean | 旧密码是否正确 |
+  |      message       | String  |    错误信息    |
 
 
 
@@ -1372,10 +1420,10 @@
 
 - Result参数：
 
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | success | boolean | 修改是否成功 |
-  | message | String  |   错误信息   |
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
 
 
 
@@ -1394,7 +1442,8 @@
   |     name     |          String          |      姓名      |
   |    gender    | Gender('MALE', 'FEMALE') |      性别      |
   |  telephone   |          String          |    联系电话    |
-  |  arriveTime  |         Integer          |    到站时间    |
+  |  arriveTime  |         Datetime         |    到站时间    |
+  |  arriveSite  |          String          |    到站地点    |
   | reserveTime  |         Datetime         |  发送预约时间  |
   | driverCheck  |         boolean          | 司机是否已确认 |
   |   driverId   |         Integer          |    司机编号    |
@@ -1420,7 +1469,8 @@
   |     name     |          String          |      姓名      |
   |    gender    | Gender('MALE', 'FEMALE') |      性别      |
   |  telephone   |          String          |    联系电话    |
-  |  arriveTime  |         Integer          |    到站时间    |
+  |  arriveTime  |         Datetime         |    到站时间    |
+  |  arriveSite  |          String          |    到站地点    |
   | reserveTime  |         Datetime         |  发送预约时间  |
   | driverCheck  |         boolean          | 司机是否已确认 |
   |   driverId   |         Integer          |    司机编号    |
@@ -1446,7 +1496,8 @@
   |     name     |          String          |      姓名      |
   |    gender    | Gender('MALE', 'FEMALE') |      性别      |
   |  telephone   |          String          |    联系电话    |
-  |  arriveTime  |         Integer          |    到站时间    |
+  |  arriveTime  |         Datetime         |    到站时间    |
+  |  arriveSite  |          String          |    到站地点    |
   | reserveTime  |         Datetime         |  发送预约时间  |
   | driverCheck  |         boolean          | 司机是否已确认 |
   |   driverId   |         Integer          |    司机编号    |
@@ -1473,10 +1524,10 @@
   
 - Result参数：
 
-  | 参数名  |  类型   |     说明     |
-  | :-----: | :-----: | :----------: |
-  | result  | boolean | 确认是否成功 |
-  | message | String  |   错误信息   |
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | result  | boolean |   true   |
+  | message | String  | 错误信息 |
 
   
 

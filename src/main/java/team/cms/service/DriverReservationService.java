@@ -1,6 +1,5 @@
 package team.cms.service;
 
-import org.apache.ibatis.annotations.Param;
 import team.cms.entity.DriverReservation;
 
 import java.util.Date;
@@ -8,9 +7,9 @@ import java.util.List;
 
 public interface DriverReservationService {
 
-    DriverReservation getDirverReservationByConferenceIdAndUserId(Integer id,Integer userId);
+    DriverReservation getDriverReservationByConferenceIdAndUserId(Integer id, Integer userId);
 
-    DriverReservation getDirverReservationByConferenceId(Integer id,Integer accountId);
+    DriverReservation getDriverReservationByConferenceId(Integer id, Integer accountId);
 
     List<DriverReservation> getUncheckedDriverReservationByFleetId(Integer accountId);
 

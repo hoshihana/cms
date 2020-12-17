@@ -22,61 +22,61 @@ import java.util.List;
 public class UserConferenceController {
 
     @Resource
-    ConferenceService conferenceService;
+    private ConferenceService conferenceService;
 
     @Resource
-    EnrollmentService enrollmentService;
+    private EnrollmentService enrollmentService;
 
     @PostMapping("/created/ongoing")
-    List<Conference> getOngoingAndCreatedConference(HttpServletRequest request) {
+    public List<Conference> getOngoingAndCreatedConference(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return conferenceService.getOngoingAndCreatedConference(accountId);
     }
 
     @PostMapping("/participated/ongoing")
-    List<Conference> getOngoingAndParticipatedConference(HttpServletRequest request) {
+    public List<Conference> getOngoingAndParticipatedConference(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return conferenceService.getOngoingAndParticipatedConference(accountId);
     }
 
     @PostMapping("/created/ended")
-    List<Conference> getEndedAndCreatedConference(HttpServletRequest request) {
+    public List<Conference> getEndedAndCreatedConference(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return conferenceService.getEndedAndCreatedConference(accountId);
     }
 
     @PostMapping("/participated/ended")
-    List<Conference> getEndedAndParticipatedConference(HttpServletRequest request) {
+    public List<Conference> getEndedAndParticipatedConference(HttpServletRequest request) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return conferenceService.getEndedAndParticipatedConference(accountId);
     }
 
     @PostMapping("/created/checkById")
-    CheckResult checkOwnerById(HttpServletRequest request, Integer id) {
+    public CheckResult checkOwnerById(HttpServletRequest request, Integer id) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return  new CheckResult(conferenceService.checkOwnerById(accountId, id));
     }
 
     @PostMapping("/created/checkByNumber")
-    CheckResult checkOwnerByNumber(HttpServletRequest request, String number) {
+    public CheckResult checkOwnerByNumber(HttpServletRequest request, String number) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return  new CheckResult(conferenceService.checkOwnerByNumber(accountId, number));
     }
 
     @PostMapping("/participated/checkById")
-    CheckResult checkParticipantById(HttpServletRequest request, Integer id) {
+    public CheckResult checkParticipantById(HttpServletRequest request, Integer id) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return  new CheckResult(conferenceService.checkParticipantById(accountId, id));
     }
 
     @PostMapping("/participated/checkByNumber")
-    CheckResult checkParticipantById(HttpServletRequest request, String number) {
+    public CheckResult checkParticipantById(HttpServletRequest request, String number) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         return  new CheckResult(conferenceService.checkParticipantByNumber(accountId, number));
     }
 
     @PostMapping("/create")
-    Result createConference(HttpServletRequest request, String name, String detail, String address, String startTime, String endTime, String enrollTime, String inviteCode) {
+    public Result createConference(HttpServletRequest request, String name, String detail, String address, String startTime, String endTime, String enrollTime, String inviteCode) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         Conference conference = new Conference();
         conference.setName(name);
@@ -91,8 +91,8 @@ public class UserConferenceController {
     }
 
     @PostMapping("/participate")
-    ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, Integer id,
-                                                      String tripNumber, String arriveTime, String stayStart, String stayEnd, String stayNeeds, String remark) {
+    public ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, Integer id,
+                                                      String tripNumber, String arriveTime, String arriveSite, String stayStart, String stayEnd, String stayNeeds, String remark) {
 
         Integer accountId = (Integer)request.getAttribute("accountId");
 
@@ -101,6 +101,7 @@ public class UserConferenceController {
             enrollment.setConferenceId(id);
             enrollment.setTripNumber(tripNumber);
             enrollment.setArriveTime(DateUtil.parseDatetimeString(arriveTime));
+            enrollment.setArriveSite(arriveSite);
             enrollment.setEnrollTime(new Date());
             enrollment.setStayStart(DateUtil.parseDateString(stayStart));
             enrollment.setStayEnd(DateUtil.parseDateString(stayEnd));

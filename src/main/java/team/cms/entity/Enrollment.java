@@ -10,8 +10,6 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public class Enrollment {
     private Integer userId;
 
@@ -21,6 +19,8 @@ public class Enrollment {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date arriveTime;
+
+    private String arriveSite;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date enrollTime;

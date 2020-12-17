@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import team.cms.entity.Enrollment;
 import team.cms.entity.User;
-import team.cms.result.ParticipateConferenceResult;
 
 import java.util.List;
 
@@ -14,9 +13,9 @@ import java.util.List;
 public interface EnrollmentRepository {
     Integer getNumberOfEnrollment(Integer id);
 
-    List<User> getEnrollmentUserInfo(Integer id);
+    List<User> getAllParticipant(Integer id);
 
-    Enrollment getEnrollmentInfo(@Param("id")Integer id, @Param("userId")Integer userId);
+    Enrollment getEnrollment(@Param("id")Integer id, @Param("userId")Integer userId);
 
     boolean removeEnrollment(@Param("id")Integer id, @Param("userId")Integer userId);
 

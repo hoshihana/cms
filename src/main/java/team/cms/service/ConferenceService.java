@@ -35,4 +35,5 @@ public interface ConferenceService {
 
     boolean setConferenceHotel(Integer id, Integer hotelId);
 
+    void confirmConference(Integer id);
 }

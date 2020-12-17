@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.HotelReservationRepository" >
+    <insert id="addHotelReservation">
+        insert into hotel_reservation(hotel_id, conference_id, user_id, reserve_time)
+        values (#{hotelId}, #{conferenceId}, #{userId}, #{reserveTime})
+    </insert>
     <update id="setHotelReservationUserCheck">
         update hotel_reservation
         set user_check=true
