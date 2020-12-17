@@ -19,19 +19,19 @@ import java.util.List;
 public class DriverReservationServiceImpl implements DriverReservationService {
 
     @Resource
-    DriverReservationRepository driverReservationRepository;
+    private DriverReservationRepository driverReservationRepository;
 
     @Resource
-    HotelReservationService hotelReservationService;
+    private HotelReservationService hotelReservationService;
 
     @Resource
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Resource
-    DriverRepository driverRepository;
+    private DriverRepository driverRepository;
 
     @Resource
-    ConferenceRepository conferenceRepository;
+    private ConferenceRepository conferenceRepository;
 
     @Override
     public DriverReservation getDriverReservationByConferenceIdAndUserId(Integer id, Integer userId) {

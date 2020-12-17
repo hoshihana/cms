@@ -21,13 +21,13 @@ public class ConferenceServiceImpl implements ConferenceService {
     private ConferenceRepository conferenceRepository;
 
     @Resource
-    EnrollmentRepository enrollmentRepository;
+    private EnrollmentRepository enrollmentRepository;
 
     @Resource
-    DriverReservationRepository driverReservationRepository;
+    private DriverReservationRepository driverReservationRepository;
 
     @Resource
-    HotelReservationRepository hotelReservationRepository;
+    private HotelReservationRepository hotelReservationRepository;
 
     @Override
     public List<Conference> getOngoingAndCreatedConference(Integer accountId) {

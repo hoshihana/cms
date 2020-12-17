@@ -18,19 +18,19 @@ import java.util.List;
 public class HotelReservationServiceImpl implements HotelReservationService {
 
     @Resource
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Resource
-    HotelRepository hotelRepository;
+    private HotelRepository hotelRepository;
 
     @Resource
-    ConferenceRepository conferenceRepository;
+    private ConferenceRepository conferenceRepository;
 
     @Resource
-    DriverReservationService driverReservationService;
+    private DriverReservationService driverReservationService;
 
     @Resource
-    HotelReservationRepository hotelReservationRepository;
+    private HotelReservationRepository hotelReservationRepository;
 
     @Override
     public boolean allHotelReservationChecked(Integer conferenceId) {
