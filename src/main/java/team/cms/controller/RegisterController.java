@@ -12,8 +12,8 @@ import team.cms.result.CheckResult;
 import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.UserService;
+import team.cms.util.CipherUtil;
 import team.cms.util.DateUtil;
-import team.cms.util.EncodeUtil;
 
 import javax.annotation.Resource;
 
@@ -40,7 +40,7 @@ public class RegisterController {
         }
         Account account = new Account();
         account.setUsername(username);
-        account.setPassword(EncodeUtil.encodeByMd5(password));
+        account.setPassword(CipherUtil.encipherText(password));
         account.setRole(Role.USER);
 
         accountService.addAccount(account);

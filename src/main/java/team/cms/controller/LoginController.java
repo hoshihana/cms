@@ -7,7 +7,7 @@ import team.cms.entity.Account;
 import team.cms.entity.enums.Role;
 import team.cms.result.LoginResult;
 import team.cms.service.*;
-import team.cms.util.EncodeUtil;
+import team.cms.util.CipherUtil;
 import team.cms.util.JsonWebTokenUtil;
 
 import javax.annotation.Resource;
@@ -26,7 +26,7 @@ public class LoginController {
 
         LoginResult loginResult = new LoginResult();
 
-        if(account == null || !account.getPassword().equals(EncodeUtil.encodeByMd5(password)) || account.getRole() != role) {
+        if(account == null || !password.equals(CipherUtil.decipherText(account.getPassword())) || account.getRole() != role) {
             loginResult.setSuccess(false);
             loginResult.setMessage("用户名或密码错误");
         } else {
