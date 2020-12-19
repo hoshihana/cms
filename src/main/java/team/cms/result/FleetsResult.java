@@ -7,15 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FleetProfileResult {
+public class FleetsResult {
 
     Integer id;
 
     String name;
-
-    String detail;
-
-    String telephone;
 
     Integer driverAmount;
 }

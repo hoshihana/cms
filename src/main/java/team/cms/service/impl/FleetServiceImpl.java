@@ -23,4 +23,24 @@ public class FleetServiceImpl implements FleetService {
     public Fleet getFleetById(Integer id) {
         return fleetRepository.getFleetById(id);
     }
+
+    @Override
+    public Integer getAmountOfFleet() {
+        return fleetRepository.getAmountOfFleet();
+    }
+
+    @Override
+    public void modifyFleet(Fleet fleet) {
+        fleetRepository.modifyFleet(fleet);
+    }
+
+    @Override
+    public void addFleet(Fleet fleet) {
+        fleetRepository.addFleet(fleet);
+    }
+
+    @Override
+    public Integer getNumberOfDrivers(Integer fleetId) {
+        return getNumberOfDrivers(fleetId);
+    }
 }

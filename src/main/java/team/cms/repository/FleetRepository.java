@@ -18,7 +18,7 @@ public interface FleetRepository {
 
     void modifyFleet(Fleet fleet);
 
-    Integer getNumberOfDrivers(Integer id);
+    Integer getNumberOfDrivers(Integer fleetId);
 
     void addFleet(Fleet fleet);
 }
