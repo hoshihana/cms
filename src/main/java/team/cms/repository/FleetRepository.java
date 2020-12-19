@@ -13,4 +13,12 @@ public interface FleetRepository {
     List<Fleet> getAll();
 
     Fleet getFleetById(Integer id);
+
+    Integer getAmountOfFleet();
+
+    void modifyFleet(Fleet fleet);
+
+    Integer getNumberOfDrivers(Integer id);
+
+    void addFleet(Fleet fleet);
 }
