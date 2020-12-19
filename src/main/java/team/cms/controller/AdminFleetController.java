@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Fleet;
+import team.cms.result.CountResult;
 import team.cms.result.FleetResult;
 import team.cms.result.Result;
 import team.cms.service.FleetService;
@@ -20,8 +21,8 @@ public class AdminFleetController {
     private FleetService fleetService;
 
     @PostMapping("/count")
-    public Integer getAmountOfFleet() {
-        return fleetService.getAmountOfFleet();
+    public CountResult getAmountOfFleet() {
+        return new CountResult(fleetService.getAmountOfFleet());
     }
 
     @PostMapping("/getAll")
@@ -33,8 +34,8 @@ public class AdminFleetController {
             FleetResult fleetResult = new FleetResult();
             fleetResult.setId(fleet.getId());
             fleetResult.setName(fleet.getName());
-            Integer newestDriverAmount = fleetService.getNumberOfDrivers(fleet.getId());
-            fleetResult.setDriverAmount(newestDriverAmount);
+            System.out.println(fleet.getDriverAmount());
+            fleetResult.setDriverAmount(fleet.getDriverAmount());
             fleetResultList.add(fleetResult);
         }
         return fleetResultList;
@@ -42,10 +43,7 @@ public class AdminFleetController {
 
     @PostMapping("/profile/get")
     public Fleet getFleetById(Integer fleetId){
-        Fleet fleet = fleetService.getFleetById(fleetId);
-        Integer newestDriverAmount = fleetService.getNumberOfDrivers(fleet.getId());
-        fleet.setDiverAmount(newestDriverAmount);
-        return fleet;
+        return fleetService.getFleetById(fleetId);
     }
 
     @PostMapping("/profile/modify")
