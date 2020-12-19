@@ -17,15 +17,15 @@ import java.util.List;
 public class AdminFleetController {
 
     @Resource
-    FleetService fleetService;
+    private FleetService fleetService;
 
     @PostMapping("/count")
-    private Integer getAmountOfFleet() {
+    public Integer getAmountOfFleet() {
         return fleetService.getAmountOfFleet();
     }
 
     @PostMapping("/getAll")
-    private List<FleetResult> getAllFleets(){
+    public List<FleetResult> getAllFleets(){
         List<Fleet> fleetList = fleetService.getAll();
         List<FleetResult> fleetResultList = new ArrayList<>();
 
@@ -41,7 +41,7 @@ public class AdminFleetController {
     }
 
     @PostMapping("/profile/get")
-    private Fleet getFleetById(Integer fleetId){
+    public Fleet getFleetById(Integer fleetId){
         Fleet fleet = fleetService.getFleetById(fleetId);
         Integer newestDriverAmount = fleetService.getNumberOfDrivers(fleet.getId());
         fleet.setDiverAmount(newestDriverAmount);
@@ -49,7 +49,7 @@ public class AdminFleetController {
     }
 
     @PostMapping("/profile/modify")
-    private Result modifyFleet(Integer fleetId,String name,String detail,String telephone){
+    public Result modifyFleet(Integer fleetId,String name,String detail,String telephone){
         Fleet fleet = new Fleet();
         fleet.setId(fleetId);
         fleet.setName(name);
@@ -60,7 +60,7 @@ public class AdminFleetController {
     }
 
     @PostMapping("/add")
-    private Result addFleet(String name,String detail,String telephone){
+    public Result addFleet(String name,String detail,String telephone){
         Fleet fleet = new Fleet();
         fleet.setName(name);
         fleet.setDetail(detail);

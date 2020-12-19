@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FleetResult {
 
-    Integer id;
+    private Integer id;
 
-    String name;
+    private String name;
 
-    Integer driverAmount;
+    private Integer driverAmount;
 }

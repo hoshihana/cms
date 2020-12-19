@@ -7,7 +7,7 @@
     <update id="modifyDrivers">
         update driver
         set name=#{name},gender=#{gender},resident_id_number=#{residentIdNumber},telephone=#{telephone}
-        where account_id=#{accountId}
+        where account_id=#{accountId} or id=#{id}
     </update>
 
     <select id="getDriverByAccountId" resultType="team.cms.entity.Driver">
