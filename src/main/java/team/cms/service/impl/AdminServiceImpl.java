@@ -17,4 +17,9 @@ public class AdminServiceImpl implements AdminService {
     public Admin getAdminByAccountId(int accountId) {
         return adminRepository.getAdminByAccountId(accountId);
     }
+
+    @Override
+    public void modifyAdmin(Admin admin) {
+        adminRepository.modifyAdmin(admin);
+    }
 }

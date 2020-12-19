@@ -12,13 +12,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/driver/password")
-public class DriverPasswordController {
+@RequestMapping("/api/admin/password")
+public class AdminPasswordController {
     @Resource
     private AccountService accountService;
 
     @PostMapping("/modify")
-    public Result updatePassword(HttpServletRequest request, String oldPassword, String newPassword) {
+    public Result modifyAdminPassword(HttpServletRequest request, String oldPassword, String newPassword) {
         Integer accountId = (Integer)request.getAttribute("accountId");
         if(!accountService.checkPassword(accountId, CipherUtil.encipherText(oldPassword))) {
             return new Result(false, "旧密码错误");

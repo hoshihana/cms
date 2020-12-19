@@ -6,4 +6,5 @@ public interface AdminService {
 
     Admin getAdminByAccountId(int accountId);
 
+    void modifyAdmin(Admin admin);
 }

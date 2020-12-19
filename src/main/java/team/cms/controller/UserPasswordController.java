@@ -4,8 +4,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Account;
-import team.cms.result.PasswordModifyResult;
+import team.cms.result.Result;
 import team.cms.service.AccountService;
+import team.cms.util.CipherUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,22 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/api/user/password")
 public class UserPasswordController {
-
     @Resource
     private AccountService accountService;
 
     @PostMapping("/modify")
-    public PasswordModifyResult updatePassword(HttpServletRequest request, String oldPassword, String newPassword)
-    {
+    public Result updatePassword(HttpServletRequest request, String oldPassword, String newPassword) {
         Integer accountId = (Integer)request.getAttribute("accountId");
-        if(!accountService.checkPassword(accountId, oldPassword)) {
-            return new PasswordModifyResult(false, false, "旧密码错误");
+        if(!accountService.checkPassword(accountId, CipherUtil.encipherText(oldPassword))) {
+            return new Result(false, "旧密码错误");
         } else {
             Account account = new Account();
             account.setId(accountId);
-            account.setPassword(newPassword);
+            account.setPassword(CipherUtil.encipherText(newPassword));
             accountService.modifyPassword(account);
-            return new PasswordModifyResult(true, true, null);
+            return new Result(true, null);
         }
     }
 }

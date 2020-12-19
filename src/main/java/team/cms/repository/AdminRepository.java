@@ -10,4 +10,6 @@ public interface AdminRepository {
 
     Admin getAdminByAccountId(Integer accountId);
 
+    void modifyAdmin(Admin admin);
+
 }
