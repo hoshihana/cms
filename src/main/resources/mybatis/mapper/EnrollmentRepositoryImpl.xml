@@ -32,7 +32,10 @@
         from enrollment
         where conference_id = #{id} and user_id=#{userId}
     </delete>
-
+    <delete id="removeAllEnrollment">
+        delete from enrollment
+        where conference_id=#{conferenceId}
+    </delete>
 
 
 </mapper>

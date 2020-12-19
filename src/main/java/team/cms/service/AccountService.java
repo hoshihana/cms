@@ -18,4 +18,6 @@ public interface AccountService {
     void modifyPassword(Account account);
 
     Account getAccountByUserId(Integer userId);
+
+    void removeAccount(Integer id);
 }

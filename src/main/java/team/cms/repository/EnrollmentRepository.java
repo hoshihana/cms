@@ -20,4 +20,6 @@ public interface EnrollmentRepository {
     boolean removeEnrollment(@Param("id")Integer id, @Param("userId")Integer userId);
 
     boolean addEnrollment(Enrollment enrollment);
+
+    void removeAllEnrollment(Integer conferenceId);
 }

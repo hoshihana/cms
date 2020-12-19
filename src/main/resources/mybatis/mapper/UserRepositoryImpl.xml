@@ -5,8 +5,12 @@
     <update id="modifyUser">
         update user
         set name=#{name}, gender=#{gender}, birthday=#{birthday}, resident_id_number=#{residentIdNumber}, email=#{email}, telephone=#{telephone},workplace=#{workplace}
-        where account_id=#{accountId}
+        where account_id=#{accountId} or id=#{id}
     </update>
+    <delete id="removeUser">
+        delete from user
+        where id=#{id}
+    </delete>
     <select id="getUserByAccountId" resultType="team.cms.entity.User">
         select *
         from user
@@ -21,6 +25,14 @@
         select *
         from user
         where account_id=(select id from account where username=#{username})
+    </select>
+    <select id="countUser" resultType="java.lang.Integer">
+        select count(*)
+        from user
+    </select>
+    <select id="getAllUser" resultType="team.cms.entity.User">
+        select *
+        from user
     </select>
     <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
         insert into user(account_id, name, gender, birthday, resident_id_number, email, telephone, workplace)

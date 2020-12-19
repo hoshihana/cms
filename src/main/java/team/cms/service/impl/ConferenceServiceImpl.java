@@ -1,6 +1,7 @@
 package team.cms.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import team.cms.entity.Conference;
 import team.cms.entity.User;
 import team.cms.entity.enums.Progress;
@@ -135,5 +136,29 @@ public class ConferenceServiceImpl implements ConferenceService {
             hotelReservationRepository.addHotelReservation(conference.getHotelId(), conference.getId(), user.getId(), new Date());
         }
         conferenceRepository.setConferenceReservationConfirm(id);
+    }
+
+    @Override
+    public Integer countConference() {
+        conferenceRepository.updateProgress(new Date());
+        return conferenceRepository.countConference();
+    }
+
+    @Override
+    public List<Conference> getAllOngoingConference() {
+        conferenceRepository.updateProgress(new Date());
+        return conferenceRepository.getAllOngoingConference();
+    }
+
+    @Override
+    public void removeConference(Integer id) {
+        enrollmentRepository.removeAllEnrollment(id);
+        conferenceRepository.removeConference(id);
+    }
+
+    @Override
+    public void modifyConference(Conference conference) {
+        enrollmentRepository.removeAllEnrollment(conference.getId());
+        conferenceRepository.modifyConference(conference);
     }
 }

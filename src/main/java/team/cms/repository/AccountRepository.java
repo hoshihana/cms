@@ -17,4 +17,6 @@ public interface AccountRepository {
     void addAccount(Account account);
 
     void modifyPassword(Account account);
+
+    void removeAccount(Integer id);
 }
