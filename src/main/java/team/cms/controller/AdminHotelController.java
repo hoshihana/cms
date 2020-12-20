@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Hotel;
 import team.cms.result.AdminHotelResult;
+import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.HotelService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,6 +41,19 @@ public class AdminHotelController {
     @PostMapping("/profile/get")
     public Hotel getHotelById(Integer id) {
         return hotelService.getHotelById(id);
+    }
+
+    @PostMapping("/profile/modify")
+    public Result modifyHotelProfile(Integer accountId, String name, String address, String detail, String telephone) {
+
+        Hotel hotel=new Hotel();
+        hotel.setAccountId(accountId);
+        hotel.setName(name);
+        hotel.setDetail(detail);
+        hotel.setAddress(address);
+        hotel.setTelephone(telephone);
+        hotelService.modifyHotel(hotel);
+        return new Result(true,null);
     }
 
 
