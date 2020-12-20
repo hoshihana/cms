@@ -34,10 +34,11 @@ public class AdminHotelController {
 //            resultList.add(new AdminHotelResult(hotel.getAccountId(),hotel.))
 //        }
         return null;
+    }
 
-
-
-
+    @PostMapping("/profile/get")
+    public Hotel getHotelById(Integer id) {
+        return hotelService.getHotelById(id);
     }
 
 
