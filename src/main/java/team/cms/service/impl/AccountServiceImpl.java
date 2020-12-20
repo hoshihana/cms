@@ -49,4 +49,9 @@ public class AccountServiceImpl implements AccountService {
     public Account getAccountByUserId(Integer userId) {
         return accountRepository.getAccountByUserId(userId);
     }
+
+    @Override
+    public void removeAccount(Integer id) {
+        accountRepository.removeAccount(id);
+    }
 }

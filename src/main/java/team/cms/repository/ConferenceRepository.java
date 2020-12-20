@@ -45,4 +45,12 @@ public interface ConferenceRepository {
     void setConferenceReservationConfirm(Integer id);
 
     void setConferenceReady(Integer id);
+
+    Integer countConference();
+
+    List<Conference> getAllOngoingConference();
+
+    void removeConference(Integer id);
+
+    void modifyConference(Conference conference);
 }

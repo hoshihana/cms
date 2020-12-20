@@ -12,6 +12,10 @@
         set password=#{password}
         where id=#{id}
     </update>
+    <delete id="removeAccount">
+        delete from account
+        where id=#{id}
+    </delete>
 
     <select id="getAccountByUsername" resultType="team.cms.entity.Account">
         select *

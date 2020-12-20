@@ -40,6 +40,15 @@
         set progress='READY'
         where id=#{id}
     </update>
+    <update id="modifyConference">
+        update conference
+        set `name`=#{name}, detail=#{detail}, address=#{address}, start_time=#{startTime}, end_time=#{endTime}, enroll_time=#{enrollTime}, invite_code=#{inviteCode}, progress=#{progress}
+        where id=#{id}
+    </update>
+    <delete id="removeConference">
+        delete from conference
+        where id=#{id}
+    </delete>
     <select id="getOngoingAndCreatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference
@@ -89,6 +98,16 @@
         select *
         from conference
         where `number`=#{number}
+    </select>
+    <select id="countConference" resultType="java.lang.Integer">
+        select count(*)
+        from conference
+        where progress&lt;&gt;'ENDED'
+    </select>
+    <select id="getAllOngoingConference" resultType="team.cms.entity.Conference">
+        select *
+        from conference
+        where progress&lt;&gt;'ENDED'
     </select>
 
 
