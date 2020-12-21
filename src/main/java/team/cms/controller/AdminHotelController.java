@@ -4,11 +4,13 @@ package team.cms.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import team.cms.entity.Account;
 import team.cms.entity.Hotel;
 import team.cms.result.AdminHotelResult;
 import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.HotelService;
+import team.cms.util.CipherUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +62,30 @@ public class AdminHotelController {
         hotelService.modifyHotel(hotel);
         return new Result(true,null);
     }
+
+
+
+    @PostMapping("/password/modify")
+    public Result modifyHotelPassword(Integer hotelId, String password) {
+
+        Hotel hotel=hotelService.getHotelById(hotelId);
+
+        Account account=new Account();
+        account.setId(hotelId);
+        account.setPassword(CipherUtil.encipherText(password));
+
+        accountService.modifyPassword(account);
+
+        return new Result(true,null);
+    }
+
+
+
+
+
+
+
+
 
 
 
