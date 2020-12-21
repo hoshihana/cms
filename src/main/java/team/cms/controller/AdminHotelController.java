@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Account;
 import team.cms.entity.Hotel;
+import team.cms.entity.enums.Role;
 import team.cms.result.AdminHotelResult;
 import team.cms.result.Result;
 import team.cms.service.AccountService;
@@ -63,8 +64,6 @@ public class AdminHotelController {
         return new Result(true,null);
     }
 
-
-
     @PostMapping("/password/modify")
     public Result modifyHotelPassword(Integer hotelId, String password) {
 
@@ -79,6 +78,18 @@ public class AdminHotelController {
         return new Result(true,null);
     }
 
+    @PostMapping("/add")
+    public Result addHotelAccount(String username, String password) {
+
+        Account account=new Account();
+        account.setUsername(username);
+        account.setPassword(CipherUtil.encipherText(password));
+        account.setRole(Role.HOTEL);
+
+        accountService.addAccount(account);
+
+        return new Result(true,null);
+    }
 
 
 
