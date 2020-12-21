@@ -22,6 +22,9 @@ public class AdminHotelController {
     @Resource
     private HotelService hotelService;
 
+    @Resource
+    private AccountService accountService;
+
     @PostMapping("/count")
     public Integer getHotelNumber(){
         return hotelService.getAll().size();
@@ -29,13 +32,15 @@ public class AdminHotelController {
 
     @PostMapping("/getAll")
     public List<AdminHotelResult> getAllHotel(){
-//        List<AdminHotelResult> resultList=new LinkedList<>();
-//        List<Hotel> tempList=hotelService.getAll();
-//
-//        for(Hotel hotel:tempList){
-//            resultList.add(new AdminHotelResult(hotel.getAccountId(),hotel.))
-//        }
-        return null;
+        List<AdminHotelResult> resultList=new LinkedList<>();
+        List<Hotel> tempList=hotelService.getAll();
+
+        for(Hotel hotel:tempList){
+            String username=accountService.getAccountById(hotel.getAccountId()).getUsername();
+            resultList.add(new AdminHotelResult(hotel.getAccountId(), username, hotel.getId(), hotel.getName()));
+        }
+
+        return resultList;
     }
 
     @PostMapping("/profile/get")
