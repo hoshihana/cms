@@ -17,7 +17,7 @@ public class Fleet {
 
     private String telephone;
 
-    private String driverAmount;
+    private Integer driverAmount;
 
 }
 

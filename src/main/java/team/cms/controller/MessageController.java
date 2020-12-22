@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Account;
 import team.cms.entity.Message;
+import team.cms.entity.enums.Role;
+import team.cms.result.AccountResult;
 import team.cms.result.Result;
-import team.cms.service.AccountService;
-import team.cms.service.MessageService;
+import team.cms.service.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,14 @@ public class MessageController {
     private MessageService messageService;
     @Resource
     private AccountService accountService;
+    @Resource
+    private UserService userService;
+    @Resource
+    private DriverService driverService;
+    @Resource
+    private HotelService hotelService;
+    @Resource
+    private AdminService adminService;
 
     @PostMapping("/sent")
     public List<Message> getSentMessage(HttpServletRequest request)
@@ -91,5 +100,21 @@ public class MessageController {
     {
         messageService.setMessageRead(id);
         return new Result(true, null);
+    }
+
+    @PostMapping("/getAccount")
+    public AccountResult getAccount(Integer accountId) {
+        Account account = accountService.getAccountById(accountId);
+        AccountResult accountResult = new AccountResult();
+        accountResult.setAccountId(account.getId());
+        accountResult.setUsername(account.getUsername());
+        accountResult.setRole(account.getRole());
+        switch (account.getRole()) {
+            case USER:accountResult.setRoleId(userService.getUserByAccountId(accountId).getId());break;
+            case ADMIN:accountResult.setRoleId(adminService.getAdminByAccountId(accountId).getId());break;
+            case DRIVER:accountResult.setRoleId(driverService.getDriverByAccountId(accountId).getId());break;
+            case HOTEL:accountResult.setRoleId(hotelService.getHotelByAccountId(accountId).getId());break;
+        }
+        return accountResult;
     }
 }
