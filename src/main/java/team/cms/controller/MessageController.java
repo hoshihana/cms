@@ -48,9 +48,9 @@ public class MessageController {
     }
 
     @PostMapping("/sendByAccountId")
-    public Result sendMessageByAccountId(HttpServletRequest request, Integer recipientId, String content)
+    public Result sendMessageByAccountId(HttpServletRequest request, Integer accountId, String content)
     {
-        Account recipientAccount = accountService.getAccountById(recipientId);
+        Account recipientAccount = accountService.getAccountById(accountId);
         if(recipientAccount == null) {
             return new Result(false, "收信人不存在！");
         }
@@ -59,7 +59,7 @@ public class MessageController {
         Message message = new Message();
         message.setContent(content);
         message.setSendTime(sendTime);
-        message.setRecipientId(recipientId);
+        message.setRecipientId(accountId);
         message.setSenderId(senderId);
         messageService.sendMessage(message);
         return new Result(true, null);

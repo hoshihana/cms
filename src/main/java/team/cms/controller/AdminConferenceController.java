@@ -14,7 +14,6 @@ import team.cms.service.ConferenceService;
 import team.cms.util.DateUtil;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -3,7 +3,6 @@ package team.cms.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.cms.entity.Account;
 import team.cms.entity.Driver;
 import team.cms.entity.enums.Gender;
 import team.cms.result.Result;
@@ -11,7 +10,6 @@ import team.cms.service.DriverService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/driver/profile")
