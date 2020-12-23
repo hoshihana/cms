@@ -7,6 +7,7 @@ import team.cms.entity.Hotel;
 import team.cms.service.HotelService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,14 @@ public class HotelController {
 
     @PostMapping("/getAll")
     public List<Hotel> getAll(){
-        return hotelService.getAll();
+        List<Hotel> hotels = hotelService.getAll();
+        List<Hotel> result = new ArrayList<>();
+        for(Hotel hotel : hotels) {
+            if(hotel.getName() != null) {
+                result.add(hotel);
+            }
+        }
+        return result;
     }
 
     @PostMapping("/get")
