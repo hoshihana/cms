@@ -72,15 +72,11 @@ public class AdminDriverController {
     }
 
     @PostMapping("/add")
-    public Result addDriverAccount(String username,String password){
-        Account account = new Account();
-
-        String newPassword = CipherUtil.encipherText(password);
-        account.setPassword(newPassword);
-        Role role = Role.DRIVER;
-        account.setRole(role);
-        account.setUsername(username);
-        accountService.addAccount(account);
+    public Result addDriverAccount(Integer fleetId, String username, String password){
+        if(!accountService.usernameAvailable(username)) {
+            return new Result(false, "用户名不可用");
+        }
+        driverService.addDriver(fleetId, username, CipherUtil.encipherText(password));
         return new Result(true,null);
     }
 }

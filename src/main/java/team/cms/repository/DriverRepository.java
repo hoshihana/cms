@@ -1,6 +1,7 @@
 package team.cms.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import team.cms.entity.Driver;
 
@@ -17,4 +18,6 @@ public interface DriverRepository {
     void modifyDrivers(Driver driver);
 
     Driver getDriverById(Integer id);
+
+    void addDriver(@Param("accountId")Integer accountId, @Param("fleetId")Integer fleetId);
 }
