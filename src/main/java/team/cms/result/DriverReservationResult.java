@@ -23,19 +23,16 @@ public class DriverReservationResult {
 
     private String telephone;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date arriveTime;
 
     private String arriveSite;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date reserveTime;
 
     private boolean driverCheck;
 
     private Integer driverId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date pickupTime;
 
     private String pickupSite;

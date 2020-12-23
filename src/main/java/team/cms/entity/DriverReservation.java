@@ -19,14 +19,12 @@ public class DriverReservation {
 
     private Integer userId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date reserveTime;
 
     private boolean driverCheck;
 
     private Integer driverId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date pickupTime;
 
     private String pickupSite;

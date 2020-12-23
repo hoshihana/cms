@@ -19,12 +19,10 @@ public class HotelReservation {
 
     private Integer userId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date reserveTime;
 
     private boolean hotelCheck;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date checkinTime;
 
     private String roomNumber;

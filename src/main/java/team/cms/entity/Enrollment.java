@@ -17,18 +17,14 @@ public class Enrollment {
 
     private String tripNumber;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date arriveTime;
 
     private String arriveSite;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date enrollTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date stayStart;
 
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date stayEnd;
 
     private String stayNeeds;
