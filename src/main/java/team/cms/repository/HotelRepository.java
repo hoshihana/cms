@@ -16,6 +16,8 @@ public interface HotelRepository {
 
     Hotel getHotelById(Integer id);
 
+    void addHotel(Integer accountId);
+
     void modifyHotel(Hotel hotel);
 
 }

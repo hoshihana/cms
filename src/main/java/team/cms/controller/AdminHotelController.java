@@ -8,13 +8,13 @@ import team.cms.entity.Account;
 import team.cms.entity.Hotel;
 import team.cms.entity.enums.Role;
 import team.cms.result.AdminHotelResult;
+import team.cms.result.CountResult;
 import team.cms.result.Result;
 import team.cms.service.AccountService;
 import team.cms.service.HotelService;
 import team.cms.util.CipherUtil;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,17 +29,17 @@ public class AdminHotelController {
     private AccountService accountService;
 
     @PostMapping("/count")
-    public Integer getHotelNumber(){
-        return hotelService.getAll().size();
+    public CountResult getHotelNumber() {
+        return new CountResult(hotelService.getAll().size());
     }
 
     @PostMapping("/getAll")
-    public List<AdminHotelResult> getAllHotel(){
-        List<AdminHotelResult> resultList=new LinkedList<>();
-        List<Hotel> tempList=hotelService.getAll();
+    public List<AdminHotelResult> getAllHotel() {
+        List<AdminHotelResult> resultList = new LinkedList<>();
+        List<Hotel> tempList = hotelService.getAll();
 
-        for(Hotel hotel:tempList){
-            String username=accountService.getAccountById(hotel.getAccountId()).getUsername();
+        for (Hotel hotel : tempList) {
+            String username = accountService.getAccountById(hotel.getAccountId()).getUsername();
             resultList.add(new AdminHotelResult(hotel.getAccountId(), username, hotel.getId(), hotel.getName()));
         }
 
@@ -47,64 +47,40 @@ public class AdminHotelController {
     }
 
     @PostMapping("/profile/get")
-    public Hotel getHotelById(Integer id) {
-        return hotelService.getHotelById(id);
+    public Hotel getHotelById(Integer hotelId) {
+        return hotelService.getHotelById(hotelId);
     }
 
     @PostMapping("/profile/modify")
-    public Result modifyHotelProfile(Integer accountId, String name, String address, String detail, String telephone) {
+    public Result modifyHotelProfile(Integer hotelId, String name, String address, String detail, String telephone) {
 
-        Hotel hotel=new Hotel();
-        hotel.setAccountId(accountId);
+        Hotel hotel = new Hotel();
+        hotel.setId(hotelId);
         hotel.setName(name);
         hotel.setDetail(detail);
         hotel.setAddress(address);
         hotel.setTelephone(telephone);
         hotelService.modifyHotel(hotel);
-        return new Result(true,null);
+        return new Result(true, null);
     }
 
     @PostMapping("/password/modify")
     public Result modifyHotelPassword(Integer hotelId, String password) {
 
-        Hotel hotel=hotelService.getHotelById(hotelId);
+        Integer accountId = hotelService.getHotelById(hotelId).getAccountId();
 
-        Account account=new Account();
-        account.setId(hotelId);
+        Account account = new Account();
+        account.setId(accountId);
         account.setPassword(CipherUtil.encipherText(password));
 
         accountService.modifyPassword(account);
 
-        return new Result(true,null);
+        return new Result(true, null);
     }
 
     @PostMapping("/add")
     public Result addHotelAccount(String username, String password) {
-
-        Account account=new Account();
-        account.setUsername(username);
-        account.setPassword(CipherUtil.encipherText(password));
-        account.setRole(Role.HOTEL);
-
-        accountService.addAccount(account);
-
-        return new Result(true,null);
+        hotelService.addHotel(username, CipherUtil.encipherText(password));
+        return new Result(true, null);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

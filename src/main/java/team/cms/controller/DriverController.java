@@ -7,6 +7,7 @@ import team.cms.entity.Driver;
 import team.cms.service.DriverService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,10 +18,15 @@ public class DriverController {
     private DriverService driverService;
 
     @PostMapping("/getByFleetId")
-    public List<Driver> getFleetDrivers(Integer fleetId)
-    {
+    public List<Driver> getFleetDrivers(Integer fleetId) {
         List<Driver> drivers= driverService.getFleetDrivers(fleetId);
-        return drivers;
+        List<Driver> result = new ArrayList<>();
+        for (Driver driver : drivers) {
+            if(driver.getName() != null) {
+                result.add(driver);
+            }
+        }
+        return result;
     }
 
     @PostMapping("/getById")

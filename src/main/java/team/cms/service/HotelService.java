@@ -12,6 +12,8 @@ public interface HotelService {
 
     Hotel getHotelById(Integer id);
 
+    void addHotel(String username, String password);
+
     void modifyHotel(Hotel hotel);
 
 }
