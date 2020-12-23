@@ -125,7 +125,7 @@
 
 
 
-### 消息接口
+### 消息接口（任意Token）
 
 
 #### 获取发送的消息
@@ -243,6 +243,25 @@
   | message | String  | 错误信息 |
 
 
+
+#### 账号编号查询账号信息
+
+- URI: POST api/message/getAccount
+
+- Path参数：
+
+  |  参数名   |  类型   |   说明   |
+  | :-------: | :-----: | :------: |
+  | accountId | Integer | 账户编号 |
+
+- Result参数：
+
+  |  参数名   |                   类型                   |               说明                |
+  | :-------: | :--------------------------------------: | :-------------------------------: |
+  | accountId |                 Integer                  |             账户编号              |
+  | username  |                  String                  |              用户名               |
+  |   role    | Role('USER', 'ADMIN', 'HOTEL', 'DRIVER') |             用户角色              |
+  |  roleId   |                 Integer                  | 角色（用户/管理员/酒店/司机）编号 |
 
 
 
@@ -387,11 +406,10 @@
 
 - Result参数：
 
-  |       参数名       |  类型   |      说明      |
-  | :----------------: | :-----: | :------------: |
-  |      success       | boolean |  更改是否成功  |
-  | oldPasswordCorrect | boolean | 旧密码是否正确 |
-  |      message       | String  |      信息      |
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 更改是否成功 |
+  | message | String  |     信息     |
 
 
 
@@ -1062,7 +1080,7 @@
 
 ### 酒店接口
 
-#### 获取所有酒店信息
+#### 获取所有酒店信息（用户Token）
 
 - URI: POST api/hotel/getAll
 
@@ -1081,7 +1099,7 @@
 
 
 
-#### 酒店编号获取酒店信息
+#### 酒店编号获取酒店信息（用户Token）
 
 - URI: POST api/hotel/get
 
@@ -1119,11 +1137,10 @@
 
 - Result参数：
 
-  |       参数名       |  类型   |      说明      |
-  | :----------------: | :-----: | :------------: |
-  |      success       | boolean |  更改是否成功  |
-  | oldPasswordCorrect | boolean | 旧密码是否正确 |
-  |      message       | String  |    错误信息    |
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 更改是否成功 |
+  | message | String  |   错误信息   |
 
 
 
@@ -1274,7 +1291,7 @@
 
 ### 车队接口
 
-#### 获取所有车队信息
+#### 获取所有车队信息（用户Token)
 
 - URI：POST api/fleet/getAll
 
@@ -1292,7 +1309,7 @@
 
 
 
-#### 车队编号获取车队信息
+#### 车队编号获取车队信息（用户Token）
 
 - URI：POST api/fleet/get
 
@@ -1316,7 +1333,7 @@
 
 ### 司机接口
 
-#### 车队编号获取所有司机信息
+#### 车队编号获取所有司机信息（用户Token）
 
 - URI：POST api/driver/getByFleetId
 
@@ -1340,7 +1357,7 @@
 
 
 
-#### 司机编号获取司机信息
+#### 司机编号获取司机信息（用户Token）
 
 - URI：POST api/driver/getById
 
@@ -1377,11 +1394,10 @@
 
 - Result参数：
 
-  |       参数名       |  类型   |      说明      |
-  | :----------------: | :-----: | :------------: |
-  |      success       | boolean |  更改是否成功  |
-  | oldPasswordCorrect | boolean | 旧密码是否正确 |
-  |      message       | String  |    错误信息    |
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 更改是否成功 |
+  | message | String  |   错误信息   |
 
 
 
@@ -1535,5 +1551,624 @@
 
 ### 管理员接口
 
+#### 获取管理员信息
+
+- URI: POST api/admin/profile
+
+- Path参数：无
+
+- Result参数：
+
+  |  参数名   |  类型   |    说明    |
+  | :-------: | :-----: | :--------: |
+  |    id     | Integer | 管理员编号 |
+  | accountId | Integer |  账户编号  |
+  |   name    | String  |    姓名    |
+  | telephone | String  |   手机号   |
+  |   email   | String  |  电子邮箱  |
 
 
+
+#### 修改管理员信息
+
+- URI: POST api/admin/profile/modify
+
+- Path参数：
+
+  |  参数名   |  类型  |   说明   |
+  | :-------: | :----: | :------: |
+  |   name    | String |   姓名   |
+  | telephone | String |  手机号  |
+  |   email   | String | 电子邮箱 |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | result  | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### 更改管理员密码
+
+- URI：POST api/admin/password/modify
+
+- Path参数：
+
+  |   参数名    |  类型  |  说明  |
+  | :---------: | :----: | :----: |
+  | oldPassword | String | 旧密码 |
+  | newPassword | String | 新密码 |
+
+- Result参数：
+
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 更改是否成功 |
+  | message | String  |   错误信息   |
+
+
+
+#### --------------------------------
+
+
+
+#### 获取用户数
+
+- URI: POST api/admin/user/count
+
+- Path参数：无
+
+- Result参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  | amount | Integer | 用户数量 |
+
+
+
+#### 获取所有用户
+
+- URI: POST api/admin/user/getAll  
+
+- Path参数：无
+
+- Result参数：
+
+  |  参数名   |  类型   |   说明   |
+  | :-------: | :-----: | :------: |
+  | accountId | Integer | 账户编号 |
+  | username  | String  |  用户名  |
+  |  userId   | Integer | 用户编号 |
+  |   name    | String  | 用户姓名 |
+
+
+
+#### 删除用户
+
+- URI: POST api/admin/user/remove
+
+- Path参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  | userId | Integer | 账户编号 |
+
+- Result参数：
+
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | result  | boolean | 是否删除成功 |
+  | message | String  |   错误信息   |
+
+
+
+#### 获取用户信息
+
+- URI: POST api/admin/user/profile/get
+
+- Path参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  | userId | Integer | 用户编号 |
+
+- Result参数：
+
+  |      参数名      |           类型           |   说明   |
+  | :--------------: | :----------------------: | :------: |
+  |        id        |         Integer          | 用户编号 |
+  |    accountId     |         Integer          | 账号编号 |
+  |       name       |          String          |   姓名   |
+  |      gender      | Gender('MALE', 'FEMALE') |   性别   |
+  |     birthday     |           Data           |   生日   |
+  | residentIdNumber |          String          | 身份证号 |
+  |    telephone     |          String          |  手机号  |
+  |      email       |          String          |   邮箱   |
+  |    workplace     |          String          | 工作单位 |
+
+
+
+#### 修改用户信息
+
+- URI: POST api/admin/user/profile/modify
+
+- Path参数：
+
+  |      参数名      |           类型           |   说明   |
+  | :--------------: | :----------------------: | :------: |
+  |      userId      |          String          | 用户编号 |
+  |       name       |          String          |   姓名   |
+  |      gender      | Gender('MALE', 'FEMALE') |   性别   |
+  |     birthday     |           Data           |   生日   |
+  | residentIdNumber |          String          | 身份证号 |
+  |      email       |          String          |   邮箱   |
+  |    telephone     |          String          |  手机号  |
+  |    workplace     |          String          | 工作单位 |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### 修改用户密码
+
+- URI: POST api/admin/user/password/modify
+
+- Path参数：
+
+  |  参数名  |  类型   |   说明   |
+  | :------: | :-----: | :------: |
+  |  userId  | Integer | 用户编号 |
+  | password | String  |  新密码  |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### --------------------------------
+
+
+
+#### 获取进行中会议数
+
+- URI: POST api/admin/conference/count
+
+- Path参数：无
+
+- Result参数：
+
+  | 参数名 |  类型   |      说明      |
+  | :----: | :-----: | :------------: |
+  | amount | Integer | 进行中会议数量 |
+
+
+
+#### 获取所有进行中会议
+
+- URI: POST api/admin/conference/getAll
+
+- Path参数：无
+
+- Result参数：
+
+  |    参数名    |  类型   |     说明     |
+  | :----------: | :-----: | :----------: |
+  | conferenceId | Integer |   会议编号   |
+  |    number    | String  |    会议号    |
+  |   username   | Integer | 创建者用户名 |
+  |     name     | String  |    会议名    |
+
+
+
+#### 删除会议
+
+- URI: POST api/admin/conference/remove
+
+- Path参数：
+
+  |    参数名    |  类型   |   说明   |
+  | :----------: | :-----: | :------: |
+  | conferenceId | Integer | 会议编号 |
+
+- Result参数：
+
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | result  | boolean | 删除是否成功 |
+  | message | String  |   错误信息   |
+
+
+
+#### 获取会议信息
+
+- URI: POST api/admin/conference/get
+
+- Path参数：
+
+  |    参数名    |  类型   |   说明   |
+  | :----------: | :-----: | :------: |
+  | conferenceId | Integer | 会议编号 |
+
+- Result参数：
+
+  |   参数名   |                             类型                             |     说明     |
+  | :--------: | :----------------------------------------------------------: | :----------: |
+  |     id     |                           Integer                            |   会议编号   |
+  |   number   |                            String                            |    会议号    |
+  |   userId   |                           Integer                            |  创建者编号  |
+  | createTime |                           Datetime                           |   创建时间   |
+  |    name    |                            String                            |    会议名    |
+  |   detail   |                            String                            |   会议详情   |
+  |  address   |                            String                            |   会议地点   |
+  | startTime  |                           Datetime                           |   开始时间   |
+  |  endTime   |                           Datetime                           |   结束时间   |
+  | enrollTime |                           Datetime                           | 报名截止时间 |
+  | inviteCode |                         String/null                          |    邀请码    |
+  |  hotelId   |                         Integer/null                         | 预约酒店编号 |
+  |  fleetId   |                         Integer/null                         | 预约车队编号 |
+  |  progress  | Progress('ENROLLMENT', 'OWNER_CONFIRM','RESERVATION_CONFIRM', 'READY', 'ENDED') | 会议确认进度 |
+
+
+
+#### 重置会议信息
+
+- URI: POST api/admin/conference/reset
+
+- Path参数：
+
+  |    参数名    |    类型     |     说明     |
+  | :----------: | :---------: | :----------: |
+  | conferenceId |   Integer   |   会议编号   |
+  |     name     |   String    |    会议名    |
+  |    detail    |   String    |   会议详情   |
+  |   address    |   String    |   会议地点   |
+  |  startTime   |  Datetime   |   开始时间   |
+  |   endTime    |  Datetime   |   结束时间   |
+  |  enrollTime  |  Datetime   | 报名截止时间 |
+  |  inviteCode  | String/null |    邀请码    |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### --------------------------------
+
+
+
+#### 获取酒店数
+
+- URI: POST api/admin/hotel/count
+
+- Path参数：无
+
+- Result参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  | amount | Integer | 酒店数量 |
+
+
+
+#### 获取所有酒店
+
+- URI: POST api/admin/hotel/getAll
+
+- Path参数：无
+
+- Resutl参数：
+
+  |  参数名   |  类型   |   说明   |
+  | :-------: | :-----: | :------: |
+  | accountId | Integer | 账户编号 |
+  | username  | String  |  用户名  |
+  |  hotelId  | Integer | 酒店编号 |
+  |   name    | String  |  酒店名  |
+
+
+
+#### 获取酒店信息
+
+- URI: POST api/admin/hotel/profile/get
+
+- Path参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | hotelId | Integer | 酒店编号 |
+
+- Result参数：
+
+  |  参数名   |  类型   |     说明     |
+  | :-------: | :-----: | :----------: |
+  |    id     | Integer |   酒店编号   |
+  | accountId | Integer | 酒店账号编号 |
+  |   name    | String  |    酒店名    |
+  |  address  | String  |   酒店地址   |
+  |  detail   | String  |     详情     |
+  | telephone | String  |   联系电话   |
+
+
+
+#### 修改酒店信息
+
+- URI: POST api/admin/hotel/profile/modify
+
+- Path参数：
+
+  |  参数名   |  类型   |   说明   |
+  | :-------: | :-----: | :------: |
+  |  hotelId  | Integer | 酒店编号 |
+  |   name    | String  |  酒店名  |
+  |  address  | String  | 酒店地址 |
+  |  detail   | String  |   详情   |
+  | telephone | String  | 联系电话 |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### 修改酒店密码
+
+- URI: POST api/admin/hotel/password/modify
+
+- Path参数：
+
+  |  参数名  |  类型   |   说明   |
+  | :------: | :-----: | :------: |
+  | hotelId  | Integer | 酒店编号 |
+  | password | String  |  新密码  |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### 添加酒店账号
+
+- URI: POST api/admin/hotel/add
+
+- Path参数：
+
+  |  参数名  |  类型  |  说明  |
+  | :------: | :----: | :----: |
+  | username | String | 用户名 |
+  | password | String |  密码  |
+
+- Result参数：
+
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 添加是否成功 |
+  | message | String  |   错误信息   |
+
+
+
+#### --------------------------------
+
+
+
+#### 获取车队数量
+
+- URI: POST api/admin/fleet/count
+
+- Path参数：无
+
+- Result参数：
+
+  | 参数名 |  类型   |   说明   |
+  | :----: | :-----: | :------: |
+  | amount | Integer | 车队数量 |
+
+
+
+#### 获取所有车队
+
+- URI: POST api/admin/fleet/getAll
+
+- Path参数：无
+
+- Result参数：
+
+  |    参数名    |  类型   |   说明   |
+  | :----------: | :-----: | :------: |
+  |   fleetId    | Integer | 车队编号 |
+  |     name     | String  |  车队名  |
+  | driverAmount | Integer | 司机数量 |
+
+
+
+#### 获取车队信息
+
+- URI：POST api/admin/fleet/profile/get
+
+- Path参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | fleetId | Integer | 车队编号 |
+
+- Result参数：
+
+  |    参数名    |  类型   |   说明   |
+  | :----------: | :-----: | :------: |
+  |      id      | Integer | 车队编号 |
+  |     name     | String  |  车队名  |
+  |    detail    | String  |   详情   |
+  |  telephone   | String  | 联系电话 |
+  | driverAmount | Integer |  司机数  |
+
+
+
+#### 修改车队信息
+
+-  URI: POST api/admin/fleet/profile/modify
+
+- Path参数：
+
+  |  参数名   |  类型   |   说明   |
+  | :-------: | :-----: | :------: |
+  |  fleetId  | Integer | 车队编号 |
+  |   name    | String  |  车队名  |
+  |  detail   | String  |   详情   |
+  | telephone | String  | 联系电话 |
+
+- Resutl参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### 添加车队
+
+- URI: POST api/admin/fleet/add
+
+- Path参数：
+
+  |  参数名   |  类型  |   说明   |
+  | :-------: | :----: | :------: |
+  |   name    | String |  车队名  |
+  |  detail   | String |   详情   |
+  | telephone | String | 联系电话 |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### --------------------------------
+
+
+
+#### 获取车队所有司机
+
+- URI: POST api/admin/driver/getAll
+
+- Path参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | fleetId | Integer | 车队编号 |
+
+- Result参数：
+
+  |  参数名   |  类型   |   说明   |
+  | :-------: | :-----: | :------: |
+  | accountId | Integer | 账户编号 |
+  | username  | String  |  用户名  |
+  | driverId  | Integer | 司机编号 |
+  |   name    | String  | 司机姓名 |
+
+
+
+#### 获取司机信息
+
+- URI: POST api/admin/driver/profile/get
+
+- Path参数：
+
+  |  参数名  |  类型   |   说明   |
+  | :------: | :-----: | :------: |
+  | driverId | Integer | 司机编号 |
+
+- Result参数：
+
+  |      参数名      |           类型           |   说明   |
+  | :--------------: | :----------------------: | :------: |
+  |        id        |         Integer          | 司机编号 |
+  |    accountId     |         Integer          | 账户编号 |
+  |     fleetId      |         Integer          | 车队编号 |
+  |       name       |          String          |   姓名   |
+  |      gender      | Gender('MALE', 'FEMALE') |   性别   |
+  | residentIdNumber |          String          | 身份证号 |
+  |    telephonne    |          String          |  手机号  |
+
+
+
+#### 修改司机信息
+
+- URI: POST api/admin/driver/profile/modify
+
+- Path参数：
+
+  |      参数名      |           类型           |   说明   |
+  | :--------------: | :----------------------: | :------: |
+  |     driverId     |         Integer          | 司机编号 |
+  |       name       |          String          |   姓名   |
+  |      gender      | Gender('MALE', 'FEMALE') |   性别   |
+  | residentIdNumber |          String          | 身份证号 |
+  |    telephonne    |          String          |  手机号  |
+
+
+
+#### 修改司机密码
+
+- URI: POST api/admin/driver/password/modify
+
+- Path参数：
+
+  |  参数名  |  类型   |   说明   |
+  | :------: | :-----: | :------: |
+  | driverId | Integer | 司机编号 |
+  | password | String  |  新密码  |
+
+- Result参数：
+
+  | 参数名  |  类型   |   说明   |
+  | :-----: | :-----: | :------: |
+  | success | boolean |   true   |
+  | message | String  | 错误信息 |
+
+
+
+#### 添加司机账号
+
+- URI: POST api/admin/driver/add
+
+- Path参数：
+
+  |  参数名  |  类型  |       说明       |
+  | :------: | :----: | :--------------: |
+  | fleetId  | String | 司机所属车队编号 |
+  | username | String |      用户名      |
+  | password | String |       密码       |
+
+- Result参数：
+
+  | 参数名  |  类型   |     说明     |
+  | :-----: | :-----: | :----------: |
+  | success | boolean | 添加是否成功 |
+  | message | String  |   错误信息   |
+
+ 
