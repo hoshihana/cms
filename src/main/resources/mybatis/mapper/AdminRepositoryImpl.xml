@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.cms.repository.AdminRepository">
+    <update id="modifyAdmin">
+        update admin
+        set name=#{name}, telephone=#{telephone}, email=#{email}
+        where account_id=#{accountId}
+    </update>
+    <select id="getAdminByAccountId" resultType="team.cms.entity.Admin">
+        select *
+        from admin
+        where account_id=#{accountId}
+    </select>
+</mapper>
