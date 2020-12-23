@@ -36,6 +36,6 @@
     </select>
     <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
         insert into user(account_id, name, gender, birthday, resident_id_number, email, telephone, workplace)
-        values (#{accountId}, #{name}, #{gender}, #{birthday}, #{residentIdNumber}, #{email}, #{telephone}, #{workplace})
+        values (#{accountId},  #{name}, #{gender}, #{birthday}, #{residentIdNumber}, #{email}, #{telephone}, #{workplace})
     </insert>
 </mapper>

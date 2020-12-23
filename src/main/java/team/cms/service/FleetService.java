@@ -10,4 +10,11 @@ public interface FleetService {
 
     Fleet getFleetById(Integer id);
 
+    Integer getAmountOfFleet();
+
+    void modifyFleet(Fleet fleet);
+
+    void addFleet(Fleet fleet);
+
+    Integer getNumberOfDrivers(Integer fleetId);
 }

@@ -13,5 +13,7 @@ public interface DriverService {
 
     Driver getDriverById(Integer id);
 
+    void addDriver(Integer fleetId, String username, String password);
+
     void modifyDriver(Driver driver);
 }

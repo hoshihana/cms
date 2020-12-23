@@ -3,11 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.DriverRepository">
+    <insert id="addDriver" useGeneratedKeys="true">
+        insert into driver(account_id, fleet_id)
+        values (#{accountId}, #{fleetId});
+        update fleet
+        set driver_amount=driver_amount+1
+        where id=#{fleetId};
+    </insert>
 
     <update id="modifyDrivers">
         update driver
         set name=#{name},gender=#{gender},resident_id_number=#{residentIdNumber},telephone=#{telephone}
-        where account_id=#{accountId}
+        where account_id=#{accountId} or id=#{id}
     </update>
 
     <select id="getDriverByAccountId" resultType="team.cms.entity.Driver">
