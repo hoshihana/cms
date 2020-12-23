@@ -90,6 +90,13 @@ public class UserConferenceController {
         return new Result(true, null);
     }
 
+    @PostMapping("/checkExisted")
+    public CheckResult checkConferenceExisted(String number) {
+        Conference conference=conferenceService.getConferenceByNumber(number);
+        if(conference == null)return new CheckResult(false);
+        else return new CheckResult(true);
+    }
+
     @PostMapping("/participate")
     public ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, Integer id,
                                                       String tripNumber, String arriveTime, String arriveSite, String stayStart, String stayEnd, String stayNeeds, String remark) {
