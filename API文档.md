@@ -622,6 +622,26 @@
 
 
 
+#### 检查会议是否存在
+
+- URI: POST api/user/conference/checkExisted
+
+- Path参数：
+
+  | 参数名 |  类型  |  说明  |
+  | :----: | :----: | :----: |
+  | number | String | 会议号 |
+
+- Result参数：
+
+  | 参数名 |  类型   |     说明     |
+  | :----: | :-----: | :----------: |
+  | result | boolean | 会议是否存在 |
+
+
+
+
+
 #### 参加会议
 
 - URI: POST api/user/conference/participate
@@ -1199,7 +1219,7 @@
   |      gender      | Gender('MALE', 'FEMALE') |      性别      |
   | residentIdNumber |          String          |    身份证号    |
   |    telephone     |          String          |    联系电话    |
-  |    startStart    |           Date           |  住宿开始时间  |
+  |    stayStart     |           Date           |  住宿开始时间  |
   |     startEnd     |           Date           |  住宿结束时间  |
   |    stayNeeds     |          String          |    住宿需求    |
   |   reserveTime    |         Integer          |  发送预约时间  |
@@ -1226,7 +1246,7 @@
   |      gender      | Gender('MALE', 'FEMALE') |      性别      |
   | residentIdNumber |          String          |    身份证号    |
   |    telephone     |          String          |    联系电话    |
-  |    startStart    |           Date           |  住宿开始时间  |
+  |    stayStart     |           Date           |  住宿开始时间  |
   |     startEnd     |           Date           |  住宿结束时间  |
   |    stayNeeds     |          String          |    住宿需求    |
   |   reserveTime    |         Integer          |  发送预约时间  |
@@ -1254,7 +1274,7 @@
   |      gender      | Gender('MALE', 'FEMALE') |      性别      |
   | residentIdNumber |          String          |    身份证号    |
   |    telephone     |          String          |    联系电话    |
-  |    startStart    |           Date           |  住宿开始时间  |
+  |    stayStart     |           Date           |  住宿开始时间  |
   |     startEnd     |           Date           |  住宿结束时间  |
   |    stayNeeds     |          String          |    住宿需求    |
   |   reserveTime    |         Integer          |  发送预约时间  |
