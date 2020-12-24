@@ -23,6 +23,8 @@ public interface ConferenceService {
 
     boolean checkParticipantByNumber(Integer accountId, String number);
 
+    boolean checkEnrollmentOngoing(String number);
+
     void addConference(Integer accountId, Conference conference);
 
     Conference getConferenceById(Integer id);

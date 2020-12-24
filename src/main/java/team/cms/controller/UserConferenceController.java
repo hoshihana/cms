@@ -97,6 +97,11 @@ public class UserConferenceController {
         else return new CheckResult(true);
     }
 
+    @PostMapping("/checkOngoing")
+    public  CheckResult checkOngoing(String number){
+        return new CheckResult(conferenceService.checkEnrollmentOngoing(number));
+    }
+
     @PostMapping("/participate")
     public ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, String number,
                                                       String tripNumber, String arriveTime, String arriveSite, String stayStart, String stayEnd, String stayNeeds, String remark) {
