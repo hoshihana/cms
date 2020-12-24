@@ -80,6 +80,9 @@ public class AdminHotelController {
 
     @PostMapping("/add")
     public Result addHotelAccount(String username, String password,String name,String address,String detail,String telephone) {
+        if(!accountService.usernameAvailable(username)) {
+            return new Result(false, "用户名不可用");
+        }
         hotelService.addHotel(username, CipherUtil.encipherText(password),name,address,detail,telephone);
         return new Result(true, null);
     }
