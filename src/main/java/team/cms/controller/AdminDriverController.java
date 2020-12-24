@@ -39,17 +39,18 @@ public class AdminDriverController {
             Account account=accountService.getAccountById(driver.getAccountId());
             driverResult.setUsername(account.getUsername());
             driverResult.setName(driver.getName());
+            driverResult.setTelephone(driver.getTelephone());
             driverResultList.add(driverResult);
         }
         return driverResultList;
     }
 
-    @PostMapping("/profile/get")
+//    @PostMapping("/profile/get")
     public Driver getDriverByDriverId(Integer driverId) {
         return driverService.getDriverById(driverId);
     }
 
-    @PostMapping("/profile/modify")
+//    @PostMapping("/profile/modify")
     public Result modifyDriver(Integer driverId, String name, Gender gender, String residentIdNumber, String telephone) {
         Driver driver = new Driver();
         driver.setId(driverId);

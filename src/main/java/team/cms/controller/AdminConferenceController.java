@@ -38,7 +38,7 @@ public class AdminConferenceController {
         List<BriefConferenceResult> briefConferenceResults = new ArrayList<>();
         for(Conference conference : conferences) {
             Account account = accountService.getAccountByUserId(conference.getUserId());
-            briefConferenceResults.add(new BriefConferenceResult(conference.getId(), conference.getNumber(), account.getUsername(), conference.getName()));
+            briefConferenceResults.add(new BriefConferenceResult(conference.getId(), conference.getNumber(), account.getUsername(), conference.getName(), conference.getCreateTime(), conference.getStartTime(), conference.getEndTime()));
         }
         return briefConferenceResults;
     }
@@ -54,12 +54,12 @@ public class AdminConferenceController {
         }
     }
 
-    @PostMapping("/get")
+//    @PostMapping("/get")
     public Conference getConference(Integer conferenceId) {
         return conferenceService.getConferenceById(conferenceId);
     }
 
-    @PostMapping("/reset")
+//    @PostMapping("/reset")
     public Result resetConference(Integer conferenceId, String name, String detail, String address, String startTime, String endTime, String enrollTime, String inviteCode) {
         Conference conference = conferenceService.getConferenceById(conferenceId);
         if(conference.getProgress() != Progress.ENROLLMENT && conference.getProgress() != Progress.OWNER_CONFIRM) {
