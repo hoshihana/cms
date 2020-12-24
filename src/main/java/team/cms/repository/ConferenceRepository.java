@@ -44,6 +44,8 @@ public interface ConferenceRepository {
 
     void setConferenceReservationConfirm(Integer id);
 
+    void setConferenceReservationOwnerConfirm(Conference conference);
+
     void setConferenceReady(Integer id);
 
     Integer countConference();

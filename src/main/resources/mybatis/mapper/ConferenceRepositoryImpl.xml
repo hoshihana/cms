@@ -45,6 +45,11 @@
         set `name`=#{name}, detail=#{detail}, address=#{address}, start_time=#{startTime}, end_time=#{endTime}, enroll_time=#{enrollTime}, invite_code=#{inviteCode}, progress=#{progress}
         where id=#{id}
     </update>
+    <update id="setConferenceReservationOwnerConfirm">
+        update conference
+        set progress=#{progress},enroll_time=#{enrollTime}
+        where id=#{id}
+    </update>
     <delete id="removeConference">
         delete from conference
         where id=#{id}

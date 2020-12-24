@@ -39,6 +39,8 @@ public interface ConferenceService {
 
     void confirmConference(Integer id);
 
+    void terminateEnrollment(Conference conference);
+
     Integer countConference();
 
     List<Conference> getAllOngoingConference();

@@ -134,6 +134,11 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
+    public void terminateEnrollment(Conference conference) {
+        conferenceRepository.setConferenceReservationOwnerConfirm(conference);
+    }
+
+    @Override
     public void confirmConference(Integer id) {
         Conference conference = conferenceRepository.getConferenceById(id);
         List<User> participants = enrollmentRepository.getAllParticipant(id);
