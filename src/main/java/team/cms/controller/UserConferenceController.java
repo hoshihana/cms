@@ -91,10 +91,10 @@ public class UserConferenceController {
     }
 
     @PostMapping("/checkExisted")
-    public Result checkConferenceExisted(String number) {
+    public CheckResult checkConferenceExisted(String number) {
         Conference conference=conferenceService.getConferenceByNumber(number);
-        if(conference == null)return new Result(false, "会议不存在！");
-        else return new Result(true, null);
+        if(conference == null)return new CheckResult(false);
+        else return new CheckResult(true);
     }
 
     @PostMapping("/participate")
