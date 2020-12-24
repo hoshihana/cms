@@ -30,7 +30,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/driver/getById");
 
         registry.addInterceptor(new AdminInterceptor())
-                .addPathPatterns("/api/admin/**");
+                .addPathPatterns("/api/admin/**")
+                .excludePathPatterns("/api/admin/getAll");
 
         registry.addInterceptor(new HotelInterceptor())
                 .addPathPatterns("/api/hotel/profile/**")
