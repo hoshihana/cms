@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.DriverRepository">
     <insert id="addDriver" useGeneratedKeys="true">
-        insert into driver(account_id, fleet_id)
-        values (#{accountId}, #{fleetId});
+        insert into driver(account_id, fleet_id,`name`,gender,resident_id_number,telephone)
+        values (#{accountId}, #{fleetId},#{name},#{gender},#{residentIdNumber},#{telephone});
         update fleet
         set driver_amount=driver_amount+1
         where id=#{fleetId};

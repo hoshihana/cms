@@ -72,11 +72,11 @@ public class AdminDriverController {
     }
 
     @PostMapping("/add")
-    public Result addDriverAccount(Integer fleetId, String username, String password){
+    public Result addDriverAccount(Integer fleetId, String username, String password,String name,Gender gender,String residentIdNumber,String telephone){
         if(!accountService.usernameAvailable(username)) {
             return new Result(false, "用户名不可用");
         }
-        driverService.addDriver(fleetId, username, CipherUtil.encipherText(password));
+        driverService.addDriver(fleetId, username, CipherUtil.encipherText(password),name,gender,residentIdNumber,telephone);
         return new Result(true,null);
     }
 }

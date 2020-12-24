@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="team.cms.repository.HotelRepository">
     <insert id="addHotel" useGeneratedKeys="true">
-        insert into hotel(account_id)
-        values (#{accountId})
+        insert into hotel(account_id,`name`,address,detail,telephone)
+        values (#{accountId},#{name},#{address},#{detail},#{telephone})
     </insert>
     <update id="modifyHotel">
         update hotel

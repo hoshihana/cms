@@ -12,7 +12,7 @@ public interface HotelService {
 
     Hotel getHotelById(Integer id);
 
-    void addHotel(String username, String password);
+    void addHotel(String username,String password,String name,String address,String detail,String telephone);
 
     void modifyHotel(Hotel hotel);
 

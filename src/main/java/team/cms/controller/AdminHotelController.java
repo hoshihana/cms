@@ -79,8 +79,8 @@ public class AdminHotelController {
     }
 
     @PostMapping("/add")
-    public Result addHotelAccount(String username, String password) {
-        hotelService.addHotel(username, CipherUtil.encipherText(password));
+    public Result addHotelAccount(String username, String password,String name,String address,String detail,String telephone) {
+        hotelService.addHotel(username, CipherUtil.encipherText(password),name,address,detail,telephone);
         return new Result(true, null);
     }
 }
