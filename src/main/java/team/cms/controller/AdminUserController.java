@@ -38,7 +38,7 @@ public class AdminUserController {
         List<User> users = userService.getAllUser();
         for(User user : users) {
             Account account = accountService.getAccountById(user.getAccountId());
-            briefUserResults.add(new BriefUserResult(account.getId(), account.getUsername(), user.getId(), user.getName()));
+            briefUserResults.add(new BriefUserResult(account.getId(), account.getUsername(), user.getId(), user.getName(), user.getTelephone()));
         }
         return briefUserResults;
     }
@@ -55,12 +55,12 @@ public class AdminUserController {
         }
     }
 
-    @PostMapping("/profile/get")
+//    @PostMapping("/profile/get")
     public User getUserProfile(Integer userId) {
         return userService.getUserById(userId);
     }
 
-    @PostMapping("/profile/modify")
+//    @PostMapping("/profile/modify")
     public Result modifyUserProfile(Integer userId, String name, Gender gender, String birthday, String residentIdNumber, String email, String telephone, String workplace) {
         User user = new User();
         user.setId(userId);

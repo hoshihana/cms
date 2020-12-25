@@ -16,4 +16,6 @@ public class DriverResult {
     private Integer driverId;
 
     private String name;
+
+    private String telephone;
 }

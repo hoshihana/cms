@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import team.cms.entity.Conference;
 import team.cms.entity.Enrollment;
 import team.cms.result.CheckResult;
-import team.cms.result.ParticipateConferenceResult;
 import team.cms.result.Result;
 import team.cms.service.ConferenceService;
 import team.cms.service.EnrollmentService;
@@ -102,8 +101,18 @@ public class UserConferenceController {
         return new CheckResult(conferenceService.checkEnrollmentOngoing(number));
     }
 
+    @PostMapping("/checkInviteCodeNeeded")
+    public CheckResult checkInviteCodeNeeded(String number) {
+        Conference conference = conferenceService.getConferenceByNumber(number);
+        if(conference.getInviteCode() == null) {
+            return new CheckResult(false);
+        } else {
+            return new CheckResult(true);
+        }
+    }
+
     @PostMapping("/participate")
-    public ParticipateConferenceResult participateConference(HttpServletRequest request, String inviteCode, String number,
+    public Result participateConference(HttpServletRequest request, String inviteCode, String number,
                                                       String tripNumber, String arriveTime, String arriveSite, String stayStart, String stayEnd, String stayNeeds, String remark) {
 
         Integer accountId = (Integer)request.getAttribute("accountId");
@@ -120,12 +129,12 @@ public class UserConferenceController {
             enrollment.setStayNeeds(stayNeeds);
             enrollment.setRemark(remark);
             if(enrollmentService.participateConference(accountId, enrollment))
-                return new ParticipateConferenceResult(true, true, null);
+                return new Result(true, null);
             else
-                return new ParticipateConferenceResult(false, true, "创建参加信息失败！");
+                return new Result(false, "创建参加信息失败！");
 
         }
-        else return new ParticipateConferenceResult(true, false, "邀请码错误！");
+        else return new Result(false, "邀请码错误！");
     }
 
 

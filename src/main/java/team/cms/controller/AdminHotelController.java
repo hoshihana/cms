@@ -40,18 +40,18 @@ public class AdminHotelController {
 
         for (Hotel hotel : tempList) {
             String username = accountService.getAccountById(hotel.getAccountId()).getUsername();
-            resultList.add(new AdminHotelResult(hotel.getAccountId(), username, hotel.getId(), hotel.getName()));
+            resultList.add(new AdminHotelResult(hotel.getAccountId(), username, hotel.getId(), hotel.getName(), hotel.getTelephone()));
         }
 
         return resultList;
     }
 
-    @PostMapping("/profile/get")
+//    @PostMapping("/profile/get")
     public Hotel getHotelById(Integer hotelId) {
         return hotelService.getHotelById(hotelId);
     }
 
-    @PostMapping("/profile/modify")
+//    @PostMapping("/profile/modify")
     public Result modifyHotelProfile(Integer hotelId, String name, String address, String detail, String telephone) {
 
         Hotel hotel = new Hotel();
