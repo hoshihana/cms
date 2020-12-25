@@ -32,5 +32,6 @@
         select *
         from hotel_reservation
         where hotel_id=#{hotelId}
+        order by reserve_time desc
     </select>
 </mapper>

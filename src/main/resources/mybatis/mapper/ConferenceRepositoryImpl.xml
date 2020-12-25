@@ -58,21 +58,25 @@
         select *
         from conference
         where progress&lt;&gt;'ENDED' and user_id=#{userId}
+        ORDER BY create_time DESC
     </select>
     <select id="getOngoingAndParticipatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference
         where progress&lt;&gt;'ENDED' and id in(select conference_id from enrollment where user_id=#{userId})
+        ORDER BY create_time DESC
     </select>
     <select id="getEndedAndCreatedConferenceByAccountUserId" resultType="team.cms.entity.Conference">
         select *
         from conference
         where progress='ENDED' and user_id=#{userId}
+        ORDER BY create_time DESC
     </select>
     <select id="getEndedAndParticipatedConferenceByUserId" resultType="team.cms.entity.Conference">
         select *
         from conference
         where progress='ENDED' and id in (select conference_id from enrollment where user_id=#{userId})
+        ORDER BY create_time DESC
     </select>
     <select id="getCreatedConferenceByUserIdAndId" resultType="team.cms.entity.Conference">
         select *

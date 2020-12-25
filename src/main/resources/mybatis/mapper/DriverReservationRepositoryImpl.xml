@@ -26,16 +26,19 @@
         select *
         from driver_reservation
         where fleet_id=#{fleetId} and driver_check=false
+        order by reserve_time desc
     </select>
     <select id="getCheckDriverReservationByDriverId" resultType="team.cms.entity.DriverReservation">
         select *
         from driver_reservation
         where driver_id=#{driverId} and driver_check=true and user_check=false
+        order by reserve_time desc
     </select>
     <select id="getEndedDriverReservationByDriverId" resultType="team.cms.entity.DriverReservation">
         select *
         from driver_reservation
         where driver_id=#{driverId} and driver_check=true and user_check=true
+        order by reserve_time desc
     </select>
     <select id="countUncheckedDriverReservation" resultType="java.lang.Integer">
         select count(*) - sum(driver_check)
