@@ -35,13 +35,19 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public void addHotel(String username, String password) {
+    public void addHotel(String username, String password, String name, String address, String detail, String telephone) {
         Account account = new Account();
         account.setUsername(username);
         account.setPassword(password);
         account.setRole(Role.HOTEL);
         accountRepository.addAccount(account);
-        hotelRepository.addHotel(account.getId());
+        Hotel hotel = new Hotel();
+        hotel.setAccountId(account.getId());
+        hotel.setTelephone(telephone);
+        hotel.setName(name);
+        hotel.setDetail(detail);
+        hotel.setAddress(address);
+        hotelRepository.addHotel(hotel);
     }
 
     @Override

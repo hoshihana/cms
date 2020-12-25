@@ -12,16 +12,19 @@
         select *
         from message
         where sender_id=#{senderId}
+        ORDER BY send_time DESC
     </select>
     <select id="getReadMessageByRecipientId" resultType="team.cms.entity.Message">
         select *
         from message
         where recipient_id=#{recipientId} and `read`=true
+        ORDER BY send_time DESC
     </select>
     <select id="getUnreadMessageByRecipientId" resultType="team.cms.entity.Message">
         select *
         from message
         where recipient_id=#{recipientId} and `read`=false
+        ORDER BY send_time DESC
     </select>
     <insert id="addMessage" useGeneratedKeys="true" keyProperty="id">
         insert into message(sender_id, recipient_id, content, send_time)

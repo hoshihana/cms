@@ -48,6 +48,7 @@ public class DriverReservationController {
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
             driverReservationResult.setUserId(user.getId());
+            driverReservationResult.setAccountId(user.getAccountId());
             driverReservationResult.setName(user.getName());
             driverReservationResult.setGender(user.getGender());
             driverReservationResult.setTelephone(user.getTelephone());
@@ -89,6 +90,7 @@ public class DriverReservationController {
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
             driverReservationResult.setUserId(user.getId());
+            driverReservationResult.setAccountId(user.getAccountId());
             driverReservationResult.setName(user.getName());
             driverReservationResult.setGender(user.getGender());
             driverReservationResult.setTelephone(user.getTelephone());
@@ -130,6 +132,7 @@ public class DriverReservationController {
             DriverReservationResult driverReservationResult = new DriverReservationResult();
             driverReservationResult.setConferenceId(driverReservation.getConferenceId());
             driverReservationResult.setUserId(user.getId());
+            driverReservationResult.setAccountId(user.getAccountId());
             driverReservationResult.setName(user.getName());
             driverReservationResult.setGender(user.getGender());
             driverReservationResult.setTelephone(user.getTelephone());

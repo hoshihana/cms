@@ -44,6 +44,7 @@ public class HotelReservationController {
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
+                hotelReservationResult.setAccountId(user.getAccountId());
                 hotelReservationResult.setName(user.getName());
                 hotelReservationResult.setGender(user.getGender());
                 hotelReservationResult.setResidentIdNumber(user.getResidentIdNumber());
@@ -75,6 +76,7 @@ public class HotelReservationController {
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
+                hotelReservationResult.setAccountId(user.getAccountId());
                 hotelReservationResult.setName(user.getName());
                 hotelReservationResult.setGender(user.getGender());
                 hotelReservationResult.setResidentIdNumber(user.getResidentIdNumber());
@@ -106,6 +108,7 @@ public class HotelReservationController {
                 hotelReservationResult.setConferenceId(hotelReservation.getHotelId());
                 hotelReservationResult.setConferenceId(hotelReservation.getConferenceId());
                 hotelReservationResult.setUserId(hotelReservation.getUserId());
+                hotelReservationResult.setAccountId(user.getAccountId());
                 hotelReservationResult.setName(user.getName());
                 hotelReservationResult.setGender(user.getGender());
                 hotelReservationResult.setResidentIdNumber(user.getResidentIdNumber());

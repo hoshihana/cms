@@ -14,4 +14,6 @@ public class FleetResult {
     private String name;
 
     private Integer driverAmount;
+
+    private String telephone;
 }

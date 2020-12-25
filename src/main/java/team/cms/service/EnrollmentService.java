@@ -2,7 +2,6 @@ package team.cms.service;
 
 import team.cms.entity.Enrollment;
 import team.cms.entity.User;
-import team.cms.result.ParticipateConferenceResult;
 
 import java.util.List;
 

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.cms.entity.*;
+import team.cms.entity.enums.Progress;
 import team.cms.service.ConferenceService;
 import team.cms.result.CheckResult;
 import team.cms.result.CountResult;
@@ -15,6 +16,7 @@ import team.cms.service.HotelReservationService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -46,25 +48,25 @@ public class ConferenceController {
 
     @PostMapping("/participant/count")
     public CountResult getNumberOfEnrollment(Integer id) {
-        Integer amount=enrollmentService.getNumberOfEnrollment(id);
+        Integer amount = enrollmentService.getNumberOfEnrollment(id);
         return new CountResult(amount);
     }
 
     @PostMapping("/participant/get")
     public List<User> getAllParticipant(Integer id) {
-        List<User> users=enrollmentService.getAllParticipant(id);
+        List<User> users = enrollmentService.getAllParticipant(id);
         return users;
     }
 
     @PostMapping("/enrollment")
     public Enrollment getEnrollment(HttpServletRequest request, Integer id) {
-        Integer accountId = (Integer)request.getAttribute("accountId");
+        Integer accountId = (Integer) request.getAttribute("accountId");
         return enrollmentService.getEnrollmentByAccountId(id, accountId);
     }
 
     @PostMapping("/enrollment/get")
     public Enrollment getEnrollmentByUserId(Integer id, Integer userId) {
-        Enrollment enrollment=enrollmentService.getEnrollmentByUserId(id, userId);
+        Enrollment enrollment = enrollmentService.getEnrollmentByUserId(id, userId);
         return enrollment;
     }
 
@@ -75,6 +77,20 @@ public class ConferenceController {
             return new Result(true, null);
         else
             return new Result(false, "删除失败！");
+    }
+
+    @PostMapping("/terminateEnrollment")
+    public Result terminateEnrollment(Integer id) {
+        Conference conference=conferenceService.getConferenceById(id);
+        if(conference.getProgress() != Progress.ENROLLMENT){
+            return new Result(false,"该会议报名已经截止");
+        }
+        else {
+            conference.setProgress(Progress.OWNER_CONFIRM);
+            conference.setEnrollTime(new Date());
+            conferenceService.terminateEnrollment(conference);
+            return new Result(true, "成功进入下一阶段");
+        }
     }
 
     @PostMapping("/chooseFleet")

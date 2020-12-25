@@ -87,6 +87,12 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
+    public boolean checkEnrollmentOngoing(String number) {
+        conferenceRepository.updateProgress(new Date());
+        return conferenceRepository.getConferenceByNumber(number).getProgress() == Progress.ENROLLMENT;
+    }
+
+    @Override
     public void addConference(Integer accountId, Conference conference) {
         Integer userId = userRepository.getUserByAccountId(accountId).getId();
         conference.setCreateTime(new Date());
@@ -125,6 +131,11 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Override
     public boolean setConferenceHotel(Integer id, Integer hotelId) {
         return conferenceRepository.modifyHotelId(id, hotelId);
+    }
+
+    @Override
+    public void terminateEnrollment(Conference conference) {
+        conferenceRepository.setConferenceReservationOwnerConfirm(conference);
     }
 
     @Override

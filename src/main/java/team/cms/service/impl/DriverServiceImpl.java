@@ -3,6 +3,7 @@ package team.cms.service.impl;
 import org.springframework.stereotype.Service;
 import team.cms.entity.Account;
 import team.cms.entity.Driver;
+import team.cms.entity.enums.Gender;
 import team.cms.entity.enums.Role;
 import team.cms.repository.AccountRepository;
 import team.cms.repository.DriverRepository;
@@ -36,13 +37,20 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public void addDriver(Integer fleetId, String username, String password) {
+    public void addDriver(Integer fleetId, String username, String password, String name, Gender gender, String residentIdNumber, String telephone) {
         Account account = new Account();
         account.setUsername(username);
         account.setPassword(password);
         account.setRole(Role.DRIVER);
         accountRepository.addAccount(account);
-        driverRepository.addDriver(account.getId(), fleetId);
+        Driver driver = new Driver();
+        driver.setAccountId(account.getId());
+        driver.setFleetId(fleetId);
+        driver.setName(name);
+        driver.setGender(gender);
+        driver.setResidentIdNumber(residentIdNumber);
+        driver.setTelephone(telephone);
+        driverRepository.addDriver(driver);
     }
 
     @Override

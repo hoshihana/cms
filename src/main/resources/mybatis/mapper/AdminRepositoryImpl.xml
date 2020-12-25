@@ -13,4 +13,8 @@
         from admin
         where account_id=#{accountId}
     </select>
+    <select id="getAllAdmin" resultType="team.cms.entity.Admin">
+        select *
+        from admin
+    </select>
 </mapper>

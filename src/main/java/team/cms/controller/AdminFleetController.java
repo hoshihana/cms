@@ -34,19 +34,19 @@ public class AdminFleetController {
             FleetResult fleetResult = new FleetResult();
             fleetResult.setId(fleet.getId());
             fleetResult.setName(fleet.getName());
-            System.out.println(fleet.getDriverAmount());
             fleetResult.setDriverAmount(fleet.getDriverAmount());
+            fleetResult.setTelephone(fleet.getTelephone());
             fleetResultList.add(fleetResult);
         }
         return fleetResultList;
     }
 
-    @PostMapping("/profile/get")
+//    @PostMapping("/profile/get")
     public Fleet getFleetById(Integer fleetId){
         return fleetService.getFleetById(fleetId);
     }
 
-    @PostMapping("/profile/modify")
+//    @PostMapping("/profile/modify")
     public Result modifyFleet(Integer fleetId,String name,String detail,String telephone){
         Fleet fleet = new Fleet();
         fleet.setId(fleetId);

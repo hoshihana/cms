@@ -19,5 +19,5 @@ public interface DriverRepository {
 
     Driver getDriverById(Integer id);
 
-    void addDriver(@Param("accountId")Integer accountId, @Param("fleetId")Integer fleetId);
+    void addDriver(Driver driver);
 }

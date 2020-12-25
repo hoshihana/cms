@@ -16,4 +16,6 @@ public class AdminHotelResult {
     private Integer hotelId;
 
     private String name;
+
+    private String telephone;
 }

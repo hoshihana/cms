@@ -19,6 +19,8 @@ public class HotelReservationResult {
 
     private Integer userId;
 
+    private Integer accountId;
+
     private String name;
 
     private Gender gender;

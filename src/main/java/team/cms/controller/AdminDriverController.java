@@ -39,17 +39,18 @@ public class AdminDriverController {
             Account account=accountService.getAccountById(driver.getAccountId());
             driverResult.setUsername(account.getUsername());
             driverResult.setName(driver.getName());
+            driverResult.setTelephone(driver.getTelephone());
             driverResultList.add(driverResult);
         }
         return driverResultList;
     }
 
-    @PostMapping("/profile/get")
+//    @PostMapping("/profile/get")
     public Driver getDriverByDriverId(Integer driverId) {
         return driverService.getDriverById(driverId);
     }
 
-    @PostMapping("/profile/modify")
+//    @PostMapping("/profile/modify")
     public Result modifyDriver(Integer driverId, String name, Gender gender, String residentIdNumber, String telephone) {
         Driver driver = new Driver();
         driver.setId(driverId);
@@ -72,11 +73,11 @@ public class AdminDriverController {
     }
 
     @PostMapping("/add")
-    public Result addDriverAccount(Integer fleetId, String username, String password){
+    public Result addDriverAccount(Integer fleetId, String username, String password,String name,Gender gender,String residentIdNumber,String telephone){
         if(!accountService.usernameAvailable(username)) {
             return new Result(false, "用户名不可用");
         }
-        driverService.addDriver(fleetId, username, CipherUtil.encipherText(password));
+        driverService.addDriver(fleetId, username, CipherUtil.encipherText(password),name,gender,residentIdNumber,telephone);
         return new Result(true,null);
     }
 }
