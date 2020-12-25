@@ -101,6 +101,7 @@ public class UserConferenceController {
         return new CheckResult(conferenceService.checkEnrollmentOngoing(number));
     }
 
+    @PostMapping("/checkInviteCodeNeeded")
     public CheckResult checkInviteCodeNeeded(String number) {
         Conference conference = conferenceService.getConferenceByNumber(number);
         if(conference.getInviteCode() == null) {
