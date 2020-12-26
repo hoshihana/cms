@@ -142,11 +142,15 @@ public class ConferenceServiceImpl implements ConferenceService {
     public void confirmConference(Integer id) {
         Conference conference = conferenceRepository.getConferenceById(id);
         List<User> participants = enrollmentRepository.getAllParticipant(id);
-        for(User user : participants) {
-            driverReservationRepository.addDriverReservation(conference.getFleetId(), conference.getId(), user.getId(), new Date());
-            hotelReservationRepository.addHotelReservation(conference.getHotelId(), conference.getId(), user.getId(), new Date());
+        if(participants.isEmpty()) {
+            conferenceRepository.setConferenceReady(id);
+        } else {
+            for (User user : participants) {
+                driverReservationRepository.addDriverReservation(conference.getFleetId(), conference.getId(), user.getId(), new Date());
+                hotelReservationRepository.addHotelReservation(conference.getHotelId(), conference.getId(), user.getId(), new Date());
+            }
+            conferenceRepository.setConferenceReservationConfirm(id);
         }
-        conferenceRepository.setConferenceReservationConfirm(id);
     }
 
     @Override
